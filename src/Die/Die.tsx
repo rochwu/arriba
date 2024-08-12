@@ -1,7 +1,9 @@
 import {createDraggable, createDroppable} from '@thisbeyond/solid-dnd';
 import {Component, createMemo} from 'solid-js';
 import {styled} from 'solid-styled-components';
+
 import {DieId, store} from '../store';
+
 import {Base} from './Base';
 import {Face} from './Face';
 import {Name} from './Name';

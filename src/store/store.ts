@@ -1,12 +1,14 @@
-import {createStore, produce} from 'solid-js/store';
 import {uniqueId} from 'lodash-es';
-import {Die, DieId, EffectId, State} from './types';
+import {createStore, produce} from 'solid-js/store';
+
+import {names} from '../names';
+import {random} from '../random';
+
 import {effects} from './effects';
 import {getDice} from './getDice';
-import {random} from '../random';
-import {names} from '../names';
 import {roll} from './mutators/roll';
 import {swap} from './mutators/swap';
+import {Die, DieId, EffectId, State} from './types';
 
 export const [store, setStore] = createStore<State>({
   dieById: {},

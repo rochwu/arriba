@@ -2,20 +2,13 @@ import {
   DragDropProvider,
   DragDropSensors,
   DragEventHandler,
-  createDraggable,
   createDroppable,
 } from '@thisbeyond/solid-dnd';
-import {
-  Component,
-  createEffect,
-  createSignal,
-  For,
-  Index,
-  onMount,
-} from 'solid-js';
+import {Component, For} from 'solid-js';
 import {styled} from 'solid-styled-components';
-import {actions, DieId, EffectId, store} from './store';
-import {Base, Die, Slot} from './Die';
+
+import {Die, Slot} from './Die';
+import {EffectId, actions, store} from './store';
 
 const DroppableContainer = styled.div({
   border: '1px dashed black',
