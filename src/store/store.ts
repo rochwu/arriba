@@ -2,10 +2,11 @@ import {createStore, produce} from 'solid-js/store';
 import {uniqueId} from 'lodash-es';
 import {Die, DieId, EffectId, State} from './types';
 import {effects} from './effects';
-import {swap} from './swap';
 import {getDice} from './getDice';
 import {random} from '../random';
 import {names} from '../names';
+import {roll} from './mutators/roll';
+import {swap} from './mutators/swap';
 
 export const [store, setStore] = createStore<State>({
   dieById: {},
@@ -26,6 +27,7 @@ export const actions = {
         name: names.shift() ?? 'Nada',
         face: random(0, 5),
         faces: Array.from({length: 6}).map(() => ({
+          value: random(1, 6),
           weight: 1,
         })),
       };
@@ -44,11 +46,8 @@ export const actions = {
   },
   endTurn() {
     setStore(
-      'dieById',
       produce((state) => {
-        Object.values(state).forEach((die) => {
-          die.face = random(0, 5);
-        });
+        roll(state);
       }),
     );
   },

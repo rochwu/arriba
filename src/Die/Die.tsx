@@ -1,10 +1,10 @@
 import {createDraggable, createDroppable} from '@thisbeyond/solid-dnd';
-import {Accessor, Component, createEffect, createMemo} from 'solid-js';
+import {Component, createMemo} from 'solid-js';
 import {styled} from 'solid-styled-components';
-import {Die as DieType, DieId, store} from '../store';
+import {DieId, store} from '../store';
 import {Base} from './Base';
-import {Name} from './Name';
 import {Face} from './Face';
+import {Name} from './Name';
 
 const Container = styled(Base)({
   backgroundColor: 'white',
@@ -22,10 +22,15 @@ const Content = styled.div({
 
 const View: Component<{identifier: DieId}> = ({identifier}) => {
   const die = createMemo(() => store.dieById[identifier]);
+  const value = createMemo(() => {
+    const {faces, face: index} = die();
+
+    return faces[index].value;
+  });
 
   return (
     <>
-      {die().id}
+      {value()}
       <Face die={die} />
       <Name die={die} />
     </>

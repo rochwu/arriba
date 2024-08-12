@@ -47,16 +47,10 @@ const Effect: Component<{identifier: EffectId}> = ({identifier}) => {
   return <Droppable identifier={identifier} />;
 };
 
-createEffect(() => {
-  console.log('store', store);
-});
-
 export const SolidDnd = () => {
   actions.generate(6);
 
   const onDragEnd: DragEventHandler = (event) => {
-    console.log(event);
-
     const {droppable, draggable} = event;
 
     actions.place({
