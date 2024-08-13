@@ -1,8 +1,16 @@
-import {Accessor, Component, For} from 'solid-js';
+import {
+  Accessor,
+  Component,
+  For,
+  Index,
+  Match,
+  Switch,
+  createMemo,
+} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {Die} from '../Die';
-import {Effect, store} from '../store';
+import {Effect} from '../store';
 
 import {Slot} from './Slot';
 
@@ -14,15 +22,17 @@ const Container = styled.div({
 export const Dice: Component<{effect: Accessor<Effect>}> = ({effect}) => {
   return (
     <Container>
-      <For each={effect().dice}>
+      <Index each={effect().dice}>
         {(item, index) => {
-          if (item) {
-            return <Die identifier={item} />;
-          }
-
-          return <Slot effect={effect} index={index} />;
+          return (
+            <Switch fallback={<Slot effect={effect()} index={index} />}>
+              <Match when={item()} keyed>
+                {(id) => <Die identifier={id} />}
+              </Match>
+            </Switch>
+          );
         }}
-      </For>
+      </Index>
     </Container>
   );
 };
