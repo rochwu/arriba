@@ -14,8 +14,10 @@ const Position = styled.div({
 const Text = styled.div({
   fontSize: '12px',
   lineHeight: '1',
-  backgroundColor: 'white',
   textTransform: 'lowercase',
+  padding: '0 1px',
+  borderRadius: '2px',
+  backgroundColor: 'white',
 });
 
 export const Name: Component<{die: Accessor<Die>}> = ({die}) => {

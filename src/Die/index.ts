@@ -1,3 +1,4 @@
 export {Slot} from './Slot';
-export {Base} from './Base';
+export {Shape} from './Shape';
 export {Die} from './Die';
+export {GhostDie} from './GhostDie';
