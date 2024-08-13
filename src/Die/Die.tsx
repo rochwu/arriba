@@ -25,16 +25,21 @@ const Content = styled.div({
 export const Die: Component<{identifier: DieId}> = ({identifier}) => {
   const [hovered, setHover] = createSignal(false);
 
-  const draggable = createDraggable(identifier);
+  const draggable = createDraggable(identifier, {id: identifier});
   const droppable = createDroppable(identifier, {type: 'die', id: identifier});
 
   const {die, value} = useDie(identifier);
 
+  let timeout: number;
+
   const enter = () => {
-    setHover(true);
+    timeout = setTimeout(() => {
+      setHover(true);
+    }, 400); // default recommended
   };
 
   const leave = () => {
+    clearTimeout(timeout);
     setHover(false);
   };
 
@@ -46,13 +51,13 @@ export const Die: Component<{identifier: DieId}> = ({identifier}) => {
       onMouseLeave={leave}
     >
       <Content ref={droppable}>
-        {value()}
         <Roll roll={die().roll} />
+        <Newborn die={die} />
+        {value()}
         <Name>{die().name}</Name>
         <Show when={hovered()}>
           <Info die={die} />
         </Show>
-        <Newborn die={die} />
       </Content>
     </Container>
   );

@@ -1,5 +1,3 @@
-import {UNPLACED} from '../constants';
-
 export type DieId = string;
 export type EffectId = string;
 
@@ -23,11 +21,13 @@ export type Effect = {
   dice: List<DieId>;
   name: string;
   max: number;
+  instant: boolean;
 };
 
 export type State = {
   dieById: Record<DieId, Die>;
-  effectById: Record<EffectId, Effect> & {[UNPLACED]: Effect};
+  effectById: Record<EffectId, Effect>;
   effects: EffectId[];
   turns: number;
+  returning: DieId[];
 };

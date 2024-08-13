@@ -1,19 +1,17 @@
-import {UNPLACED} from '../constants';
+import {EFFECTS} from '../constants';
 
-import {effects} from './effects';
+import {effects as rawEffects} from './effects';
 import {State} from './types';
+
+const {[EFFECTS.UNPLACED]: unplaced, ...effects} = rawEffects;
 
 export const initialValue: State = {
   dieById: {},
   effectById: {
     ...effects,
-    [UNPLACED]: {
-      id: UNPLACED,
-      name: 'Milling',
-      dice: [],
-      max: Infinity,
-    },
+    [EFFECTS.UNPLACED]: unplaced,
   },
   effects: Object.keys(effects),
   turns: 0,
+  returning: [],
 };

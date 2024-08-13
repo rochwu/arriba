@@ -1,22 +1,25 @@
 import {random} from 'lodash-es';
 
-import {UNPLACED} from '../../../constants';
-import {State} from '../../types';
-import {createDie} from '../createDie';
-import {getDice} from '../getDice';
-
-import {place} from './place';
+import {EFFECTS} from '../../../../constants';
+import {State} from '../../../types';
+import {createDie} from '../../createDie';
+import {getDice} from '../../getDice';
+import {tryEffect} from '../../tryEffect';
+import {place} from '../place';
+import {push} from '../push';
 
 const it = Array.from({length: 6});
 
 export const summon = (state: State) => {
-  const effect = state.effectById['summon'];
+  const maybe = tryEffect(state, EFFECTS.SUMMON);
 
-  const summoner = state.dieById[effect.dice[0]!];
-
-  if (!summoner) {
+  if (!maybe) {
     return;
   }
+
+  const {
+    dice: [summoner],
+  } = maybe;
 
   const {roll} = summoner;
 
@@ -36,12 +39,5 @@ export const summon = (state: State) => {
   const summoned = createDie({values});
   state.dieById[summoned.id] = summoned;
 
-  const unplaced = getDice(state, {effect: UNPLACED});
-
-  const index = unplaced.indexOf(null);
-  if (index !== -1) {
-    unplaced[index] = summoned.id;
-  } else {
-    unplaced.push(summoned.id);
-  }
+  push(state, {die: summoned.id, effect: EFFECTS.UNPLACED});
 };

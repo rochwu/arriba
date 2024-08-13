@@ -13,9 +13,9 @@ export const swap = (
   const to = state.dieById[args.to];
   const from = state.dieById[args.from];
 
-  const fromDice = getDice(state, {effect: from.effect});
+  const fromDice = getDice(state, from.effect);
   const toDice =
-    from.effect === to.effect ? fromDice : getDice(state, {effect: to.effect});
+    from.effect === to.effect ? fromDice : getDice(state, to.effect);
 
   const fromIndex = fromDice.indexOf(from.id);
   const toIndex = toDice.indexOf(to.id);

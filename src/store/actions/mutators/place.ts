@@ -1,11 +1,22 @@
-import {UNPLACED} from '../../../constants';
+import {EFFECTS} from '../../../constants';
 import {DieId, EffectId, State} from '../../types';
 import {getDice} from '../getDice';
 
+import {instant} from './instant/instant';
+import {push} from './push';
+
 export const place = (
   state: State,
-  {from, to = UNPLACED, order}: {from: DieId; to?: EffectId; order?: number},
+  {
+    from,
+    to = EFFECTS.UNPLACED,
+    order,
+  }: {from: DieId; to?: EffectId; order?: number},
 ) => {
+  if (instant(state, {die: from, effect: to})) {
+    return;
+  }
+
   const die = state.dieById[from];
 
   const previousEffectId = die.effect;
@@ -18,7 +29,7 @@ export const place = (
     }
   }
 
-  const toDice = getDice(state, {effect: effectId});
+  const toDice = getDice(state, effectId);
   const openIndex = toDice.indexOf(null);
 
   if (effectId) {
@@ -31,20 +42,22 @@ export const place = (
   }
 
   // Cleanup previous effect
-  const fromDice = getDice(state, {effect: previousEffectId});
+  const fromDice = getDice(state, previousEffectId);
   const fromIndex = fromDice.indexOf(die.id);
   fromDice[fromIndex] = null;
 
+  let at = undefined;
   if (order) {
-    toDice[order] = die.id;
-  } else {
-    // Set next effect
-    if (openIndex !== -1) {
-      toDice[openIndex] = die.id;
-    } else {
-      toDice.push(die.id);
-    }
+    at = order;
+  } else if (openIndex !== -1) {
+    at = openIndex;
   }
+
+  push(state, {
+    die: die.id,
+    effect: effectId,
+    order: at,
+  });
 
   die.effect = effectId;
 };

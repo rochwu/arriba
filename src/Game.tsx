@@ -27,12 +27,16 @@ export const Game = () => {
   });
 
   const onDragEnd: DragEventHandler = (event) => {
-    console.log(event);
-
     const {droppable, draggable} = event;
 
+    console.log(
+      JSON.stringify(draggable.data),
+      '->',
+      JSON.stringify(droppable?.data),
+    );
+
     actions.place({
-      dieId: draggable.id.toString(),
+      dieId: draggable.data.id,
       to: droppable
         ? {
             id: droppable.data.id,
