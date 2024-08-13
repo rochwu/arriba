@@ -1,7 +1,9 @@
 import {random} from 'lodash-es';
 
+import {UNPLACED} from '../../../constants';
 import {State} from '../../types';
 import {createDie} from '../createDie';
+import {getDice} from '../getDice';
 
 import {place} from './place';
 
@@ -29,14 +31,17 @@ export const summon = (state: State) => {
     values = it.map(() => random(2, 6));
   }
 
+  place(state, {from: summoner.id});
+
   const summoned = createDie({values});
   state.dieById[summoned.id] = summoned;
-  const index = state.unplaced.indexOf(null);
-  if (index !== -1) {
-    state.unplaced[index] = summoned.id;
-  } else {
-    state.unplaced.push(summoned.id);
-  }
 
-  place(state, {from: summoner.id});
+  const unplaced = getDice(state, {effect: UNPLACED});
+
+  const index = unplaced.indexOf(null);
+  if (index !== -1) {
+    unplaced[index] = summoned.id;
+  } else {
+    unplaced.push(summoned.id);
+  }
 };

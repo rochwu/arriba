@@ -7,4 +7,6 @@ export const Shape = styled.div({
   aspectRatio: '1 / 1',
   borderRadius: '0.5em',
   borderWidth: '1px',
+  borderStyle: 'solid',
+  position: 'relative',
 });

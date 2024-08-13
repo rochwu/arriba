@@ -1,8 +1,10 @@
 import {Accessor, Component, For} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
-import {Die, Slot} from '../Die';
+import {Die} from '../Die';
 import {Effect, store} from '../store';
+
+import {Slot} from './Slot';
 
 const Container = styled.div({
   display: 'flex',
@@ -13,12 +15,12 @@ export const Dice: Component<{effect: Accessor<Effect>}> = ({effect}) => {
   return (
     <Container>
       <For each={effect().dice}>
-        {(item) => {
+        {(item, index) => {
           if (item) {
             return <Die identifier={item} />;
           }
 
-          return <Slot />;
+          return <Slot effect={effect} index={index} />;
         }}
       </For>
     </Container>

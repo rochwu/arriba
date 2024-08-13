@@ -3,7 +3,7 @@ import {getDice} from '../getDice';
 
 export const place = (
   state: State,
-  {from, to}: {from: DieId; to?: EffectId},
+  {from, to, order}: {from: DieId; to?: EffectId; order?: number},
 ) => {
   const die = state.dieById[from];
 
@@ -14,28 +14,32 @@ export const place = (
     return;
   }
 
-  const nextDice = getDice(state, {effect: effectId});
-  const openNextIndex = nextDice.indexOf(null);
+  const toDice = getDice(state, {effect: effectId});
+  const openIndex = toDice.indexOf(null);
 
   if (effectId) {
     const effect = state.effectById[effectId];
 
-    // If limited slots and can't find undefined means it's filled
-    if (effect.max !== Infinity && openNextIndex === -1) {
+    // If limited slots and can't find null means it's filled
+    if (effect.max !== Infinity && openIndex === -1) {
       return;
     }
   }
 
   // Cleanup previous effect
-  const previousDice = getDice(state, {effect: previousEffectId});
-  const previousIndex = previousDice.indexOf(die.id);
-  previousDice[previousIndex] = null;
+  const fromDice = getDice(state, {effect: previousEffectId});
+  const fromIndex = fromDice.indexOf(die.id);
+  fromDice[fromIndex] = null;
 
-  // Set next effect
-  if (openNextIndex !== -1) {
-    nextDice[openNextIndex] = die.id;
+  if (order) {
+    toDice[order] = die.id;
   } else {
-    nextDice.push(die.id);
+    // Set next effect
+    if (openIndex !== -1) {
+      toDice[openIndex] = die.id;
+    } else {
+      toDice.push(die.id);
+    }
   }
 
   die.effect = effectId;

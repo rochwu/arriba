@@ -1,29 +1,24 @@
 import {random, uniqueId} from 'lodash-es';
 import {produce} from 'solid-js/store';
 
+import {UNPLACED} from '../../constants';
 import {names} from '../../names';
 import {setStore} from '../store';
 import {Die, DieId, EffectId} from '../types';
 
+import {createDie} from './createDie';
+import {age} from './mutators/age';
 import {place} from './mutators/place';
 import {roll} from './mutators/roll';
 import {summon} from './mutators/summon';
 import {swap} from './mutators/swap';
 
+const it = Array.from({length: 6});
+
 export const actions = {
   generate(repeat = 1) {
     const dice: Die[] = Array.from({length: repeat}).map(() => {
-      const id = uniqueId('d');
-
-      return {
-        id,
-        name: names.shift() ?? id,
-        roll: random(0, 5),
-        faces: Array.from({length: 6}).map(() => ({
-          value: random(1, 4),
-          weight: 1,
-        })),
-      };
+      return createDie({age: 1, values: it.map(() => random(1, 4))});
     });
 
     setStore(
@@ -32,7 +27,7 @@ export const actions = {
           const id = die.id;
 
           state.dieById[id] = die;
-          state.unplaced.push(id);
+          state.effectById[UNPLACED].dice.push(id);
         });
       }),
     );
@@ -40,6 +35,8 @@ export const actions = {
   endTurn() {
     setStore(
       produce((state) => {
+        age(state);
+
         summon(state);
 
         // End
@@ -66,7 +63,7 @@ export const actions = {
             return;
           }
 
-          place(state, {from: dieId, to: to.id});
+          place(state, {from: dieId, to: to.id, order: to.order});
         });
       }),
     );

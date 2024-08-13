@@ -1,7 +1,7 @@
 import {type Component} from 'solid-js';
 import {createGlobalStyles, styled} from 'solid-styled-components';
 
-import {SolidDnd} from './SolidDnd';
+import {Game} from './Game';
 import {store} from './store';
 
 const Container = styled.div({
@@ -22,7 +22,7 @@ export const App: Component = () => {
       <Styles />
       <Container>
         <div>Turn {store.turns}</div>
-        <SolidDnd />
+        <Game />
       </Container>
     </>
   );

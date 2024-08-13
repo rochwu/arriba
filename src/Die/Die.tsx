@@ -5,9 +5,11 @@ import {styled} from 'solid-styled-components';
 import {DieId, store} from '../store';
 
 import {DieLike} from './DieLike';
-import {Faces} from './Faces';
+import {Info} from './Info';
 import {Name} from './Name';
+import {Newborn} from './Newborn';
 import {Roll} from './Roll';
+import {useDie} from './useDie';
 
 const Container = styled(DieLike)({
   cursor: 'grab',
@@ -16,7 +18,6 @@ const Container = styled(DieLike)({
 const Content = styled.div({
   display: 'grid',
   placeContent: 'center',
-  position: 'relative',
   width: 'inherit',
   aspectRatio: 'inherit',
 });
@@ -25,15 +26,9 @@ export const Die: Component<{identifier: DieId}> = ({identifier}) => {
   const [hovered, setHover] = createSignal(false);
 
   const draggable = createDraggable(identifier);
-  const droppable = createDroppable(identifier, {type: 'die'});
+  const droppable = createDroppable(identifier, {type: 'die', id: identifier});
 
-  const die = createMemo(() => store.dieById[identifier]);
-  const value = createMemo(() => {
-    const {faces, roll: index} = die();
-
-    return faces[index].value;
-  });
-  const roll = createMemo(() => die().roll);
+  const {die, value, roll} = useDie(identifier);
 
   const enter = () => {
     setHover(true);
@@ -55,8 +50,9 @@ export const Die: Component<{identifier: DieId}> = ({identifier}) => {
         <Roll roll={roll} />
         <Name die={die} />
         <Show when={hovered()}>
-          <Faces die={die} />
+          <Info die={die} />
         </Show>
+        <Newborn die={die} />
       </Content>
     </Container>
   );

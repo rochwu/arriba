@@ -16,7 +16,7 @@ const Text = styled.div({
   lineHeight: '1',
   textTransform: 'lowercase',
   padding: '0 1px',
-  borderRadius: '2px',
+  borderRadius: '4px',
   backgroundColor: 'white',
 });
 
