@@ -1,8 +1,8 @@
 import {styled} from 'solid-styled-components';
 
-import {Base} from './Base';
+import {Shape} from './Shape';
 
-export const Slot = styled(Base)({
+export const Slot = styled(Shape)({
   borderColor: 'black',
   borderStyle: 'dashed',
   backgroundColor: '#fff8dc',

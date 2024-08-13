@@ -1,17 +1,16 @@
 import {createDraggable, createDroppable} from '@thisbeyond/solid-dnd';
-import {Component, createMemo} from 'solid-js';
+import {Component, Show, createMemo, createSignal, splitProps} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {DieId, store} from '../store';
 
-import {Base} from './Base';
-import {Face} from './Face';
+import {DieLike} from './DieLike';
+import {Faces} from './Faces';
 import {Name} from './Name';
+import {Roll} from './Roll';
 
-const Container = styled(Base)({
-  backgroundColor: 'white',
-  borderColor: 'white',
-  borderStyle: 'solid',
+const Container = styled(DieLike)({
+  cursor: 'grab',
 });
 
 const Content = styled.div({
@@ -22,35 +21,42 @@ const Content = styled.div({
   aspectRatio: 'inherit',
 });
 
-const View: Component<{identifier: DieId}> = ({identifier}) => {
+export const Die: Component<{identifier: DieId}> = ({identifier}) => {
+  const [hovered, setHover] = createSignal(false);
+
+  const draggable = createDraggable(identifier);
+  const droppable = createDroppable(identifier, {type: 'die'});
+
   const die = createMemo(() => store.dieById[identifier]);
   const value = createMemo(() => {
-    const {faces, face: index} = die();
+    const {faces, roll: index} = die();
 
     return faces[index].value;
   });
+  const roll = createMemo(() => die().roll);
 
-  return (
-    <>
-      {value()}
-      <Face die={die} />
-      <Name die={die} />
-    </>
-  );
-};
+  const enter = () => {
+    setHover(true);
+  };
 
-export const Die: Component<{identifier: DieId}> = ({identifier}) => {
-  const draggable = createDraggable(identifier);
-  const droppable = createDroppable(identifier, {type: 'die'});
+  const leave = () => {
+    setHover(false);
+  };
 
   return (
     <Container
       ref={draggable}
       data-die={identifier}
-      style={{cursor: draggable.isActiveDraggable ? 'grabbing' : 'grab'}}
+      onMouseEnter={enter}
+      onMouseLeave={leave}
     >
       <Content ref={droppable}>
-        <View identifier={identifier} />
+        {value()}
+        <Roll roll={roll} />
+        <Name die={die} />
+        <Show when={hovered()}>
+          <Faces die={die} />
+        </Show>
       </Content>
     </Container>
   );

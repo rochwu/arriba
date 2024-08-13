@@ -1,15 +1,33 @@
-import {Effect, EffectId} from './types';
+import {DieId, Effect, EffectId} from './types';
 
-const create = (id: string) => {
-  return {
-    [id]: {
-      id,
-      dice: [undefined],
+const create = (
+  ...effects: {
+    id: string;
+    name?: string;
+    dice?: DieId[];
+    max?: number;
+  }[]
+) => {
+  return effects.reduce(
+    (result, {id, name, dice, max}) => {
+      return {
+        ...result,
+        [id]: {
+          id,
+          dice:
+            dice ??
+            (max && max !== Infinity
+              ? Array.from({length: max}).map(() => null)
+              : [null]),
+          name: name ?? id,
+          max: max ?? Infinity,
+        },
+      };
     },
-  };
+    {} as Record<EffectId, Effect>,
+  );
 };
 
 export const effects: Record<EffectId, Effect> = {
-  ...create('one'),
-  ...create('two'),
+  ...create({id: 'one'}, {id: 'two'}, {id: 'summon', max: 1, name: 'Summon'}),
 };

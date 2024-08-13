@@ -2,48 +2,19 @@ import {
   DragDropProvider,
   DragDropSensors,
   DragEventHandler,
-  createDroppable,
 } from '@thisbeyond/solid-dnd';
-import {Component, For} from 'solid-js';
-import {styled} from 'solid-styled-components';
+import {For} from 'solid-js';
 
-import {Die, Slot} from './Die';
-import {EffectId, actions, store} from './store';
-
-const DroppableContainer = styled.div({
-  border: '1px dashed black',
-  padding: '1em',
-});
-
-const Droppable: Component<{identifier: EffectId}> = ({identifier}) => {
-  const droppable = createDroppable(identifier, {type: 'effect'});
-
-  return (
-    <DroppableContainer ref={droppable} data-effect={identifier}>
-      Droppable {identifier}
-      <div style={{display: 'flex', gap: '0.5em'}}>
-        <For each={store.effectById[identifier].dice}>
-          {(item) => {
-            if (item) {
-              return <Die identifier={item} />;
-            }
-
-            return <Slot />;
-          }}
-        </For>
-      </div>
-    </DroppableContainer>
-  );
-};
-
-const Effect: Component<{identifier: EffectId}> = ({identifier}) => {
-  return <Droppable identifier={identifier} />;
-};
+import {Die, GhostDie, Slot} from './Die';
+import {Effect} from './Effect';
+import {actions, store} from './store';
 
 export const SolidDnd = () => {
-  actions.generate(6);
+  actions.generate(3);
 
   const onDragEnd: DragEventHandler = (event) => {
+    console.log(event);
+
     const {droppable, draggable} = event;
 
     actions.place({
@@ -53,10 +24,6 @@ export const SolidDnd = () => {
         type: droppable?.data.type,
       },
     });
-  };
-
-  const endTurn = () => {
-    actions.endTurn();
   };
 
   return (
@@ -77,7 +44,9 @@ export const SolidDnd = () => {
         </For>
       </div>
 
-      <button onClick={endTurn}>Turn</button>
+      <GhostDie />
+
+      <button onClick={actions.endTurn}>End Turn</button>
     </DragDropProvider>
   );
 };
