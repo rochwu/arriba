@@ -12,7 +12,7 @@ type Face = {
 
 export type Die = {
   id: DieId;
-  effect?: EffectId;
+  effect: EffectId;
   name: string;
   faces: Face[];
   roll: number;

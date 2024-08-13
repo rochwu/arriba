@@ -22,10 +22,10 @@ const Text = styled.div({
   lineHeight: 1,
 });
 
-export const Roll: Component<{roll: Accessor<number>}> = ({roll}) => {
+export const Roll: Component<{roll: number}> = (props) => {
   return (
     <Position>
-      <Text>{roll() + 1}</Text>
+      <Text>{props.roll + 1}</Text>
     </Position>
   );
 };

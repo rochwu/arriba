@@ -9,7 +9,6 @@ export const useDie = (identifier: DieId) => {
 
     return faces[index].value;
   });
-  const roll = createMemo(() => die().roll);
 
-  return {die, value, roll};
+  return {die, value};
 };

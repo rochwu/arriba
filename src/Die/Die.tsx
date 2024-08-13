@@ -28,7 +28,7 @@ export const Die: Component<{identifier: DieId}> = ({identifier}) => {
   const draggable = createDraggable(identifier);
   const droppable = createDroppable(identifier, {type: 'die', id: identifier});
 
-  const {die, value, roll} = useDie(identifier);
+  const {die, value} = useDie(identifier);
 
   const enter = () => {
     setHover(true);
@@ -47,8 +47,8 @@ export const Die: Component<{identifier: DieId}> = ({identifier}) => {
     >
       <Content ref={droppable}>
         {value()}
-        <Roll roll={roll} />
-        <Name die={die} />
+        <Roll roll={die().roll} />
+        <Name>{die().name}</Name>
         <Show when={hovered()}>
           <Info die={die} />
         </Show>

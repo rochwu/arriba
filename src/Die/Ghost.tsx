@@ -16,13 +16,13 @@ export const Ghost: Component = () => {
   return (
     <DragOverlay>
       {(draggable) => {
-        const {die, value, roll} = useDie(draggable!.id.toString());
+        const {die, value} = useDie(draggable!.id.toString());
 
         return (
           <Die>
             {value()}
-            <Roll roll={roll} />
-            <Name die={die} />
+            <Roll roll={die().roll} />
+            <Name>{die().name}</Name>
           </Die>
         );
       }}

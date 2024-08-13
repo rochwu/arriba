@@ -1,8 +1,7 @@
-import {random, uniqueId} from 'lodash-es';
+import {random} from 'lodash-es';
 import {produce} from 'solid-js/store';
 
 import {UNPLACED} from '../../constants';
-import {names} from '../../names';
 import {setStore} from '../store';
 import {Die, DieId, EffectId} from '../types';
 
@@ -63,7 +62,7 @@ export const actions = {
             return;
           }
 
-          place(state, {from: dieId, to: to.id, order: to.order});
+          place(state, {from: dieId, to: to.id ?? UNPLACED, order: to.order});
         });
       }),
     );

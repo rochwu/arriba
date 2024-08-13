@@ -46,7 +46,7 @@ export const Info: Component<{die: Accessor<Die>}> = ({die}) => {
             return (
               <Face>
                 {item.value}
-                <Roll roll={index} />
+                <Roll roll={index()} />
               </Face>
             );
           }}
