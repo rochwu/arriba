@@ -20,10 +20,10 @@ const Text = styled.div({
   backgroundColor: 'white',
 });
 
-export const Name: Component<{die: Accessor<Die>}> = ({die}) => {
+export const Name: Component<{children: string}> = (props) => {
   return (
     <Position>
-      <Text>{die().name}</Text>
+      <Text>{props.children}</Text>
     </Position>
   );
 };

@@ -1,5 +1,6 @@
 import {random, uniqueId} from 'lodash-es';
 
+import {UNPLACED} from '../../constants';
 import {names} from '../../names';
 
 export const createDie = (args?: {values?: number[]; age?: number}) => {
@@ -16,5 +17,6 @@ export const createDie = (args?: {values?: number[]; age?: number}) => {
       weight: 1,
     })),
     age,
+    effect: UNPLACED,
   };
 };

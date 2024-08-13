@@ -1,9 +1,10 @@
+import {UNPLACED} from '../../../constants';
 import {DieId, EffectId, State} from '../../types';
 import {getDice} from '../getDice';
 
 export const place = (
   state: State,
-  {from, to, order}: {from: DieId; to?: EffectId; order?: number},
+  {from, to = UNPLACED, order}: {from: DieId; to?: EffectId; order?: number},
 ) => {
   const die = state.dieById[from];
 
@@ -11,7 +12,10 @@ export const place = (
   const effectId = to;
 
   if (previousEffectId === effectId) {
-    return;
+    // Allow order changes on same effect
+    if (order === undefined) {
+      return;
+    }
   }
 
   const toDice = getDice(state, {effect: effectId});
