@@ -1,0 +1,1 @@
+export {instant} from './instant';

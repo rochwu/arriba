@@ -1,15 +1,15 @@
 import {random} from 'lodash-es';
 import {produce} from 'solid-js/store';
 
-import {UNPLACED} from '../../constants';
+import {EFFECTS} from '../../constants';
 import {setStore} from '../store';
 import {Die, DieId, EffectId} from '../types';
 
 import {createDie} from './createDie';
 import {age} from './mutators/age';
+import {summon} from './mutators/effects/summon';
 import {place} from './mutators/place';
 import {roll} from './mutators/roll';
-import {summon} from './mutators/summon';
 import {swap} from './mutators/swap';
 
 const it = Array.from({length: 6});
@@ -26,7 +26,7 @@ export const actions = {
           const id = die.id;
 
           state.dieById[id] = die;
-          state.effectById[UNPLACED].dice.push(id);
+          state.effectById[EFFECTS.UNPLACED].dice.push(id);
         });
       }),
     );
@@ -38,8 +38,7 @@ export const actions = {
 
         summon(state);
 
-        // End
-        state.turns += 1;
+        // Has to be at the end or the rolls won't count right
         roll(state);
       }),
     );
@@ -62,7 +61,11 @@ export const actions = {
             return;
           }
 
-          place(state, {from: dieId, to: to.id ?? UNPLACED, order: to.order});
+          place(state, {
+            from: dieId,
+            to: to.id ?? EFFECTS.UNPLACED,
+            order: to.order,
+          });
         });
       }),
     );

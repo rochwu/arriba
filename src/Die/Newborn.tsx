@@ -19,7 +19,7 @@ export const Newborn: Component<{die: Accessor<Die>}> = ({die}) => {
 
   return (
     <Show when={isNewborn()}>
-      <Dot />
+      <Dot aria-label="new die" />
     </Show>
   );
 };

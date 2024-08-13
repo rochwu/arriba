@@ -20,8 +20,8 @@ export const Ghost: Component = () => {
 
         return (
           <Die>
-            {value()}
             <Roll roll={die().roll} />
+            {value()}
             <Name>{die().name}</Name>
           </Die>
         );

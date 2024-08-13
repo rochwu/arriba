@@ -1,3 +1,5 @@
+import {EFFECTS} from '../constants';
+
 import {DieId, Effect, EffectId} from './types';
 
 const create = (
@@ -6,10 +8,11 @@ const create = (
     name?: string;
     dice?: DieId[];
     max?: number;
+    instant?: boolean;
   }[]
 ) => {
   return effects.reduce(
-    (result, {id, name, dice, max}) => {
+    (result, {id, name, dice, max, instant}) => {
       return {
         ...result,
         [id]: {
@@ -21,6 +24,7 @@ const create = (
               : [null]),
           name: name ?? id,
           max: max ?? Infinity,
+          instant: instant ?? false,
         },
       };
     },
@@ -28,6 +32,11 @@ const create = (
   );
 };
 
-export const effects: Record<EffectId, Effect> = {
-  ...create({id: 'one'}, {id: 'two'}, {id: 'summon', max: 1, name: 'Summon'}),
+export const effects = {
+  ...create(
+    {id: 'one'},
+    {id: EFFECTS.UNPLACED, name: 'Milling', dice: []},
+    {id: EFFECTS.FIRE, name: 'Fire', max: 1, instant: true},
+    {id: EFFECTS.SUMMON, max: 1, name: 'Summon'},
+  ),
 };
