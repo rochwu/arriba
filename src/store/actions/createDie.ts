@@ -2,8 +2,8 @@ import {random, uniqueId} from 'lodash-es';
 
 import {names} from '../../names';
 
-export const createDie = (args?: {values: number[]}) => {
-  const {values = []} = args ?? {};
+export const createDie = (args?: {values?: number[]; age?: number}) => {
+  const {values = [], age = 1} = args ?? {};
 
   const id = uniqueId('d');
 
@@ -15,5 +15,6 @@ export const createDie = (args?: {values: number[]}) => {
       value: values[index] ?? random(1, 6),
       weight: 1,
     })),
+    age,
   };
 };

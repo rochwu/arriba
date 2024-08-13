@@ -13,7 +13,10 @@ const Container = styled.div({
 });
 
 export const Effect: Component<{identifier: EffectId}> = ({identifier}) => {
-  const droppable = createDroppable(identifier, {type: 'effect'});
+  const droppable = createDroppable(identifier, {
+    type: 'effect',
+    id: identifier,
+  });
 
   const effect = createMemo(() => store.effectById[identifier]);
 

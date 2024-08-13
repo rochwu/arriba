@@ -1,3 +1,5 @@
+import {UNPLACED} from '../constants';
+
 export type DieId = string;
 export type EffectId = string;
 
@@ -14,6 +16,7 @@ export type Die = {
   name: string;
   faces: Face[];
   roll: number;
+  age: number;
 };
 export type Effect = {
   id: EffectId;
@@ -24,8 +27,7 @@ export type Effect = {
 
 export type State = {
   dieById: Record<DieId, Die>;
-  effectById: Record<EffectId, Effect>;
+  effectById: Record<EffectId, Effect> & {[UNPLACED]: Effect};
   effects: EffectId[];
-  unplaced: List<DieId>;
   turns: number;
 };

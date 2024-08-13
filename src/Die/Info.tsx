@@ -22,25 +22,24 @@ const List = styled.div({
   gap: '0.5em',
 });
 
-const Face = styled(DieLike)({
-  position: 'relative',
-  opacity: 1,
-});
+const Face = styled(DieLike)({});
 
 const Name = styled.div({
   alignSelf: 'center',
   width: 'fit-content',
   lineHeight: '1',
   padding: '0 1px',
-  borderRadius: '2px',
+  borderRadius: '4px',
   backgroundColor: 'white',
   textTransform: 'lowercase',
 });
 
-export const Faces: Component<{die: Accessor<Die>}> = ({die}) => {
+export const Info: Component<{die: Accessor<Die>}> = ({die}) => {
   return (
     <Container>
-      <Name>{die().name}</Name>
+      <Name>
+        {die().name} Age: {die().age}
+      </Name>
       <List>
         <For each={die().faces}>
           {(item, index) => {

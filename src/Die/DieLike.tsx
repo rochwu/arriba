@@ -4,5 +4,5 @@ import {Shape} from './Shape';
 
 export const DieLike = styled(Shape)({
   backgroundColor: 'white',
-  borderColor: 'blue',
+  borderColor: 'white',
 });
