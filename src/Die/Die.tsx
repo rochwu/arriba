@@ -3,6 +3,7 @@ import type {Component} from 'solid-js';
 import {Show, createSignal} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
+import {DropType} from '../constants';
 import type {DieId} from '../store';
 
 import {DieLike} from './DieLike';
@@ -28,7 +29,7 @@ export const Die: Component<{identifier: DieId}> = (props) => {
 
   const draggable = createDraggable(props.identifier, {id: props.identifier});
   const droppable = createDroppable(props.identifier, {
-    type: 'die',
+    type: DropType.Effect,
     id: props.identifier,
   });
 
@@ -55,7 +56,7 @@ export const Die: Component<{identifier: DieId}> = (props) => {
       onMouseLeave={leave}
     >
       <Content ref={droppable}>
-        <Roll roll={die().roll} />
+        <Roll>{die().roll + 1}</Roll>
         <Newborn die={die} />
         {value()}
         <Name>{die().name}</Name>

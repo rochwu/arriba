@@ -1,4 +1,4 @@
-import {EFFECTS} from '../../../../constants';
+import {Effects} from '../../../../constants';
 import type {DieId, EffectId, State} from '../../../types';
 
 import {fire} from './fire';
@@ -8,7 +8,7 @@ export const instant = (
   {die, effect}: {die: DieId; effect: EffectId},
 ) => {
   switch (effect) {
-    case EFFECTS.FIRE: {
+    case Effects.Fire: {
       return fire(state, {die});
     }
   }

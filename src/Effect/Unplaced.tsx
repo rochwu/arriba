@@ -1,12 +1,12 @@
 import {createMemo} from 'solid-js';
 
-import {EFFECTS} from '../constants';
+import {Effects} from '../constants';
 import {store} from '../store';
 
 import {Dice} from './Dice';
 
 export const Unplaced = () => {
-  const unplaced = createMemo(() => store.effectById[EFFECTS.UNPLACED]);
+  const unplaced = createMemo(() => store.effectById[Effects.Unplaced]);
 
   return (
     <div style={{display: 'flex', gap: '0.5em'}}>

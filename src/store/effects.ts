@@ -1,4 +1,4 @@
-import {EFFECTS} from '../constants';
+import {Effects} from '../constants';
 
 import type {DieId, Effect, EffectId} from './types';
 
@@ -35,8 +35,8 @@ const create = (
 export const effects = {
   ...create(
     {id: 'one'},
-    {id: EFFECTS.UNPLACED, name: 'Milling', dice: []},
-    {id: EFFECTS.FIRE, name: 'Fire', max: 1, instant: true},
-    {id: EFFECTS.SUMMON, max: 1, name: 'Summon'},
+    {id: Effects.Unplaced, name: 'Milling', dice: []},
+    {id: Effects.Fire, name: 'Fire', max: 1, instant: true},
+    {id: Effects.Summon, max: 1, name: 'Summon'},
   ),
 };

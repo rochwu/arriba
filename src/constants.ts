@@ -1,5 +1,10 @@
-export const EFFECTS = {
-  UNPLACED: 'unplaced',
-  SUMMON: 'summon',
-  FIRE: 'fire',
+export const Effects = {
+  Unplaced: 'unplaced',
+  Summon: 'summon',
+  Fire: 'fire',
 } as const;
+
+export const DropType = {
+  Die: 'die',
+  Effect: 'effect',
+};

@@ -3,6 +3,7 @@ import type {Component} from 'solid-js';
 import {createMemo} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
+import {DropType} from '../constants';
 import type {EffectId} from '../store';
 import {store} from '../store';
 
@@ -16,7 +17,7 @@ const Container = styled.div({
 
 export const Effect: Component<{identifier: EffectId}> = (props) => {
   const droppable = createDroppable(props.identifier, {
-    type: 'effect',
+    type: DropType.Effect,
     id: props.identifier,
   });
 

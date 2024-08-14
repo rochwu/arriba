@@ -1,4 +1,4 @@
-import {EFFECTS} from '../../../constants';
+import {Effects} from '../../../constants';
 import type {DieId, EffectId, State} from '../../types';
 import {getDice} from '../getDice';
 
@@ -9,7 +9,7 @@ export const place = (
   state: State,
   {
     from,
-    to = EFFECTS.UNPLACED,
+    to = Effects.Unplaced,
     order,
   }: {from: DieId; to?: EffectId; order?: number},
 ) => {

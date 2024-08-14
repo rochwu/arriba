@@ -1,4 +1,4 @@
-import {EFFECTS} from '../../../constants';
+import {Effects} from '../../../constants';
 import type {State} from '../../types';
 
 import {push} from './push';
@@ -8,7 +8,7 @@ import {push} from './push';
  */
 export const returning = (state: State) => {
   state.returning.forEach((die) => {
-    push(state, {die, effect: EFFECTS.UNPLACED});
+    push(state, {die, effect: Effects.Unplaced});
   });
 
   state.returning = [];
