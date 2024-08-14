@@ -2,6 +2,7 @@
   "name": "arriba",
   "version": "0.0.0",
   "description": "It goes up",
+  "homepage": "https://rochwu.github.io/arriba",
   "scripts": {
     "start": "vite --open",
     "dev": "vite",

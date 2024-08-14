@@ -1,34 +1,9 @@
-## Usage
+# Arriba
 
-Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
+Very many years ago I was playing Rebuild 3 and had this idea of doing something like it but instead of doing everything yourself you had commanders. Back then I had no skills.
 
-This is the reason you see a `pnpm-lock.yaml`. That being said, any package manager will work. This file can be safely be removed once you clone a template.
+Then many years later, I started doing board games and learned of the worker placement mechanic and how there were some using dice as workers. But there wasn't any inspiration of what to do about it.
 
-```bash
-$ npm install # or pnpm install or yarn install
-```
+Then I came upon Dark Forest Village and everything was so well built and finally made me start my own incremental.
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm run dev` or `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-
-### `npm run build`
-
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-## Deployment
-
-You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+So this has no goal, maybe learn Solid, maybe do something with it. But hey at least there's some worker placement stuff going on, not sure if it's even a game at this point.
