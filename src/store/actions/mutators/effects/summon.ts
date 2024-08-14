@@ -1,9 +1,8 @@
 import {random} from 'lodash-es';
 
 import {EFFECTS} from '../../../../constants';
-import {State} from '../../../types';
+import type {State} from '../../../types';
 import {createDie} from '../../createDie';
-import {getDice} from '../../getDice';
 import {tryEffect} from '../../tryEffect';
 import {place} from '../place';
 import {push} from '../push';

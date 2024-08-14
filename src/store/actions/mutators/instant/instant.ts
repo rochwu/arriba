@@ -1,5 +1,5 @@
 import {EFFECTS} from '../../../../constants';
-import {DieId, EffectId, State} from '../../../types';
+import type {DieId, EffectId, State} from '../../../types';
 
 import {fire} from './fire';
 

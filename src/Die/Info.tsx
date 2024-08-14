@@ -1,7 +1,8 @@
-import {Accessor, Component, For, createMemo} from 'solid-js';
+import type {Accessor, Component} from 'solid-js';
+import {For} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
-import {Die} from '../store';
+import type {Die} from '../store';
 
 import {DieLike} from './DieLike';
 import {Roll} from './Roll';
@@ -34,14 +35,14 @@ const Name = styled.div({
   textTransform: 'lowercase',
 });
 
-export const Info: Component<{die: Accessor<Die>}> = ({die}) => {
+export const Info: Component<{die: Accessor<Die>}> = (props) => {
   return (
     <Container>
       <Name>
-        {die().name} Age: {die().age}
+        {props.die().name} Age: {props.die().age}
       </Name>
       <List>
-        <For each={die().faces}>
+        <For each={props.die().faces}>
           {(item, index) => {
             return (
               <Face>

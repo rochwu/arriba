@@ -1,7 +1,7 @@
 import {EFFECTS} from '../constants';
 
 import {effects as rawEffects} from './effects';
-import {State} from './types';
+import type {State} from './types';
 
 const {[EFFECTS.UNPLACED]: unplaced, ...effects} = rawEffects;
 

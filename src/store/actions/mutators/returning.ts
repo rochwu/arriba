@@ -1,5 +1,5 @@
 import {EFFECTS} from '../../../constants';
-import {State} from '../../types';
+import type {State} from '../../types';
 
 import {push} from './push';
 

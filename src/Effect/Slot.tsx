@@ -1,9 +1,9 @@
 import {createDroppable} from '@thisbeyond/solid-dnd';
-import {Component} from 'solid-js';
+import type {Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {Shape} from '../Die';
-import {Effect} from '../store';
+import type {Effect} from '../store';
 
 const Container = styled(Shape)({
   borderColor: 'black',
@@ -14,18 +14,18 @@ const Container = styled(Shape)({
 export const Slot: Component<{
   effect: Effect;
   index: number;
-}> = ({effect, index}) => {
-  const droppable = createDroppable(`${effect.id}-${index}`, {
+}> = (props) => {
+  const droppable = createDroppable(`${props.effect.id}-${props.index}`, {
     type: 'effect',
-    id: effect.id,
-    order: index,
+    id: props.effect.id,
+    order: props.index,
   });
 
   return (
     <Container
       ref={droppable}
-      data-effect={effect.id}
-      data-order={index}
-    ></Container>
+      data-effect={props.effect.id}
+      data-order={props.index}
+    />
   );
 };

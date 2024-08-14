@@ -1,7 +1,8 @@
-import {Accessor, Component, Show, createMemo} from 'solid-js';
+import type {Accessor, Component} from 'solid-js';
+import {Show, createMemo} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
-import {Die} from '../store';
+import type {Die} from '../store';
 
 const Dot = styled.div({
   position: 'absolute',
@@ -14,8 +15,8 @@ const Dot = styled.div({
   opacity: '0.4',
 });
 
-export const Newborn: Component<{die: Accessor<Die>}> = ({die}) => {
-  const isNewborn = createMemo(() => die().age === 1);
+export const Newborn: Component<{die: Accessor<Die>}> = (props) => {
+  const isNewborn = createMemo(() => props.die().age === 1);
 
   return (
     <Show when={isNewborn()}>

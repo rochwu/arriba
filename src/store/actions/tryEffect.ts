@@ -1,4 +1,4 @@
-import {EffectId, State} from '../types';
+import type {EffectId, State} from '../types';
 
 export const tryEffect = (state: State, id: EffectId) => {
   const effect = state.effectById[id];

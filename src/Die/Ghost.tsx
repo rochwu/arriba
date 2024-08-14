@@ -1,5 +1,5 @@
 import {DragOverlay} from '@thisbeyond/solid-dnd';
-import {Component} from 'solid-js';
+import type {Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {DieLike} from './DieLike';

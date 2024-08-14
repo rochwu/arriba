@@ -1,4 +1,4 @@
-import {State} from '../../types';
+import type {State} from '../../types';
 
 export const age = (state: State) => {
   Object.values(state.dieById).forEach((die) => {

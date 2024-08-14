@@ -1,8 +1,5 @@
-import {
-  DragDropProvider,
-  DragDropSensors,
-  DragEventHandler,
-} from '@thisbeyond/solid-dnd';
+import type {DragEventHandler} from '@thisbeyond/solid-dnd';
+import {DragDropProvider, DragDropSensors} from '@thisbeyond/solid-dnd';
 import {For, onCleanup, onMount} from 'solid-js';
 
 import {Ghost} from './Die';
