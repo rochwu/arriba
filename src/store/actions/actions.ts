@@ -1,7 +1,7 @@
 import {random} from 'lodash-es';
 import {produce} from 'solid-js/store';
 
-import {EFFECTS} from '../../constants';
+import {DropType, Effects} from '../../constants';
 import {setStore} from '../store';
 import type {Die, DieId, EffectId} from '../types';
 
@@ -26,7 +26,7 @@ export const actions = {
           const id = die.id;
 
           state.dieById[id] = die;
-          state.effectById[EFFECTS.UNPLACED].dice.push(id);
+          state.effectById[Effects.Unplaced].dice.push(id);
         });
       }),
     );
@@ -38,7 +38,7 @@ export const actions = {
 
         summon(state);
 
-        // Has to be at the end or the rolls won't count right
+        // Has to be at the end or the rolls won't count right up top
         roll(state);
       }),
     );
@@ -56,14 +56,14 @@ export const actions = {
     setStore(
       produce((state) => {
         placements.forEach(({dieId, to}) => {
-          if (to.type === 'die') {
+          if (to.type === DropType.Die) {
             swap(state, {from: dieId, to: to.id!});
             return;
           }
 
           place(state, {
             from: dieId,
-            to: to.id ?? EFFECTS.UNPLACED,
+            to: to.id ?? Effects.Unplaced,
             order: to.order,
           });
         });

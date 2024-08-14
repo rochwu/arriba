@@ -1,10 +1,9 @@
 import type {Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
-const Position = styled.div({
-  display: 'flex',
-  justifyContent: 'center',
-  position: 'absolute',
+import {Absolute} from '../Absolute';
+
+const Position = styled(Absolute)({
   bottom: 0,
   width: '100%',
 });

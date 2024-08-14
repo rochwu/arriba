@@ -1,6 +1,6 @@
 import {random} from 'lodash-es';
 
-import {EFFECTS} from '../../../../constants';
+import {Effects} from '../../../../constants';
 import type {State} from '../../../types';
 import {createDie} from '../../createDie';
 import {tryEffect} from '../../tryEffect';
@@ -10,7 +10,7 @@ import {push} from '../push';
 const it = Array.from({length: 6});
 
 export const summon = (state: State) => {
-  const maybe = tryEffect(state, EFFECTS.SUMMON);
+  const maybe = tryEffect(state, Effects.Summon);
 
   if (!maybe) {
     return;
@@ -38,5 +38,5 @@ export const summon = (state: State) => {
   const summoned = createDie({values});
   state.dieById[summoned.id] = summoned;
 
-  push(state, {die: summoned.id, effect: EFFECTS.UNPLACED});
+  push(state, {die: summoned.id, effect: Effects.Unplaced});
 };

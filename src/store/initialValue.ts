@@ -1,15 +1,15 @@
-import {EFFECTS} from '../constants';
+import {Effects} from '../constants';
 
 import {effects as rawEffects} from './effects';
 import type {State} from './types';
 
-const {[EFFECTS.UNPLACED]: unplaced, ...effects} = rawEffects;
+const {[Effects.Unplaced]: unplaced, ...effects} = rawEffects;
 
 export const initialValue: State = {
   dieById: {},
   effectById: {
     ...effects,
-    [EFFECTS.UNPLACED]: unplaced,
+    [Effects.Unplaced]: unplaced,
   },
   effects: Object.keys(effects),
   turns: 0,
