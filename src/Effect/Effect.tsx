@@ -1,8 +1,10 @@
 import {createDroppable} from '@thisbeyond/solid-dnd';
-import {Component, createMemo} from 'solid-js';
+import type {Component} from 'solid-js';
+import {createMemo} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
-import {EffectId, store} from '../store';
+import type {EffectId} from '../store';
+import {store} from '../store';
 
 import {Dice} from './Dice';
 
@@ -12,16 +14,16 @@ const Container = styled.div({
   margin: '0.5em',
 });
 
-export const Effect: Component<{identifier: EffectId}> = ({identifier}) => {
-  const droppable = createDroppable(identifier, {
+export const Effect: Component<{identifier: EffectId}> = (props) => {
+  const droppable = createDroppable(props.identifier, {
     type: 'effect',
-    id: identifier,
+    id: props.identifier,
   });
 
-  const effect = createMemo(() => store.effectById[identifier]);
+  const effect = createMemo(() => store.effectById[props.identifier]);
 
   return (
-    <Container ref={droppable} data-effect={identifier}>
+    <Container ref={droppable} data-effect={props.identifier}>
       {effect().name}
       <Dice effect={effect} />
     </Container>

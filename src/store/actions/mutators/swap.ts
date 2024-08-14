@@ -1,4 +1,4 @@
-import {DieId, State} from '../../types';
+import type {DieId, State} from '../../types';
 import {getDice} from '../getDice';
 
 export const swap = (

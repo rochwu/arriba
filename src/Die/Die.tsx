@@ -1,8 +1,9 @@
 import {createDraggable, createDroppable} from '@thisbeyond/solid-dnd';
-import {Component, Show, createMemo, createSignal, splitProps} from 'solid-js';
+import type {Component} from 'solid-js';
+import {Show, createSignal} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
-import {DieId, store} from '../store';
+import type {DieId} from '../store';
 
 import {DieLike} from './DieLike';
 import {Info} from './Info';
@@ -22,13 +23,16 @@ const Content = styled.div({
   aspectRatio: 'inherit',
 });
 
-export const Die: Component<{identifier: DieId}> = ({identifier}) => {
+export const Die: Component<{identifier: DieId}> = (props) => {
   const [hovered, setHover] = createSignal(false);
 
-  const draggable = createDraggable(identifier, {id: identifier});
-  const droppable = createDroppable(identifier, {type: 'die', id: identifier});
+  const draggable = createDraggable(props.identifier, {id: props.identifier});
+  const droppable = createDroppable(props.identifier, {
+    type: 'die',
+    id: props.identifier,
+  });
 
-  const {die, value} = useDie(identifier);
+  const {die, value} = useDie(props.identifier);
 
   let timeout: number;
 
@@ -46,7 +50,7 @@ export const Die: Component<{identifier: DieId}> = ({identifier}) => {
   return (
     <Container
       ref={draggable}
-      data-die={identifier}
+      data-die={props.identifier}
       onMouseEnter={enter}
       onMouseLeave={leave}
     >

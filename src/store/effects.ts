@@ -1,6 +1,6 @@
 import {EFFECTS} from '../constants';
 
-import {DieId, Effect, EffectId} from './types';
+import type {DieId, Effect, EffectId} from './types';
 
 const create = (
   ...effects: {

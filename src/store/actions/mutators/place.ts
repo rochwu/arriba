@@ -1,8 +1,8 @@
 import {EFFECTS} from '../../../constants';
-import {DieId, EffectId, State} from '../../types';
+import type {DieId, EffectId, State} from '../../types';
 import {getDice} from '../getDice';
 
-import {instant} from './instant/instant';
+import {instant} from './instant';
 import {push} from './push';
 
 export const place = (

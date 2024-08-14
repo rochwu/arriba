@@ -3,7 +3,7 @@ import {produce} from 'solid-js/store';
 
 import {EFFECTS} from '../../constants';
 import {setStore} from '../store';
-import {Die, DieId, EffectId} from '../types';
+import type {Die, DieId, EffectId} from '../types';
 
 import {createDie} from './createDie';
 import {age} from './mutators/age';

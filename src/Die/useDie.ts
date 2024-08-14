@@ -1,6 +1,7 @@
 import {createMemo} from 'solid-js';
 
-import {DieId, store} from '../store';
+import type {DieId} from '../store';
+import {store} from '../store';
 
 export const useDie = (identifier: DieId) => {
   const die = createMemo(() => store.dieById[identifier]);
