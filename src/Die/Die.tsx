@@ -27,14 +27,14 @@ const Content = styled.div({
   aspectRatio: 'inherit',
 });
 
-export const Die: Component<{identifier: DieId}> = (props) => {
-  const draggable = createDraggable(props.identifier, {id: props.identifier});
-  const droppable = createDroppable(props.identifier, {
+export const Die: Component<{id: DieId}> = (props) => {
+  const draggable = createDraggable(props.id, {id: props.id});
+  const droppable = createDroppable(props.id, {
     type: DropType.Die,
-    id: props.identifier,
+    id: props.id,
   });
 
-  const {die, value} = useDie(props.identifier);
+  const {die, value} = useDie(props.id);
 
   const {enter, leave, hovered, container, tooltip} = useTooltip();
 
@@ -44,7 +44,7 @@ export const Die: Component<{identifier: DieId}> = (props) => {
         container(el);
         draggable(el);
       }}
-      data-die={props.identifier}
+      data-die={props.id}
       onMouseEnter={enter}
       onMouseLeave={leave}
     >

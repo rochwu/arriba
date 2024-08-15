@@ -20,7 +20,7 @@ export const Dice: Component<{effect: Accessor<Effect>}> = (props) => {
           return (
             <Switch fallback={<Slot effect={props.effect()} index={index} />}>
               <Match when={item()} keyed>
-                {(id) => <Die identifier={id} />}
+                {(id) => <Die id={id} />}
               </Match>
             </Switch>
           );

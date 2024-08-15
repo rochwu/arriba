@@ -10,7 +10,8 @@
     "serve": "vite preview",
     "deduplicate": "yarn-deduplicate",
     "format": "prettier . --write",
-    "lint": "eslint . --quiet --fix"
+    "lint": "eslint . --quiet --fix",
+    "typecheck": "tsc --noEmit"
   },
   "license": "MIT",
   "devDependencies": {

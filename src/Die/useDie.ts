@@ -3,8 +3,8 @@ import {createMemo} from 'solid-js';
 import type {DieId} from '../store';
 import {store} from '../store';
 
-export const useDie = (identifier: DieId) => {
-  const die = createMemo(() => store.dieById[identifier]);
+export const useDie = (id: DieId) => {
+  const die = createMemo(() => store.dieById[id]);
   const value = createMemo(() => {
     const {faces, roll: index} = die();
 

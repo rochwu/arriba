@@ -6,5 +6,5 @@ import type {Effect} from '../../store';
 export const Opponent: Component<{effect: Effect}> = (props) => {
   const opponent = createMemo(() => props.effect.opponents![0]);
 
-  return <Die identifier={opponent()} />;
+  return <Die id={opponent()} />;
 };
