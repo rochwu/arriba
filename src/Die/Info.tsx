@@ -1,4 +1,4 @@
-import type {Accessor, Component} from 'solid-js';
+import type {Accessor, Component, Ref} from 'solid-js';
 import {For} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
@@ -11,11 +11,10 @@ const Container = styled.div({
   display: 'flex',
   flexDirection: 'column',
   gap: '0.5em',
-  position: 'absolute',
   padding: '0.5em',
   borderRadius: '0.5em',
-  transform: 'translateY(calc(-100%))',
   backgroundColor: '#cdaa7d80',
+  width: 'fit-content',
 });
 
 const List = styled.div({
@@ -35,9 +34,12 @@ const Name = styled.div({
   textTransform: 'lowercase',
 });
 
-export const Info: Component<{die: Accessor<Die>}> = (props) => {
+export const Info: Component<{
+  die: Accessor<Die>;
+  ref?: HTMLDivElement | Ref<HTMLDivElement>;
+}> = (props) => {
   return (
-    <Container>
+    <Container ref={props.ref}>
       <Name>
         {props.die().name} Age: {props.die().age}
       </Name>

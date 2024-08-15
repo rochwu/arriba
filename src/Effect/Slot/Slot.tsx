@@ -1,5 +1,5 @@
 import {createDroppable} from '@thisbeyond/solid-dnd';
-import type {Component} from 'solid-js';
+import {mergeProps, type Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {DropType} from '../../constants';
@@ -17,22 +17,27 @@ const Container = styled(Shape)({
 
 export const Slot: Component<{
   effect: Effect;
-  index: number;
+  index?: number;
 }> = (props) => {
-  const droppable = createDroppable(`${props.effect.id}-${props.index}`, {
-    type: DropType.Effect,
-    id: props.effect.id,
-    order: props.index,
-  });
+  const mergedProps = mergeProps({index: 0}, props);
+
+  const droppable = createDroppable(
+    `${mergedProps.effect.id}-${mergedProps.index}`,
+    {
+      type: DropType.Effect,
+      id: mergedProps.effect.id,
+      order: mergedProps.index,
+    },
+  );
 
   return (
     <Container
       ref={droppable}
-      data-effect={props.effect.id}
-      data-order={props.index}
+      data-effect={mergedProps.effect.id}
+      data-order={mergedProps.index}
     >
-      <Min effect={props.effect} />
-      <Type effect={props.effect} />
+      <Min effect={mergedProps.effect} />
+      <Type effect={mergedProps.effect} />
     </Container>
   );
 };

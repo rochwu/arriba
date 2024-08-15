@@ -34,7 +34,7 @@ export const Min: Component<{effect: Effect}> = (prop) => {
   return (
     <Position>
       <Text>
-        0<Plus>+</Plus>
+        1<Plus>+</Plus>
       </Text>
     </Position>
   );

@@ -1,32 +1,17 @@
-import {createDroppable} from '@thisbeyond/solid-dnd';
-import type {Component} from 'solid-js';
-import {createMemo} from 'solid-js';
-import {styled} from 'solid-styled-components';
+import {Match, Switch, type Component} from 'solid-js';
 
-import {DropType} from '../constants';
+import {Effects} from '../constants';
 import type {EffectId} from '../store';
-import {store} from '../store';
 
-import {Dice} from './Dice';
-
-const Container = styled.div({
-  border: '1px dashed black',
-  padding: '0.5em',
-  margin: '0.5em',
-});
+import {Duel} from './Duel';
+import {Generic} from './Generic';
 
 export const Effect: Component<{identifier: EffectId}> = (props) => {
-  const droppable = createDroppable(props.identifier, {
-    type: DropType.Effect,
-    id: props.identifier,
-  });
-
-  const effect = createMemo(() => store.effectById[props.identifier]);
-
   return (
-    <Container ref={droppable} data-effect={props.identifier}>
-      {effect().name}
-      <Dice effect={effect} />
-    </Container>
+    <Switch fallback={<Generic identifier={props.identifier} />}>
+      <Match when={props.identifier === Effects.Duel}>
+        <Duel />
+      </Match>
+    </Switch>
   );
 };

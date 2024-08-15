@@ -27,6 +27,7 @@ export const actions = {
 
           state.dieById[id] = die;
           state.effectById[Effects.Unplaced].dice.push(id);
+          state.dice.push(id);
         });
       }),
     );
