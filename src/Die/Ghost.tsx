@@ -6,6 +6,7 @@ import {DieLike} from './DieLike';
 import {Name} from './Name';
 import {Roll} from './Roll';
 import {useDie} from './useDie';
+import {Value} from './Value';
 
 const Die = styled(DieLike)({
   opacity: '0.5',
@@ -21,7 +22,7 @@ export const Ghost: Component = () => {
         return (
           <Die>
             <Roll>{die().roll + 1}</Roll>
-            {value()}
+            <Value>{value()}</Value>
             <Name>{die().name}</Name>
           </Die>
         );

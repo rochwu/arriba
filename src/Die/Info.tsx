@@ -6,6 +6,7 @@ import type {Die} from '../store';
 
 import {DieLike} from './DieLike';
 import {Roll} from './Roll';
+import {Value} from './Value';
 
 const Container = styled.div({
   display: 'flex',
@@ -49,7 +50,7 @@ export const Info: Component<{
             return (
               <Face>
                 <Roll>{index() + 1}</Roll>
-                {item.value}
+                <Value>{item.value}</Value>
               </Face>
             );
           }}

@@ -15,7 +15,7 @@ const Dot = styled.div({
   opacity: '0.4',
 });
 
-export const Newborn: Component<{die: Accessor<Die>}> = (props) => {
+export const New: Component<{die: Accessor<Die>}> = (props) => {
   const isNewborn = createMemo(() => props.die().age === 1);
 
   return (

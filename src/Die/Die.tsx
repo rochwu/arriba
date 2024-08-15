@@ -11,9 +11,10 @@ import {useTooltip} from '../useTooltip';
 import {DieLike} from './DieLike';
 import {Info} from './Info';
 import {Name} from './Name';
-import {Newborn} from './Newborn';
+import {New} from './New';
 import {Roll} from './Roll';
 import {useDie} from './useDie';
+import {Value} from './Value';
 
 const Container = styled(DieLike)({
   cursor: 'grab',
@@ -49,8 +50,8 @@ export const Die: Component<{identifier: DieId}> = (props) => {
     >
       <Content ref={droppable}>
         <Roll>{die().roll + 1}</Roll>
-        <Newborn die={die} />
-        {value()}
+        <New die={die} />
+        <Value>{value()}</Value>
         <Name>{die().name}</Name>
         <Show when={hovered()}>
           <Portal>
