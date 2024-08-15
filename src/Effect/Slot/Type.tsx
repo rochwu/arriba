@@ -14,7 +14,7 @@ export const Type: Component<{effect: Effect}> = (prop) => {
   return (
     <Show when={prop.effect.instant}>
       <Position>
-        <Lightning size={18} weight="duotone" />
+        <Lightning size={18} weight="duotone" color="blue" />
       </Position>
     </Show>
   );

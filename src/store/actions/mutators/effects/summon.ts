@@ -36,7 +36,9 @@ export const summon = (state: State) => {
   place(state, {from: summoner.id});
 
   const summoned = createDie({values});
+  // TODO: Create a born mutator that puts it in the right place
   state.dieById[summoned.id] = summoned;
+  state.dice.push(summoned.id);
 
   push(state, {die: summoned.id, effect: Effects.Unplaced});
 };

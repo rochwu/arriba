@@ -2,4 +2,11 @@
 
 :root {
   --slot-color: #fff8dc;
+  --background-color: #deb887;
+}
+
+body {
+  user-select: none;
+  background-color: var(--background-color);
+  font-family: Arial, Helvetica, sans-serif;
 }

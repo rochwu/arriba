@@ -15,17 +15,20 @@ export type Die = {
   faces: Face[];
   roll: number;
   age: number;
+  opponent?: boolean;
 };
 export type Effect = {
   id: EffectId;
   dice: List<DieId>;
   name: string;
   max: number;
-  instant: boolean;
+  instant?: boolean;
+  opponents?: DieId[];
 };
 
 export type State = {
   dieById: Record<DieId, Die>;
+  dice: DieId[];
   effectById: Record<EffectId, Effect>;
   effects: EffectId[];
   turns: number;

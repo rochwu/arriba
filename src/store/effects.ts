@@ -1,18 +1,18 @@
 import {Effects} from '../constants';
 
-import type {DieId, Effect, EffectId} from './types';
+import {createDie} from './actions/createDie';
+import type {Die, Effect, EffectId} from './types';
 
-const create = (
-  ...effects: {
-    id: string;
-    name?: string;
-    dice?: DieId[];
-    max?: number;
-    instant?: boolean;
-  }[]
-) => {
+type Args = Partial<Omit<Effect, 'id'>> & {id: EffectId};
+
+export const opponents: Die[] = [
+  {...createDie(), opponent: true, age: 13},
+  {...createDie(), opponent: true, age: 17},
+];
+
+const create = (...effects: Args[]) => {
   return effects.reduce(
-    (result, {id, name, dice, max, instant}) => {
+    (result, {id, name, dice, max, instant, opponents}) => {
       return {
         ...result,
         [id]: {
@@ -24,7 +24,8 @@ const create = (
               : [null]),
           name: name ?? id,
           max: max ?? Infinity,
-          instant: instant ?? false,
+          instant,
+          opponents,
         },
       };
     },
@@ -34,7 +35,12 @@ const create = (
 
 export const effects = {
   ...create(
-    {id: 'one'},
+    {
+      id: Effects.Duel,
+      name: 'Duel to the Death',
+      max: 1,
+      opponents: opponents.map(({id}) => id),
+    },
     {id: Effects.Unplaced, name: 'Milling', dice: []},
     {id: Effects.Fire, name: 'Fire', max: 1, instant: true},
     {id: Effects.Summon, max: 1, name: 'Summon'},
