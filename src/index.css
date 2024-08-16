@@ -3,6 +3,8 @@
 :root {
   --slot-color: #fff8dc;
   --background-color: #deb887;
+
+  --tooltip-background-color: #cdaa7d;
 }
 
 body {

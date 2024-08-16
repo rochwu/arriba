@@ -1,5 +1,5 @@
 import type {Accessor, Component} from 'solid-js';
-import {Index, Match, Switch} from 'solid-js';
+import {Index, Show} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {Die} from '../Die';
@@ -18,11 +18,13 @@ export const Dice: Component<{effect: Accessor<Effect>}> = (props) => {
       <Index each={props.effect().dice}>
         {(item, index) => {
           return (
-            <Switch fallback={<Slot effect={props.effect()} index={index} />}>
-              <Match when={item()} keyed>
-                {(id) => <Die id={id} />}
-              </Match>
-            </Switch>
+            <Show
+              when={item()}
+              fallback={<Slot effect={props.effect()} index={index} />}
+              keyed
+            >
+              {(id) => <Die id={id} />}
+            </Show>
           );
         }}
       </Index>

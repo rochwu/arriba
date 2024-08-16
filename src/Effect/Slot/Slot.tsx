@@ -3,16 +3,17 @@ import {mergeProps, type Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {DropType} from '../../constants';
+import {vars} from '../../css';
 import {Shape} from '../../Die';
 import type {Effect} from '../../store';
 
 import {Min} from './Min';
-import {Type} from './Type';
+import {Types} from './Types';
 
 const Container = styled(Shape)({
   borderColor: 'black',
   borderStyle: 'dashed',
-  backgroundColor: 'var(--slot-color)',
+  backgroundColor: vars.slot.backgroundColor,
 });
 
 export const Slot: Component<{
@@ -37,7 +38,7 @@ export const Slot: Component<{
       data-order={mergedProps.index}
     >
       <Min effect={mergedProps.effect} />
-      <Type effect={mergedProps.effect} />
+      <Types effect={mergedProps.effect} />
     </Container>
   );
 };

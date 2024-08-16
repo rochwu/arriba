@@ -2,6 +2,7 @@ import {type Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {Absolute} from '../../Absolute';
+import {vars} from '../../css';
 import type {Effect} from '../../store';
 
 const SIZE = '12px';
@@ -12,7 +13,7 @@ const Position = styled(Absolute)({
   width: SIZE,
   aspectRatio: '1 / 1',
   color: 'black',
-  backgroundColor: 'var(--slot-color)',
+  backgroundColor: vars.slot.backgroundColor,
   borderRadius: '0.5em',
 });
 

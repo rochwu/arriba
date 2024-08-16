@@ -1,12 +1,10 @@
 import {createDraggable, createDroppable} from '@thisbeyond/solid-dnd';
 import type {Component} from 'solid-js';
-import {Show} from 'solid-js';
-import {Portal} from 'solid-js/web';
 import {styled} from 'solid-styled-components';
 
 import {DropType} from '../constants';
 import type {DieId} from '../store';
-import {useTooltip} from '../useTooltip';
+import {useTooltip} from '../tooltip';
 
 import {DieLike} from './DieLike';
 import {Info} from './Info';
@@ -36,12 +34,13 @@ export const Die: Component<{id: DieId}> = (props) => {
 
   const {die, value} = useDie(props.id);
 
-  const {enter, leave, hovered, container, tooltip} = useTooltip();
+  const {enter, leave} = useTooltip({
+    element: <Info die={die} />,
+  });
 
   return (
     <Container
       ref={(el) => {
-        container(el);
         draggable(el);
       }}
       data-die={props.id}
@@ -53,11 +52,6 @@ export const Die: Component<{id: DieId}> = (props) => {
         <New die={die} />
         <Value>{value()}</Value>
         <Name>{die().name}</Name>
-        <Show when={hovered()}>
-          <Portal>
-            <Info ref={tooltip} die={die} />
-          </Portal>
-        </Show>
       </Content>
     </Container>
   );
