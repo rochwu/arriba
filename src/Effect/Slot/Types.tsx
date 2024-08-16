@@ -1,4 +1,4 @@
-import {Lightning, Stairs} from 'phosphor-solid-js';
+import {Lightning, Skull, Stairs} from 'phosphor-solid-js';
 import {Show, type Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
@@ -9,7 +9,8 @@ import {Type} from './Type';
 
 const Position = styled(Absolute)({
   bottom: '-4px',
-  width: '100%',
+  minWidth: '100%',
+  justifySelf: 'center',
 });
 
 export const Types: Component<{effect: Effect}> = (props) => {
@@ -22,6 +23,9 @@ export const Types: Component<{effect: Effect}> = (props) => {
       <Position>
         <Show when={effect().instant}>
           <Type Icon={Lightning} tooltip="happens instantly" />
+        </Show>
+        <Show when={effect().opponents}>
+          <Type Icon={Skull} tooltip="can lose their life" />
         </Show>
         <Show when={effect().opponents}>
           <Type Icon={Stairs} tooltip="busy 'til it's over" />
