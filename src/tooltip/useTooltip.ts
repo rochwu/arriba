@@ -14,8 +14,8 @@ const [content, setContent] = createSignal<JSX.Element>(null);
 
 export {content};
 
-const reset = () => {
-  setContent();
+export const reset = () => {
+  setContent(null);
   clearTimeout(enterTimeout);
   clearTimeout(leaveTimeout);
   cleanup?.();

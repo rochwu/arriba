@@ -1,4 +1,4 @@
-import type {Lightning} from 'phosphor-solid-js';
+import type {IconProps, Lightning} from 'phosphor-solid-js';
 import type {JSX} from 'solid-js';
 import {type Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
@@ -10,28 +10,22 @@ const Tooltip = styled.div({
   alignItems: 'center',
 });
 
+const SIZE = 18;
+
 export const Type: Component<{Icon: typeof Lightning; tooltip: JSX.Element}> = (
   props,
 ) => {
+  const common: IconProps = {size: SIZE, weight: 'duotone', color: 'blue'};
+
   const {enter, leave} = useTooltip({
     placement: 'bottom',
     element: (
       <Tooltip>
-        <props.Icon size={18} weight="duotone" color="blue" />
-        &nbsp;happens instantly
+        <props.Icon {...common} />
+        &nbsp;{props.tooltip}
       </Tooltip>
     ),
   });
 
-  return (
-    <>
-      <props.Icon
-        size={18}
-        weight="duotone"
-        color="blue"
-        onMouseEnter={enter}
-        onMouseLeave={leave}
-      />
-    </>
-  );
+  return <props.Icon {...common} onMouseEnter={enter} onMouseLeave={leave} />;
 };

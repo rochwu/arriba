@@ -5,6 +5,7 @@ import {For, onCleanup, onMount} from 'solid-js';
 import {Ghost} from './Die';
 import {Effect, Unplaced} from './Effect';
 import {actions, store} from './store';
+import {reset} from './tooltip';
 
 const listener = (event: KeyboardEvent) => {
   if (event.code === 'Space') {
@@ -44,8 +45,12 @@ export const Game = () => {
     });
   };
 
+  const start = () => {
+    reset();
+  };
+
   return (
-    <DragDropProvider onDragEnd={onDragEnd}>
+    <DragDropProvider onDragEnd={onDragEnd} onDragStart={start}>
       <DragDropSensors />
 
       <For each={store.effects}>{(item) => <Effect id={item} />}</For>

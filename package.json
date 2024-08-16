@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "It goes up",
   "homepage": "https://rochwu.github.io/arriba",
+  "type": "module",
   "scripts": {
     "start": "vite --open",
     "dev": "vite",

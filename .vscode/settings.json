@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["thisbeyond"],
+  "cSpell.words": ["proxify", "thisbeyond"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
