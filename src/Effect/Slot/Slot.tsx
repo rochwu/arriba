@@ -1,8 +1,8 @@
 import {createDroppable} from '@thisbeyond/solid-dnd';
-import {mergeProps, type Component} from 'solid-js';
+import {mergeProps, Show, type Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
-import {DropType} from '../../constants';
+import {DropType, Effects} from '../../constants';
 import {vars} from '../../css';
 import {Shape} from '../../Die';
 import type {Effect} from '../../store';
@@ -11,8 +11,7 @@ import {Min} from './Min';
 import {Types} from './Types';
 
 const Container = styled(Shape)({
-  borderColor: 'black',
-  borderStyle: 'dashed',
+  borderColor: vars.slot.backgroundColor,
   backgroundColor: vars.slot.backgroundColor,
 });
 
@@ -37,7 +36,9 @@ export const Slot: Component<{
       data-effect={mergedProps.effect.id}
       data-order={mergedProps.index}
     >
-      <Min effect={mergedProps.effect} />
+      <Show when={props.effect.id !== Effects.Unplaced}>
+        <Min effect={mergedProps.effect} />
+      </Show>
       <Types effect={mergedProps.effect} />
     </Container>
   );
