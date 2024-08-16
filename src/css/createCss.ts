@@ -1,18 +1,8 @@
-export const createCss = <T extends Record<string, any>>(config: T) => {
-  const record: Record<string, string> = {};
-
+export const createCss = <T extends Record<string, any>>(styles: T) => {
   const proxify = <U extends Record<string, any>>(obj: U, path = ''): U => {
     return new Proxy(obj, {
-      get(target, prop: string | symbol) {
-        if (
-          typeof prop === 'symbol' ||
-          prop === 'inspect' ||
-          prop === 'toStringTag'
-        ) {
-          return Reflect.get(target, prop);
-        }
-
-        const newPath = path ? `${path}-${String(prop)}` : String(prop);
+      get(target, prop: string) {
+        const newPath = path ? `${path}-${prop}` : prop;
 
         if (
           typeof target[prop as keyof U] === 'object' &&
@@ -21,15 +11,14 @@ export const createCss = <T extends Record<string, any>>(config: T) => {
           return proxify(target[prop as keyof U], newPath);
         } else {
           const name = `--${newPath}`;
-          record[name] = target[prop as keyof U] as string;
 
           return `var(${name})`;
         }
       },
-      set(target, prop: string | symbol, value: any) {
+      set(target, prop: string, value: any) {
         if (typeof prop === 'symbol') return false;
 
-        const newPath = path ? `${path}-${String(prop)}` : String(prop);
+        const newPath = path ? `${path}-${prop}` : prop;
         const name = `--${newPath}`;
 
         // Update the CSS variable value in the DOM
@@ -39,6 +28,8 @@ export const createCss = <T extends Record<string, any>>(config: T) => {
       },
     }) as U;
   };
+
+  const record: Record<string, string> = {};
 
   const traverse = (obj: Record<string, any>, path = '') => {
     for (const key in obj) {
@@ -52,7 +43,9 @@ export const createCss = <T extends Record<string, any>>(config: T) => {
     }
   };
 
-  traverse(config);
-  const vars = proxify(config);
+  traverse(styles);
+
+  const vars = proxify(styles);
+
   return {vars, record};
 };
