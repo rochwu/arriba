@@ -10,12 +10,12 @@ let cleanup: () => void | undefined;
 let enterTimeout: number;
 let leaveTimeout: number;
 
-const [el, setEl] = createSignal<JSX.Element>(null);
+const [content, setContent] = createSignal<JSX.Element>(null);
 
-export {el};
+export {content};
 
 const reset = () => {
-  setEl();
+  setContent();
   clearTimeout(enterTimeout);
   clearTimeout(leaveTimeout);
   cleanup?.();
@@ -59,7 +59,7 @@ export const useTooltip = (config: Config) => {
       containerEl = target as HTMLElement;
 
       enterTimeout = setTimeout(() => {
-        setEl(config.element);
+        setContent(config.element);
         cleanup = autoUpdate(containerEl, tooltipEl, update);
       }, 400); // default recommended
     },

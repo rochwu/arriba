@@ -4,7 +4,7 @@ import {styled} from 'solid-styled-components';
 
 import {vars} from '../css';
 
-import {el, enter, leave, tooltipRef} from './useTooltip';
+import {content, enter, leave, tooltipRef} from './useTooltip';
 
 const Container = styled.div({
   display: 'grid',
@@ -17,11 +17,14 @@ const Container = styled.div({
 });
 
 export const Tooltip: Component = () => {
+  // vite couldn't build without this. Complaining about ref={tooltipRef} trying to reassign tooltipRef even though it's a function
+  const ref = tooltipRef;
+
   return (
-    <Show when={el()} keyed>
+    <Show when={content()} keyed>
       {(el) => (
         <Portal>
-          <Container ref={tooltipRef} onMouseEnter={enter} onMouseLeave={leave}>
+          <Container ref={ref} onMouseEnter={enter} onMouseLeave={leave}>
             {el}
           </Container>
         </Portal>
