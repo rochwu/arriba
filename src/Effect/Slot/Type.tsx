@@ -1,21 +1,37 @@
-import {Lightning} from 'phosphor-solid-js';
-import {Show, type Component} from 'solid-js';
+import type {Lightning} from 'phosphor-solid-js';
+import type {JSX} from 'solid-js';
+import {type Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
-import {Absolute} from '../../Absolute';
-import type {Effect} from '../../store';
+import {useTooltip} from '../../tooltip';
 
-const Position = styled(Absolute)({
-  bottom: '-2px',
-  width: '100%',
+const Tooltip = styled.div({
+  display: 'flex',
+  alignItems: 'center',
 });
 
-export const Type: Component<{effect: Effect}> = (prop) => {
+export const Type: Component<{Icon: typeof Lightning; tooltip: JSX.Element}> = (
+  props,
+) => {
+  const {enter, leave} = useTooltip({
+    placement: 'bottom',
+    element: (
+      <Tooltip>
+        <props.Icon size={18} weight="duotone" color="blue" />
+        &nbsp;happens instantly
+      </Tooltip>
+    ),
+  });
+
   return (
-    <Show when={prop.effect.instant}>
-      <Position>
-        <Lightning size={18} weight="duotone" color="blue" />
-      </Position>
-    </Show>
+    <>
+      <props.Icon
+        size={18}
+        weight="duotone"
+        color="blue"
+        onMouseEnter={enter}
+        onMouseLeave={leave}
+      />
+    </>
   );
 };

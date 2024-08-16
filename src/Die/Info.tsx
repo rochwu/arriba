@@ -1,4 +1,4 @@
-import type {Accessor, Component, Ref} from 'solid-js';
+import type {Accessor, Component} from 'solid-js';
 import {For} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
@@ -6,15 +6,12 @@ import type {Die} from '../store';
 
 import {DieLike} from './DieLike';
 import {Roll} from './Roll';
+import {Value} from './Value';
 
 const Container = styled.div({
   display: 'flex',
   flexDirection: 'column',
   gap: '0.5em',
-  padding: '0.5em',
-  borderRadius: '0.5em',
-  backgroundColor: '#cdaa7d80',
-  width: 'fit-content',
 });
 
 const List = styled.div({
@@ -36,10 +33,9 @@ const Name = styled.div({
 
 export const Info: Component<{
   die: Accessor<Die>;
-  ref?: HTMLDivElement | Ref<HTMLDivElement>;
 }> = (props) => {
   return (
-    <Container ref={props.ref}>
+    <Container>
       <Name>
         {props.die().name} Age: {props.die().age}
       </Name>
@@ -49,7 +45,7 @@ export const Info: Component<{
             return (
               <Face>
                 <Roll>{index() + 1}</Roll>
-                {item.value}
+                <Value>{item.value}</Value>
               </Face>
             );
           }}

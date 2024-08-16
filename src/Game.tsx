@@ -48,7 +48,7 @@ export const Game = () => {
     <DragDropProvider onDragEnd={onDragEnd}>
       <DragDropSensors />
 
-      <For each={store.effects}>{(item) => <Effect identifier={item} />}</For>
+      <For each={store.effects}>{(item) => <Effect id={item} />}</For>
 
       <Unplaced />
 
