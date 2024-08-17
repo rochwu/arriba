@@ -64,6 +64,7 @@ export const effects = {
           turns: 3,
           at: 0,
         },
+        death: true,
         opponents: [geomentralist.id],
       },
       max: 1,
