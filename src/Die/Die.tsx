@@ -2,9 +2,10 @@ import {createDraggable, createDroppable} from '@thisbeyond/solid-dnd';
 import type {Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
+import {useTooltip} from '@arriba/tooltip';
+
 import {DropType} from '../constants';
 import type {DieId} from '../store';
-import {useTooltip} from '../tooltip';
 
 import {DieLike} from './DieLike';
 import {Info} from './Info';

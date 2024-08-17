@@ -2,8 +2,9 @@ import {createDroppable} from '@thisbeyond/solid-dnd';
 import {mergeProps, Show, type Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
+import {vars} from '@arriba/css';
+
 import {DropType, Effects} from '../../constants';
-import {vars} from '../../css';
 import {Shape} from '../../Die';
 import type {Effect} from '../../store';
 

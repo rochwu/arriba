@@ -1,10 +1,11 @@
 import {type Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
-import {GlobalStyles} from './css';
+import {GlobalStyles} from '@arriba/css';
+import {Tooltip} from '@arriba/tooltip';
+
 import {Game} from './Game';
 import {store} from './store';
-import {Tooltip} from './tooltip';
 
 const Container = styled.div({
   position: 'relative',

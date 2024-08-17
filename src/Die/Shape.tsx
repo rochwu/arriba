@@ -1,6 +1,6 @@
 import {styled} from 'solid-styled-components';
 
-import {vars} from '../css';
+import {vars} from '@arriba/css';
 
 export const Shape = styled.div({
   display: 'grid',

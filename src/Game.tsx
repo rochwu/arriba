@@ -2,10 +2,11 @@ import type {DragEventHandler} from '@thisbeyond/solid-dnd';
 import {DragDropProvider, DragDropSensors} from '@thisbeyond/solid-dnd';
 import {For, onCleanup, onMount} from 'solid-js';
 
+import {reset} from '@arriba/tooltip';
+
 import {Ghost} from './Die';
 import {Effect, Unplaced} from './Effect';
 import {actions, store} from './store';
-import {reset} from './tooltip';
 
 const listener = (event: KeyboardEvent) => {
   if (event.code === 'Space') {

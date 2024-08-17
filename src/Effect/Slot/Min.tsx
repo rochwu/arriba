@@ -1,8 +1,9 @@
 import {type Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
+import {vars} from '@arriba/css';
+
 import {Absolute} from '../../Absolute';
-import {vars} from '../../css';
 import {RollLike} from '../../Die';
 import type {Effect} from '../../store';
 

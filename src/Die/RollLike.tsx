@@ -1,7 +1,8 @@
 import {styled} from 'solid-styled-components';
 
+import {vars} from '@arriba/css';
+
 import {Absolute} from '../Absolute';
-import {vars} from '../css';
 
 export const RollLike = styled(Absolute)({
   left: '-1px',
