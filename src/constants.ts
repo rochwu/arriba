@@ -1,8 +1,11 @@
 export const Effects = {
+  // Core
+  Fire: 'fire',
   Unplaced: 'unplaced',
   Summon: 'summon',
-  Fire: 'fire',
+  // Special
   Duel: 'duel',
+  Geometry: 'geometry',
 } as const;
 
 export const DropType = {

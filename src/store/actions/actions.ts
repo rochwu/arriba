@@ -1,4 +1,4 @@
-import {random} from 'lodash-es';
+import {shuffle} from 'lodash-es';
 import {produce} from 'solid-js/store';
 
 import {DropType, Effects} from '../../constants';
@@ -12,12 +12,12 @@ import {place} from './mutators/place';
 import {roll} from './mutators/roll';
 import {swap} from './mutators/swap';
 
-const it = Array.from({length: 6});
+const beginners = [1, 1, 1, 2, 2, 3];
 
 export const actions = {
   generate(repeat = 1) {
     const dice: Die[] = Array.from({length: repeat}).map(() => {
-      return createDie({age: 1, values: it.map(() => random(1, 4))});
+      return createDie({age: 1, values: shuffle(beginners)});
     });
 
     setStore(

@@ -23,7 +23,7 @@ export const {vars, root} = createCssVars({
   },
   slot: {
     backgroundColor: '#fff8dc',
-    type: {
+    special: {
       size: '18px',
       color: 'blue',
     },

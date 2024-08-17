@@ -22,8 +22,15 @@ export type Effect = {
   dice: List<DieId>;
   name: string;
   max: number;
-  instant?: boolean;
-  opponents?: DieId[];
+  special?: {
+    instant?: boolean;
+    turned?: {
+      turns: number;
+      at: number;
+    };
+    opponents?: DieId[];
+    death?: boolean;
+  };
 };
 
 export type State = {

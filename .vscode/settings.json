@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["arriba", "proxify", "thisbeyond"],
+  "cSpell.words": ["arriba", "Geomentralist", "proxify", "thisbeyond"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"

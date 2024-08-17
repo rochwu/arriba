@@ -11,17 +11,18 @@ const Tooltip = styled.div({
   alignItems: 'center',
 });
 
-export const Type: Component<{Icon: typeof Lightning; tooltip: JSX.Element}> = (
-  props,
-) => {
+export const Special: Component<{
+  Icon: typeof Lightning;
+  tooltip: JSX.Element;
+}> = (props) => {
   const common: IconProps = {
     // Couldn't pass CSS vars into `size` so I had to inline inject it
     style: {
-      width: vars.slot.type.size,
-      height: vars.slot.type.size,
+      width: vars.slot.special.size,
+      height: vars.slot.special.size,
     },
     weight: 'duotone',
-    color: vars.slot.type.color,
+    color: vars.slot.special.color,
   };
 
   const {enter, leave} = useTooltip({

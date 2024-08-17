@@ -1,10 +1,8 @@
 import {type Component} from 'solid-js';
 
 import {Die} from '../../Die';
-import type {Effect} from '../../store';
+import type {DieId} from '../../store';
 
-export const Opponent: Component<{effect: Effect}> = (props) => {
-  const opponent = () => props.effect.opponents![0];
-
-  return <Die id={opponent()} />;
+export const Opponent: Component<{id: DieId}> = (props) => {
+  return <Die id={props.id} />;
 };

@@ -4,7 +4,8 @@ import {styled} from 'solid-styled-components';
 
 import {vars} from '@arriba/css';
 
-import {DropType, Effects} from '../../constants';
+import {DropType} from '../../constants';
+import type {EffectId} from '../../store';
 import {Card} from '../Card';
 import {Dice} from '../Dice';
 import {useEffect} from '../useEffect';
@@ -17,21 +18,23 @@ const Container = styled.div({
   alignItems: 'center',
 });
 
-export const Duel: Component = () => {
-  const id = Effects.Duel;
-
-  const droppable = createDroppable(id, {
+export const Duel: Component<{id: EffectId}> = (props) => {
+  const droppable = createDroppable(props.id, {
     type: DropType.Effect,
-    id,
+    id: props.id,
   });
 
-  const {effect} = useEffect(id);
+  const {effect} = useEffect(props.id);
+
+  const opponent = () => {
+    return effect().special!.opponents![0]!;
+  };
 
   return (
     <Card ref={droppable}>
       {effect().name}
       <Container>
-        <Dice effect={effect} /> v <Opponent effect={effect()} />
+        <Dice effect={effect} /> v <Opponent id={opponent()} />
       </Container>
     </Card>
   );
