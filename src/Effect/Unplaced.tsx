@@ -9,6 +9,7 @@ export const Unplaced = () => {
 
   return (
     <Card>
+      {unplaced().name}
       <Dice effect={unplaced} />
     </Card>
   );

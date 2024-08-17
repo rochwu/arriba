@@ -1,12 +1,12 @@
 import {styled} from 'solid-styled-components';
 
+import {vars} from '@arriba/css';
+
 export const Shape = styled.div({
   display: 'grid',
   placeContent: 'center',
-  width: '3em',
-  aspectRatio: '1 / 1',
-  borderRadius: '0.5em',
-  borderWidth: '1px',
-  borderStyle: 'solid',
+  width: vars.die.size,
+  height: vars.die.size,
+  borderRadius: vars.borderRadius,
   position: 'relative',
 });

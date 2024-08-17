@@ -1,4 +1,4 @@
-import {shuffle} from './shuffle';
+import {shuffle} from 'lodash-es';
 
 const raw = [
   'Aitana',

@@ -41,7 +41,7 @@ export const effects = {
       max: 1,
       opponents: opponents.map(({id}) => id),
     },
-    {id: Effects.Unplaced, name: 'Milling', dice: []},
+    {id: Effects.Unplaced, name: 'Put These to Work', dice: []},
     {id: Effects.Fire, name: 'Fire', max: 1, instant: true},
     {id: Effects.Summon, max: 1, name: 'Summon'},
   ),

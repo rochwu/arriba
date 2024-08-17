@@ -2,6 +2,8 @@ import type {Accessor, Component} from 'solid-js';
 import {For} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
+import {vars} from '@arriba/css';
+
 import type {Die} from '../store';
 
 import {DieLike} from './DieLike';
@@ -11,12 +13,12 @@ import {Value} from './Value';
 const Container = styled.div({
   display: 'flex',
   flexDirection: 'column',
-  gap: '0.5em',
+  gap: vars.gap,
 });
 
 const List = styled.div({
   display: 'flex',
-  gap: '0.5em',
+  gap: vars.gap,
 });
 
 const Face = styled(DieLike)({});

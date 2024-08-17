@@ -25,7 +25,7 @@ export const Types: Component<{effect: Effect}> = (props) => {
           <Type Icon={Lightning} tooltip="happens instantly" />
         </Show>
         <Show when={effect().opponents}>
-          <Type Icon={Skull} tooltip="can lose their life" />
+          <Type Icon={Skull} tooltip="die lose, die dies" />
         </Show>
         <Show when={effect().opponents}>
           <Type Icon={Stairs} tooltip="busy 'til it's over" />

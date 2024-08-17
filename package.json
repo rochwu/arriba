@@ -4,17 +4,22 @@
   "description": "It goes up",
   "homepage": "https://rochwu.github.io/arriba",
   "type": "module",
+  "packageManager": "yarn@1.22.22",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "license": "MIT",
   "scripts": {
     "start": "vite --open",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
+    "check-types": "tsc --noEmit",
     "deduplicate": "yarn-deduplicate",
     "format": "prettier . --write",
-    "lint": "eslint . --quiet --fix",
-    "typecheck": "tsc --noEmit"
+    "lint": "eslint . --quiet --fix"
   },
-  "license": "MIT",
   "devDependencies": {
     "@types/lodash-es": "^4.17.12",
     "eslint": "^9.9.0",

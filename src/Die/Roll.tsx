@@ -1,23 +1,18 @@
 import type {Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
-import {Absolute} from '../Absolute';
+import {vars} from '@arriba/css';
 
-const SIZE = '12px';
+import {RollLike} from './RollLike';
 
-const Position = styled(Absolute)({
-  left: '-1px',
-  top: '-1px',
-  width: SIZE,
-  aspectRatio: '1 / 1',
-  color: 'white',
-  backgroundColor: 'red',
-  borderRadius: SIZE,
+const Position = styled(RollLike)({
+  color: vars.die.roll.color,
+  backgroundColor: vars.die.roll.backgroundColor,
 });
 
 const Text = styled.div({
-  fontSize: SIZE,
-  fontWeight: 600,
+  fontSize: vars.die.roll.size,
+  fontWeight: vars.die.roll.fontWeight,
   lineHeight: 1,
 });
 

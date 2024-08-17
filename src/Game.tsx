@@ -2,10 +2,12 @@ import type {DragEventHandler} from '@thisbeyond/solid-dnd';
 import {DragDropProvider, DragDropSensors} from '@thisbeyond/solid-dnd';
 import {For, onCleanup, onMount} from 'solid-js';
 
+import {reset} from '@arriba/tooltip';
+
 import {Ghost} from './Die';
 import {Effect, Unplaced} from './Effect';
+import {EndTurn} from './EndTurn';
 import {actions, store} from './store';
-import {reset} from './tooltip';
 
 const listener = (event: KeyboardEvent) => {
   if (event.code === 'Space') {
@@ -24,7 +26,7 @@ export const Game = () => {
     });
   });
 
-  const onDragEnd: DragEventHandler = (event) => {
+  const dropped: DragEventHandler = (event) => {
     const {droppable, draggable} = event;
 
     console.log(
@@ -45,12 +47,8 @@ export const Game = () => {
     });
   };
 
-  const start = () => {
-    reset();
-  };
-
   return (
-    <DragDropProvider onDragEnd={onDragEnd} onDragStart={start}>
+    <DragDropProvider onDragEnd={dropped} onDragStart={reset}>
       <DragDropSensors />
 
       <For each={store.effects}>{(item) => <Effect id={item} />}</For>
@@ -59,7 +57,7 @@ export const Game = () => {
 
       <Ghost />
 
-      <button onClick={actions.endTurn}>End Turn</button>
+      <EndTurn />
     </DragDropProvider>
   );
 };

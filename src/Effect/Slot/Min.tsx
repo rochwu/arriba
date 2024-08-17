@@ -1,31 +1,27 @@
 import {type Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
+import {vars} from '@arriba/css';
+
 import {Absolute} from '../../Absolute';
+import {RollLike} from '../../Die';
 import type {Effect} from '../../store';
 
-const SIZE = '12px';
-
-const Position = styled(Absolute)({
-  left: '-1px',
-  top: '-1px',
-  width: SIZE,
-  aspectRatio: '1 / 1',
-  color: 'black',
+const Position = styled(RollLike)({
+  color: vars.slot.min.color,
 });
 
 const Text = styled.div({
   position: 'relative',
-  fontSize: SIZE,
-  fontWeight: 600,
+  fontSize: vars.die.roll.size,
+  fontWeight: vars.die.roll.fontWeight,
   lineHeight: 1,
 });
 
 const Plus = styled(Absolute)({
-  position: 'absolute',
   top: 0,
   left: '100%',
-  color: 'black',
+  color: vars.slot.min.color,
 });
 
 export const Min: Component<{effect: Effect}> = (prop) => {

@@ -9,6 +9,9 @@ import {plugin as tsplugin} from 'typescript-eslint';
 
 export default [
   {
+    ignores: ['.yarn/*'],
+  },
+  {
     files: ['**/*.{mjs,ts,tsx}'], // Apply to TypeScript files
     plugins: {
       'unused-imports': unusedImports,
@@ -31,8 +34,8 @@ export default [
         'error',
         {
           groups: [
-            ['builtin', 'external', 'internal'],
-            'parent',
+            ['builtin', 'external'],
+            ['internal', 'parent'],
             ['sibling', 'index'],
           ],
           'newlines-between': 'always', // Enforce newlines between groups
@@ -40,6 +43,14 @@ export default [
             order: 'asc', // Sort imports within groups alphabetically
             caseInsensitive: true,
           },
+          pathGroups: [
+            {
+              pattern: '@arriba/**',
+              group: 'internal',
+              position: 'before',
+            },
+          ],
+          pathGroupsExcludedImportTypes: [],
         },
       ],
       'prettier/prettier': 'error',
