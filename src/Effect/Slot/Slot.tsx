@@ -11,7 +11,6 @@ import {Min} from './Min';
 import {Types} from './Types';
 
 const Container = styled(Shape)({
-  borderColor: vars.slot.backgroundColor,
   backgroundColor: vars.slot.backgroundColor,
 });
 

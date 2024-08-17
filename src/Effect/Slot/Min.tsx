@@ -2,21 +2,17 @@ import {type Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {Absolute} from '../../Absolute';
+import {vars} from '../../css';
+import {RollLike} from '../../Die';
 import type {Effect} from '../../store';
 
-const SIZE = '12px';
-
-const Position = styled(Absolute)({
-  left: '-1px',
-  top: '-1px',
-  width: SIZE,
-  aspectRatio: '1 / 1',
+const Position = styled(RollLike)({
   color: 'black',
 });
 
 const Text = styled.div({
   position: 'relative',
-  fontSize: SIZE,
+  fontSize: vars.die.roll.size,
   fontWeight: 600,
   lineHeight: 1,
 });

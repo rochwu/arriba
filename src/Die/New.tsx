@@ -11,7 +11,7 @@ const Dot = styled.div({
   backgroundColor: '#3cb371',
   minWidth: '8px',
   aspectRatio: '1 / 1',
-  borderRadius: '100%',
+  borderRadius: '50%',
   opacity: '0.4',
 });
 

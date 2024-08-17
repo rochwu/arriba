@@ -11,4 +11,12 @@ export const {vars, record} = createCss({
   tooltip: {
     backgroundColor: '#cdaa7d',
   },
+  die: {
+    backgroundColor: 'white',
+    color: 'black',
+    size: '50px',
+    roll: {
+      size: '12px',
+    },
+  },
 });
