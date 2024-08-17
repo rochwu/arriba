@@ -1,13 +1,12 @@
-import {createCss} from './createCss';
+import {createCssVars} from './createCssVars';
 
-// Example usage with TypeScript type inference
-export const {vars, record} = createCss({
+export const {vars, root} = createCssVars({
   backgroundColor: '#deb887',
   borderRadius: '8px',
+  boxShadow: '2px 2px rgba(0, 0, 0, 0.10)',
   color: 'black',
   fontFamily: 'Arial, Helvetica, sans-serif',
   gap: '8px',
-
   tooltip: {
     backgroundColor: '#cdaa7d',
   },
@@ -26,6 +25,7 @@ export const {vars, record} = createCss({
     backgroundColor: '#fff8dc',
     type: {
       size: '18px',
+      color: 'blue',
     },
     min: {
       // Most come from die.roll

@@ -1,10 +1,10 @@
 import {createGlobalStyles} from 'solid-styled-components';
 
 import 'normalize.css';
-import {vars, record} from './css';
+import {vars, root} from './css';
 
 export const GlobalStyles = createGlobalStyles({
-  ':root': record,
+  ':root': root,
   body: {
     backgroundColor: vars.backgroundColor,
     color: vars.color,

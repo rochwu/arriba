@@ -16,6 +16,7 @@
     "build": "vite build",
     "serve": "vite preview",
     "check-types": "tsc --noEmit",
+    "clean-branches": "git branch | grep -v \"main\" | xargs git branch -D",
     "deduplicate": "yarn-deduplicate",
     "format": "prettier . --write",
     "lint": "eslint . --quiet --fix"

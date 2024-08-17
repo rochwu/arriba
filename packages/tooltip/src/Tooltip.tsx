@@ -14,6 +14,7 @@ const Container = styled.div({
   borderRadius: vars.borderRadius,
   backgroundColor: vars.tooltip.backgroundColor,
   width: 'fit-content',
+  boxShadow: vars.boxShadow,
 });
 
 export const Tooltip: Component = () => {

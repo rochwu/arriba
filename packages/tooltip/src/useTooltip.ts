@@ -1,5 +1,11 @@
 import type {Placement} from '@floating-ui/dom';
-import {autoUpdate, computePosition, flip, shift} from '@floating-ui/dom';
+import {
+  autoUpdate,
+  computePosition,
+  flip,
+  shift,
+  offset,
+} from '@floating-ui/dom';
 import type {JSX} from 'solid-js';
 import {createSignal} from 'solid-js';
 
@@ -45,7 +51,7 @@ export const useTooltip = (config: Config) => {
   const update = () => {
     computePosition(containerEl, tooltipEl, {
       placement: config?.placement ?? 'top',
-      middleware: [flip(), shift({padding: 8})],
+      middleware: [offset(4), flip(), shift({padding: 8})],
     }).then(({x, y}) => {
       tooltipEl.style.top = `${y}px`;
       tooltipEl.style.left = `${x}px`;
