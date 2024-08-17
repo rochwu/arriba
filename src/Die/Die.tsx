@@ -51,7 +51,7 @@ export const Die: Component<{id: DieId}> = (props) => {
       onMouseLeave={leave}
     >
       <Content ref={droppable}>
-        <Roll>{die().roll + 1}</Roll>
+        <Roll>{die().roll}</Roll>
         <NoticeMe die={die} />
         <Value>{value()}</Value>
         <Name>{die().name}</Name>

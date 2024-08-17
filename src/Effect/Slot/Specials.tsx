@@ -17,8 +17,6 @@ export const Specials: Component<{effect: Effect}> = (props) => {
   const special = () => {
     const special = props.effect.special;
 
-    console.log(props.effect.id, special);
-
     return special;
   };
 

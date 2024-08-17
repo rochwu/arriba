@@ -26,7 +26,7 @@ export const Opponent: Component<{id: DieId}> = (props) => {
 
   return (
     <Container data-die={props.id} onMouseEnter={enter} onMouseLeave={leave}>
-      <Roll>{die().roll + 1}</Roll>
+      <Roll>{die().roll}</Roll>
       <Value>{value()}</Value>
       <Name
         style={{

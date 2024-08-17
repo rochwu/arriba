@@ -1,5 +1,5 @@
 import type {Accessor, Component} from 'solid-js';
-import {createEffect, For} from 'solid-js';
+import {Index} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {vars} from '@arriba/css';
@@ -36,9 +36,11 @@ const Name = styled.div({
 export const Info: Component<{
   die: Accessor<Die>;
 }> = (props) => {
-  createEffect(() => {
-    console.log(props.die());
-  });
+  const faces = () => {
+    const {faces} = props.die();
+
+    return faces;
+  };
 
   return (
     <Container>
@@ -46,16 +48,16 @@ export const Info: Component<{
         {props.die().name} Age: {props.die().age}
       </Name>
       <List>
-        <For each={props.die().faces}>
-          {(item, index) => {
+        <Index each={props.die().rolls}>
+          {(roll) => {
             return (
               <Face>
-                <Roll>{index() + 1}</Roll>
-                <Value>{item.value}</Value>
+                <Roll>{roll()}</Roll>
+                <Value>{faces()[roll()].value}</Value>
               </Face>
             );
           }}
-        </For>
+        </Index>
       </List>
     </Container>
   );

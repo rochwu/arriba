@@ -4,7 +4,7 @@ export type EffectId = string;
 type List<T> = (T | null)[]; // undefined doesn't seem to work
 
 type Face = {
-  weight: number;
+  id: number;
   value: number;
 };
 
@@ -12,10 +12,10 @@ export type Die = {
   id: DieId;
   effect: EffectId;
   name: string;
-  faces: Face[];
-  roll: number;
+  faces: Record<number, Face>;
+  rolls: number[]; // eg: [1, 2, 3, 4, 5, 6], it's aware of how many faces there are
+  roll: number; // value in `rolls` eg: 1 - 6
   age: number;
-  opponent?: boolean;
 };
 export type Effect = {
   id: EffectId;
