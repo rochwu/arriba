@@ -7,7 +7,6 @@ export const {vars, record} = createCss({
   color: 'black',
   fontFamily: 'Arial, Helvetica, sans-serif',
   gap: '8px',
-
   tooltip: {
     backgroundColor: '#cdaa7d',
   },
@@ -26,6 +25,7 @@ export const {vars, record} = createCss({
     backgroundColor: '#fff8dc',
     type: {
       size: '18px',
+      color: 'blue',
     },
     min: {
       // Most come from die.roll
