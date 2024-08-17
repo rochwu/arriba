@@ -5,10 +5,12 @@ import {vars} from '@arriba/css';
 
 import {actions} from './store';
 
+const shadow = 2;
+
 const Button = styled.div({
   display: 'grid',
   placeContent: 'center',
-  height: vars.die.size,
+  height: `calc(${vars.die.size} - ${shadow}px)`,
   width: 'fit-content',
   cursor: 'pointer',
   backgroundColor: 'white',
@@ -19,7 +21,7 @@ const Button = styled.div({
       backgroundColor: vars.slot.backgroundColor,
     },
   },
-  boxShadow: `2px 2px #696969`,
+  boxShadow: `${2}px ${2}px #696969`,
 });
 
 export const EndTurn: Component = () => {
