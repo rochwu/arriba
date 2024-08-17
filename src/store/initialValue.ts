@@ -1,13 +1,13 @@
 import {Effects} from '../constants';
 
-import {opponents, effects as rawEffects} from './effects';
+import {geomentralist, opponents, effects as rawEffects} from './effects';
 import type {State} from './types';
 
 const {[Effects.Unplaced]: unplaced, ...effects} = rawEffects;
 
 export const initialValue: State = {
   dieById: {
-    ...opponents.reduce((dice, die) => {
+    ...[...opponents, geomentralist].reduce((dice, die) => {
       return {
         ...dice,
         [die.id]: die,

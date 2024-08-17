@@ -3,14 +3,18 @@ import {random, uniqueId} from 'lodash-es';
 import {Effects} from '../../constants';
 import {names} from '../../names';
 
-export const createDie = (args?: {values?: number[]; age?: number}) => {
-  const {values = [], age = 1} = args ?? {};
+export const createDie = (args?: {
+  values?: number[];
+  age?: number;
+  name?: string;
+}) => {
+  const {values = [], age = 1, name} = args ?? {};
 
   const id = uniqueId('d');
 
   return {
     id,
-    name: names.shift() ?? id,
+    name: name ?? names.shift() ?? id,
     roll: random(0, 5),
     faces: Array.from({length: 6}).map((_, index) => ({
       value: values[index] ?? random(1, 6),

@@ -9,7 +9,7 @@ import {Shape} from '../../Die';
 import type {Effect} from '../../store';
 
 import {Min} from './Min';
-import {Types} from './Types';
+import {Specials} from './Specials';
 
 const Container = styled(Shape)({
   backgroundColor: vars.slot.backgroundColor,
@@ -39,7 +39,7 @@ export const Slot: Component<{
       <Show when={props.effect.id !== Effects.Unplaced}>
         <Min effect={mergedProps.effect} />
       </Show>
-      <Types effect={mergedProps.effect} />
+      <Specials effect={mergedProps.effect} />
     </Container>
   );
 };

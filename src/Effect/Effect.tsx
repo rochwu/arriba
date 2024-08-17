@@ -9,8 +9,8 @@ import {Generic} from './Generic';
 export const Effect: Component<{id: EffectId}> = (props) => {
   return (
     <Switch fallback={<Generic id={props.id} />}>
-      <Match when={props.id === Effects.Duel}>
-        <Duel />
+      <Match when={props.id === Effects.Duel || props.id === Effects.Geometry}>
+        <Duel id={props.id} />
       </Match>
     </Switch>
   );
