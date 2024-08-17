@@ -8,21 +8,20 @@ import {RollLike} from '../../Die';
 import type {Effect} from '../../store';
 
 const Position = styled(RollLike)({
-  color: 'black',
+  color: vars.slot.min.color,
 });
 
 const Text = styled.div({
   position: 'relative',
   fontSize: vars.die.roll.size,
-  fontWeight: 600,
+  fontWeight: vars.die.roll.fontWeight,
   lineHeight: 1,
 });
 
 const Plus = styled(Absolute)({
-  position: 'absolute',
   top: 0,
   left: '100%',
-  color: 'black',
+  color: vars.slot.min.color,
 });
 
 export const Min: Component<{effect: Effect}> = (prop) => {
