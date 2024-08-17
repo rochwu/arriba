@@ -1,8 +1,15 @@
-export const createCss = <Styles extends Record<string, any>>(
+export const createCssVars = <
+  Styles extends Record<string, any>,
+  MoreStyles extends Record<string, any> | {},
+>(
   styles: Styles,
+  /**
+   * Let us compose styles based on previously defined CSS variables
+   */
+  composer?: (styles: Styles) => MoreStyles,
 ) => {
   // Record of CSS variable and initial value, spread this at :root to register
-  const record: Record<string, string> = {};
+  const root: Record<string, string> = {};
 
   const proxify = <Node extends Record<string, any>>(node: Node, path = '') => {
     const proxies: Record<keyof Node, Node[string]> = {} as never;
@@ -19,7 +26,7 @@ export const createCss = <Styles extends Record<string, any>>(
       if (typeof value === 'object') {
         proxies[prop] = proxify(value, newPath);
       } else {
-        record[`--${newPath}`] = value;
+        root[`--${newPath}`] = value;
       }
     }
 
@@ -47,7 +54,14 @@ export const createCss = <Styles extends Record<string, any>>(
     });
   };
 
-  const vars = proxify(styles);
+  const styled = proxify(styles);
 
-  return {vars, record};
+  const vars = {...composer?.(styled), ...styled};
+
+  return {
+    vars: vars as typeof composer extends undefined
+      ? Styles
+      : Styles & MoreStyles,
+    root,
+  };
 };

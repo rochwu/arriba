@@ -10,7 +10,7 @@ const shadow = 2;
 const Button = styled.div({
   display: 'grid',
   placeContent: 'center',
-  height: `calc(${vars.die.size} - ${shadow}px)`,
+  height: vars.die.size,
   width: 'fit-content',
   cursor: 'pointer',
   backgroundColor: 'white',
@@ -21,7 +21,7 @@ const Button = styled.div({
       backgroundColor: vars.slot.backgroundColor,
     },
   },
-  boxShadow: `${2}px ${2}px ${vars.tooltip.backgroundColor}`,
+  boxShadow: vars.boxShadow,
 });
 
 export const EndTurn: Component = () => {

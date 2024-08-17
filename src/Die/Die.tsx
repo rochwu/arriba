@@ -18,6 +18,7 @@ import {Value} from './Value';
 
 const Container = styled(DieLike)({
   cursor: 'grab',
+  boxShadow: vars.boxShadow,
 });
 
 const Content = styled.div({
