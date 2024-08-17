@@ -10,8 +10,8 @@ const Container = styled.div({
   display: 'grid',
   placeContent: 'center',
   position: 'fixed',
-  padding: '0.5em',
-  borderRadius: '0.5em',
+  padding: vars.gap,
+  borderRadius: vars.borderRadius,
   backgroundColor: vars.tooltip.backgroundColor,
   width: 'fit-content',
 });

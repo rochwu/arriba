@@ -2,6 +2,8 @@ import {createDroppable} from '@thisbeyond/solid-dnd';
 import {type Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
+import {vars} from '@arriba/css';
+
 import {DropType, Effects} from '../../constants';
 import {Card} from '../Card';
 import {Dice} from '../Dice';
@@ -11,7 +13,7 @@ import {Opponent} from './Opponent';
 
 const Container = styled.div({
   display: 'flex',
-  gap: '0.5em',
+  gap: vars.gap,
   alignItems: 'center',
 });
 

@@ -2,6 +2,7 @@ import {createDraggable, createDroppable} from '@thisbeyond/solid-dnd';
 import type {Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
+import {vars} from '@arriba/css';
 import {useTooltip} from '@arriba/tooltip';
 
 import {DropType} from '../constants';
@@ -10,7 +11,7 @@ import type {DieId} from '../store';
 import {DieLike} from './DieLike';
 import {Info} from './Info';
 import {Name} from './Name';
-import {New} from './New';
+import {NoticeMe} from './NoticeMe';
 import {Roll} from './Roll';
 import {useDie} from './useDie';
 import {Value} from './Value';
@@ -22,8 +23,8 @@ const Container = styled(DieLike)({
 const Content = styled.div({
   display: 'grid',
   placeContent: 'center',
-  width: 'inherit',
-  aspectRatio: 'inherit',
+  width: vars.die.size,
+  height: vars.die.size,
 });
 
 export const Die: Component<{id: DieId}> = (props) => {
@@ -50,7 +51,7 @@ export const Die: Component<{id: DieId}> = (props) => {
     >
       <Content ref={droppable}>
         <Roll>{die().roll + 1}</Roll>
-        <New die={die} />
+        <NoticeMe die={die} />
         <Value>{value()}</Value>
         <Name>{die().name}</Name>
       </Content>

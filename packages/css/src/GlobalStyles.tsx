@@ -7,7 +7,7 @@ export const GlobalStyles = createGlobalStyles({
   ':root': record,
   body: {
     userSelect: 'none',
-    backgroundColor: vars.app.backgroundColor,
-    fontFamily: 'Arial, Helvetica, sans-serif',
+    backgroundColor: vars.backgroundColor,
+    fontFamily: vars.fontFamily,
   },
 });

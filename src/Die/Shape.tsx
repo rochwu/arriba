@@ -6,7 +6,7 @@ export const Shape = styled.div({
   display: 'grid',
   placeContent: 'center',
   width: vars.die.size,
-  aspectRatio: '1 / 1',
-  borderRadius: '0.5em',
+  height: vars.die.size,
+  borderRadius: vars.borderRadius,
   position: 'relative',
 });
