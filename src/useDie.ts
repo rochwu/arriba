@@ -1,5 +1,5 @@
-import type {DieId} from '../store';
-import {store} from '../store';
+import type {DieId} from './store';
+import {store} from './store';
 
 export const useDie = (id: DieId) => {
   const die = () => store.dieById[id];

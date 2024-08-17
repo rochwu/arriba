@@ -1,5 +1,5 @@
 import type {Accessor, Component} from 'solid-js';
-import {For} from 'solid-js';
+import {createEffect, For} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {vars} from '@arriba/css';
@@ -36,6 +36,10 @@ const Name = styled.div({
 export const Info: Component<{
   die: Accessor<Die>;
 }> = (props) => {
+  createEffect(() => {
+    console.log(props.die());
+  });
+
   return (
     <Container>
       <Name>
