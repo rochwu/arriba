@@ -21,7 +21,7 @@ const Button = styled.div({
       backgroundColor: vars.slot.backgroundColor,
     },
   },
-  boxShadow: `${2}px ${2}px #696969`,
+  boxShadow: `${2}px ${2}px ${vars.tooltip.backgroundColor}`,
 });
 
 export const EndTurn: Component = () => {
