@@ -30,8 +30,7 @@ export const Opponent: Component<{id: DieId}> = (props) => {
       <Value>{value()}</Value>
       <Name
         style={{
-          'background-color': 'black',
-          color: 'white',
+          color: 'red',
         }}
       >
         {die().name}
