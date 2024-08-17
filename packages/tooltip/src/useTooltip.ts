@@ -51,7 +51,7 @@ export const useTooltip = (config: Config) => {
   const update = () => {
     computePosition(containerEl, tooltipEl, {
       placement: config?.placement ?? 'top',
-      middleware: [offset(2), flip(), shift({padding: 8})],
+      middleware: [offset(4), flip(), shift({padding: 8})],
     }).then(({x, y}) => {
       tooltipEl.style.top = `${y}px`;
       tooltipEl.style.left = `${x}px`;

@@ -17,7 +17,7 @@ export const Ghost: Component = () => {
   return (
     <DragOverlay>
       {(draggable) => {
-        const {die, value} = useDie(draggable!.id.toString());
+        const {die, value} = useDie(String(draggable!.id));
 
         return (
           <Die>
