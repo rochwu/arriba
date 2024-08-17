@@ -7,13 +7,13 @@ import {useTooltip} from '@arriba/tooltip';
 
 import {DropType} from '../constants';
 import type {DieId} from '../store';
+import {useDie} from '../useDie';
 
 import {DieLike} from './DieLike';
 import {Info} from './Info';
 import {Name} from './Name';
 import {NoticeMe} from './NoticeMe';
 import {Roll} from './Roll';
-import {useDie} from './useDie';
 import {Value} from './Value';
 
 const Container = styled(DieLike)({

@@ -5,12 +5,11 @@ import {styled} from 'solid-styled-components';
 import {vars} from '@arriba/css';
 
 import {DropType} from '../../constants';
+import {Opponent} from '../../Die';
 import type {EffectId} from '../../store';
 import {Card} from '../Card';
 import {Dice} from '../Dice';
 import {useEffect} from '../useEffect';
-
-import {Opponent} from './Opponent';
 
 const Container = styled.div({
   display: 'flex',

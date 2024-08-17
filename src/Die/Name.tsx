@@ -1,4 +1,4 @@
-import type {Component} from 'solid-js';
+import type {Component, JSX} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {Absolute} from '../Absolute';
@@ -17,10 +17,12 @@ const Text = styled.div({
   backgroundColor: 'white',
 });
 
-export const Name: Component<{children: string}> = (props) => {
+export const Name: Component<{children: string; style?: JSX.CSSProperties}> = (
+  props,
+) => {
   return (
     <Position>
-      <Text>{props.children}</Text>
+      <Text style={props.style}>{props.children}</Text>
     </Position>
   );
 };
