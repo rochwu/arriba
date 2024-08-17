@@ -50,7 +50,14 @@ export const Info: Component<{
         <Name die={props.die} />
         <Flex>
           {props.die.age}
-          <Cake />
+          <Cake
+            style={{
+              width: vars.slot.special.size,
+              height: vars.slot.special.size,
+            }}
+            weight="duotone"
+            color={vars.slot.special.color}
+          />
         </Flex>
       </Header>
       <List>
