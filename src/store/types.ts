@@ -16,6 +16,7 @@ export type Die = {
   rolls: number[]; // eg: [1, 2, 3, 4, 5, 6], it's aware of how many faces there are
   roll: number; // value in `rolls` eg: 1 - 6
   age: number;
+  opponent?: boolean;
 };
 export type Effect = {
   id: EffectId;

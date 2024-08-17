@@ -7,14 +7,15 @@ import type {Die, Effect, EffectId} from './types';
 type Args = Partial<Omit<Effect, 'id'>> & {id: EffectId};
 
 export const opponents: Die[] = [
-  {...makeDie(), age: 13},
-  {...makeDie(), age: 17},
+  {...makeDie(), age: 13, opponent: true},
+  {...makeDie(), age: 17, opponent: true},
 ];
 
 export const geomentralist = makeDie({
   name: 'Geomentralist',
-  age: 66,
+  age: 666,
   faces: makeFaces([undefined, 6, 6, 6, 6, 6]),
+  opponent: true,
 });
 
 const create = (...effects: Args[]) => {

@@ -38,7 +38,7 @@ export const Die: Component<{id: DieId}> = (props) => {
   const {die, value} = useDie(props.id);
 
   const {enter, leave} = useTooltip({
-    element: <Info die={die} />,
+    element: <Info die={die()} />,
   });
 
   return (
