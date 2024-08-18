@@ -1,5 +1,5 @@
+import {getSlot} from '../../../getSlot';
 import type {DieId, State} from '../../../types';
-import {getDice} from '../../getDice';
 
 export const fire = (state: State, {die}: {die: DieId}) => {
   const existing = state.dieById[die].effect;
@@ -7,8 +7,8 @@ export const fire = (state: State, {die}: {die: DieId}) => {
   // TODO: Consolidate removal logic to be more modular
 
   // Off the effects' bookkeeping
-  const dice = getDice(state, existing);
-  dice[dice.indexOf(die)] = null;
+  const slot = getSlot(state, {effect: existing, die});
+  slot!.die = undefined;
 
   // Off the active dice bookkeeping
   const index = state.dice.indexOf(die);

@@ -1,25 +1,27 @@
 import {random} from 'lodash-es';
 
 import {Effects} from '../../../../constants';
+import {getDice} from '../../../getDice';
 import type {State} from '../../../types';
 import {makeDie} from '../../makeDie';
 import {makeFaces} from '../../makeFaces';
-import {tryEffect} from '../../tryEffect';
 import {place} from '../place';
 import {push} from '../push';
 
 const it = Array.from({length: 6});
 
 export const summon = (state: State) => {
-  const maybe = tryEffect(state, Effects.Summon);
+  const [summoner] = getDice(state, Effects.Summon);
 
-  if (!maybe) {
+  if (!summoner) {
     return;
   }
 
-  const {
-    dice: [summoner],
-  } = maybe;
+  // TODO: Do it in UI too
+  if (state.dice.length === state.effectById[Effects.Unplaced].slots.length) {
+    place(state, {from: summoner.id});
+    return;
+  }
 
   const {roll} = summoner;
 

@@ -5,7 +5,10 @@ export const Effects = {
   Summon: 'summon',
   // Special
   Duel: 'duel',
-  Geometry: 'geometry',
+  Geomentralist: 'geomentralist',
+  Geometric: 'geometric',
+  // For Opponents
+  None: 'none',
 } as const;
 
 export const DropType = {

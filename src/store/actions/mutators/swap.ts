@@ -1,5 +1,5 @@
+import {getSlot} from '../../getSlot';
 import type {DieId, State} from '../../types';
-import {getDice} from '../getDice';
 
 export const swap = (
   state: State,
@@ -13,15 +13,15 @@ export const swap = (
   const to = state.dieById[args.to];
   const from = state.dieById[args.from];
 
-  const fromDice = getDice(state, from.effect);
-  const toDice =
-    from.effect === to.effect ? fromDice : getDice(state, to.effect);
+  const fromSlot = getSlot(state, {effect: from.effect, die: from.id})!;
+  const toSlot =
+    // Don't getSlot if they are the same
+    from.effect === to.effect
+      ? fromSlot
+      : getSlot(state, {effect: to.effect, die: to.id})!;
 
-  const fromIndex = fromDice.indexOf(from.id);
-  const toIndex = toDice.indexOf(to.id);
-
-  fromDice[fromIndex] = to.id;
-  toDice[toIndex] = from.id;
+  fromSlot.die = to.id;
+  toSlot.die = from.id;
 
   const effect = from.effect;
   from.effect = to.effect;

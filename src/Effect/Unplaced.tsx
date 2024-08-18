@@ -2,7 +2,7 @@ import {Effects} from '../constants';
 import {store} from '../store';
 
 import {Card} from './Card';
-import {Dice} from './Dice';
+import {Slots} from './Slots';
 
 export const Unplaced = () => {
   const unplaced = () => store.effectById[Effects.Unplaced];
@@ -10,7 +10,7 @@ export const Unplaced = () => {
   return (
     <Card>
       {unplaced().name}
-      <Dice effect={unplaced} />
+      <Slots effect={unplaced()} />
     </Card>
   );
 };

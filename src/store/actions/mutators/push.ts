@@ -4,17 +4,17 @@ export const push = (
   state: State,
   {die, effect, order}: {die: DieId; effect: EffectId; order?: number},
 ) => {
-  const dice = state.effectById[effect].dice;
+  const slots = state.effectById[effect].slots;
 
   if (order) {
-    dice[order] = die;
+    slots[order].die = die;
   } else {
-    const open = dice.indexOf(null);
+    const open = slots.findIndex(({die}) => die === undefined);
 
     if (open !== -1) {
-      dice[open] = die;
+      slots[open].die = die;
     } else {
-      dice.push(die);
+      console.error('push', 'no empty space', die, effect, order);
     }
   }
 };

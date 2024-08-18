@@ -6,7 +6,7 @@ import {vars} from '@arriba/css';
 import {Opponent} from '../../Die';
 import type {EffectId} from '../../store';
 import {Card} from '../Card';
-import {Dice} from '../Dice';
+import {Slots} from '../Slots';
 import {useEffect} from '../useEffect';
 
 const Container = styled.div({
@@ -31,7 +31,7 @@ export const Fight: Component<{id: EffectId}> = (props) => {
     <Card>
       <Title>{effect().name}</Title>
       <Container>
-        <Dice effect={effect} /> v <Opponent id={opponent()} />
+        <Slots effect={effect()} /> v <Opponent id={opponent()} />
       </Container>
     </Card>
   );

@@ -1,6 +1,6 @@
 import {Effects} from '../../../constants';
+import {getSlot} from '../../getSlot';
 import type {DieId, EffectId, State} from '../../types';
-import {getDice} from '../getDice';
 
 import {instant} from './instant';
 import {push} from './push';
@@ -29,28 +29,23 @@ export const place = (
     }
   }
 
-  const toDice = getDice(state, effectId);
-  const openIndex = toDice.indexOf(null);
+  const openToSlot = getSlot(state, {effect: to, die: undefined});
 
-  if (effectId) {
-    const effect = state.effectById[effectId];
-
-    // If limited slots and can't find null means it's filled
-    if (effect.max !== Infinity && openIndex === -1) {
-      return;
-    }
+  if (!openToSlot) {
+    return;
   }
 
   // Cleanup previous effect
-  const fromDice = getDice(state, previousEffectId);
-  const fromIndex = fromDice.indexOf(die.id);
-  fromDice[fromIndex] = null;
+  const previousSlot = getSlot(state, {effect: previousEffectId, die: from});
+  if (previousSlot) {
+    previousSlot.die = undefined;
+  }
 
   let at = undefined;
   if (order) {
     at = order;
-  } else if (openIndex !== -1) {
-    at = openIndex;
+  } else if (openToSlot) {
+    at = openToSlot.id;
   }
 
   push(state, {

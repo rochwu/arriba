@@ -16,8 +16,6 @@ const listener = (event: KeyboardEvent) => {
 };
 
 export const Game = () => {
-  actions.generate(3);
-
   onMount(() => {
     window.addEventListener('keydown', listener);
 

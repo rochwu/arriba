@@ -3,7 +3,7 @@ import type {Component} from 'solid-js';
 import type {EffectId} from '../store';
 
 import {Card} from './Card';
-import {Dice} from './Dice';
+import {Slots} from './Slots';
 import {useEffect} from './useEffect';
 
 export const Generic: Component<{id: EffectId}> = (props) => {
@@ -12,7 +12,7 @@ export const Generic: Component<{id: EffectId}> = (props) => {
   return (
     <Card data-effect={props.id}>
       {effect().name}
-      <Dice effect={effect} />
+      <Slots effect={effect()} />
     </Card>
   );
 };
