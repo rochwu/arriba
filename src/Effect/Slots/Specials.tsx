@@ -1,10 +1,11 @@
-import {Key, Lightning, LockLaminated, Skull, Stairs} from 'phosphor-solid-js';
+import {Key, Lightning, Skull, Stairs} from 'phosphor-solid-js';
 import {Show, type Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {Absolute} from '../../Absolute';
 import type {Effect, Slot} from '../../store';
 
+import {Lock} from './Lock';
 import {Special} from './Special';
 
 const Position = styled(Absolute)({
@@ -37,7 +38,7 @@ export const Specials: Component<{effect: Effect; slot?: Slot}> = (props) => {
             <Special Icon={Key} tooltip="unlocks" />
           </Show>
           <Show when={lock}>
-            <Special Icon={LockLaminated} tooltip="locked" />
+            <Lock effect={props.effect} />
           </Show>
         </Position>
       )}
