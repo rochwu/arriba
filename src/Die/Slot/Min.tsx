@@ -4,8 +4,8 @@ import {styled} from 'solid-styled-components';
 import {vars} from '@arriba/css';
 
 import {Absolute} from '../../Absolute';
-import {RollLike} from '../../Die';
 import type {Effect} from '../../store';
+import {RollLike} from '../RollLike';
 
 const Position = styled(RollLike)({
   color: vars.slot.min.color,

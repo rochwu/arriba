@@ -68,7 +68,7 @@ export const effects = {
         death: true,
         opponents: [geomentralist.id],
       },
-      max: 1,
+      max: 2,
     },
     {id: Effects.Unplaced, name: 'Put These to Work', dice: []},
     {

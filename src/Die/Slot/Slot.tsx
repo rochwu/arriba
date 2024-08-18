@@ -5,8 +5,8 @@ import {styled} from 'solid-styled-components';
 import {vars} from '@arriba/css';
 
 import {DropType, Effects} from '../../constants';
-import {Shape} from '../../Die';
 import type {Effect} from '../../store';
+import {Shape} from '../Shape';
 
 import {Min} from './Min';
 import {Specials} from './Specials';
