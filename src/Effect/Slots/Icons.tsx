@@ -5,15 +5,15 @@ import {styled} from 'solid-styled-components';
 import {Absolute} from '../../Absolute';
 import type {Effect, Slot} from '../../store';
 
+import {Icon} from './Icon';
 import {Lock} from './Lock';
-import {Special} from './Special';
 
 const Position = styled(Absolute)({
   bottom: '-4px',
   minWidth: '100%',
 });
 
-export const Specials: Component<{effect: Effect; slot?: Slot}> = (props) => {
+export const Icons: Component<{effect: Effect; slot?: Slot}> = (props) => {
   const special = () => {
     const special = props.effect.special;
     const slot = props.slot;
@@ -26,19 +26,19 @@ export const Specials: Component<{effect: Effect; slot?: Slot}> = (props) => {
       {({instant, death, turns, key, lock}) => (
         <Position>
           <Show when={instant}>
-            <Special Icon={Lightning} tooltip="happens instantly" />
+            <Icon Icon={Lightning} tooltip="happens instantly" />
           </Show>
           <Show when={death}>
-            <Special Icon={Skull} tooltip="die loses, die dies" />
+            <Icon Icon={Skull} tooltip="die loses, die dies" />
           </Show>
           <Show when={turns}>
-            <Special Icon={Stairs} tooltip="busy 'til it's over" />
+            <Icon Icon={Stairs} tooltip="busy 'til it's over" />
           </Show>
           <Show when={key}>
-            <Special Icon={Key} tooltip="unlocks" />
+            <Icon Icon={Key} tooltip="unlocks" />
           </Show>
           <Show when={lock}>
-            <Lock effect={props.effect} />
+            <Lock />
           </Show>
         </Position>
       )}

@@ -1,20 +1,19 @@
 import {LockLaminated} from 'phosphor-solid-js';
 import {createMemo, Show, type Component} from 'solid-js';
 
-import type {Effect} from '../../store';
+import {useEffectContext} from '../Provider';
 
-import {Special} from './Special';
+import {Icon} from './Icon';
+import {isUnlocked} from './isUnlocked';
 
-export const Lock: Component<{effect: Effect}> = (props) => {
-  const unlocked = createMemo(() => {
-    const keyed = props.effect.slots.filter((slot) => slot.key);
+export const Lock: Component = () => {
+  const effect = useEffectContext();
 
-    return keyed.every((slot) => slot.die);
-  });
+  const unlocked = createMemo(() => isUnlocked(effect.slots));
 
   return (
     <Show when={!unlocked()}>
-      <Special Icon={LockLaminated} tooltip="locked" />
+      <Icon Icon={LockLaminated} tooltip="locked" />
     </Show>
   );
 };
