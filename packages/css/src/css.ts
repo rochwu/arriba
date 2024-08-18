@@ -50,9 +50,8 @@ export const {vars, root} = createCssVars(
         // Most come from die.roll
         color: 'black',
       },
-      disabled: {
-        backgroundColor: '#e6a9a9',
-      },
+      allowed: '#b8e0d2',
+      disallowed: '#e6a9a9',
     },
     opponent: {
       color: '#DC143C',

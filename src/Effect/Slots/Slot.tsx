@@ -56,9 +56,7 @@ export const Slot: Component<{
 
     return {
       'background-color':
-        roll >= min() && unlocked()
-          ? vars.die.backgroundColor
-          : vars.slot.disabled.backgroundColor,
+        roll >= min() && unlocked() ? vars.slot.allowed : vars.slot.disallowed,
     };
   };
 
