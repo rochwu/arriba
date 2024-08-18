@@ -11,6 +11,7 @@ const generic = [1, 2, 3, 4, 5, 6];
 
 export const makeDie = (args: Partial<Die> = {}) => {
   const base: Die = {
+    age: 1,
     effect: Effects.Unplaced,
   } as never;
 

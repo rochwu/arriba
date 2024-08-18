@@ -3,6 +3,7 @@ import {random} from 'lodash-es';
 import {Effects} from '../../../../constants';
 import type {State} from '../../../types';
 import {makeDie} from '../../makeDie';
+import {makeFaces} from '../../makeFaces';
 import {tryEffect} from '../../tryEffect';
 import {place} from '../place';
 import {push} from '../push';
@@ -35,7 +36,7 @@ export const summon = (state: State) => {
 
   place(state, {from: summoner.id});
 
-  const summoned = makeDie({values});
+  const summoned = makeDie({faces: makeFaces(values)});
   // TODO: Create a born mutator that puts it in the right place
   state.dieById[summoned.id] = summoned;
   state.dice.push(summoned.id);

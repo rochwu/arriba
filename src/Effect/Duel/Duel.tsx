@@ -1,10 +1,8 @@
-import {createDroppable} from '@thisbeyond/solid-dnd';
 import {type Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {vars} from '@arriba/css';
 
-import {DropType} from '../../constants';
 import {Opponent} from '../../Die';
 import type {EffectId} from '../../store';
 import {Card} from '../Card';
@@ -18,11 +16,6 @@ const Container = styled.div({
 });
 
 export const Duel: Component<{id: EffectId}> = (props) => {
-  const droppable = createDroppable(props.id, {
-    type: DropType.Effect,
-    id: props.id,
-  });
-
   const {effect} = useEffect(props.id);
 
   const opponent = () => {
@@ -30,7 +23,7 @@ export const Duel: Component<{id: EffectId}> = (props) => {
   };
 
   return (
-    <Card ref={droppable}>
+    <Card>
       {effect().name}
       <Container>
         <Dice effect={effect} /> v <Opponent id={opponent()} />
