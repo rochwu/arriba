@@ -12,7 +12,6 @@ const generic = [1, 2, 3, 4, 5, 6];
 export const makeDie = (args: Partial<Die> = {}) => {
   const base: Die = {
     age: 1,
-    effect: Effects.Unplaced,
   } as never;
 
   const partial = merge({}, base, args);
@@ -22,13 +21,15 @@ export const makeDie = (args: Partial<Die> = {}) => {
   // Cannot be added to `base` because it'd merge a 6 faces into eg: 5 faces from args
   partial.faces ??= makeFaces(shuffle(generic));
 
-  partial.id ??= uniqueId();
+  partial.id ??= uniqueId('d');
 
   partial.name ??= names.shift() ?? partial.id;
 
   partial.rolls ??= Object.keys(partial.faces) as unknown as number[]; // faces is Record<number, ...
 
   partial.roll ??= roll(partial.rolls);
+
+  partial.effect ??= partial.opponent ? Effects.None : Effects.Unplaced;
 
   return partial;
 };

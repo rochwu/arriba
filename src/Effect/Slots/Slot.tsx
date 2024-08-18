@@ -1,12 +1,13 @@
 import {createDroppable} from '@thisbeyond/solid-dnd';
-import {mergeProps, Show, type Component} from 'solid-js';
+import {Show} from 'solid-js';
+import type {Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {vars} from '@arriba/css';
 
 import {DropType, Effects} from '../../constants';
 import {Shape} from '../../Die';
-import type {Effect} from '../../store';
+import type {Effect, Slot as SlotState} from '../../store';
 
 import {Min} from './Min';
 import {Specials} from './Specials';
@@ -16,25 +17,21 @@ const Container = styled(Shape)({
 });
 
 export const Slot: Component<{
+  slot: SlotState;
+  index: number;
   effect: Effect;
-  index?: number;
 }> = (props) => {
-  const mergedProps = mergeProps({index: 0}, props);
-
-  const droppable = createDroppable(
-    `${mergedProps.effect.id}-${mergedProps.index}`,
-    {
-      type: DropType.Effect,
-      id: mergedProps.effect.id,
-      order: mergedProps.index,
-    },
-  );
+  const droppable = createDroppable(`${props.effect.id}-${props.index}`, {
+    type: DropType.Effect,
+    id: props.effect.id,
+    order: props.index,
+  });
 
   return (
     <Container
       ref={droppable}
-      data-effect={mergedProps.effect.id}
-      data-order={mergedProps.index}
+      data-effect={props.effect.id}
+      data-order={props.index}
       style={
         droppable.isActiveDroppable
           ? {
@@ -44,9 +41,9 @@ export const Slot: Component<{
       }
     >
       <Show when={props.effect.id !== Effects.Unplaced}>
-        <Min effect={mergedProps.effect} />
+        <Min>{props.slot.min}</Min>
       </Show>
-      <Specials effect={mergedProps.effect} />
+      <Specials effect={props.effect} slot={props.slot} />
     </Container>
   );
 };

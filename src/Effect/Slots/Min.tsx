@@ -1,11 +1,10 @@
-import {type Component} from 'solid-js';
+import {Show, type Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {vars} from '@arriba/css';
 
 import {Absolute} from '../../Absolute';
 import {RollLike} from '../../Die';
-import type {Effect} from '../../store';
 
 const Position = styled(RollLike)({
   color: vars.slot.min.color,
@@ -24,11 +23,14 @@ const Plus = styled(Absolute)({
   color: vars.slot.min.color,
 });
 
-export const Min: Component<{effect: Effect}> = (prop) => {
+export const Min: Component<{children?: number}> = (props) => {
   return (
     <Position>
       <Text>
-        1<Plus>+</Plus>
+        {props.children ?? 1}
+        <Show when={props.children !== 6}>
+          <Plus>+</Plus>
+        </Show>
       </Text>
     </Position>
   );

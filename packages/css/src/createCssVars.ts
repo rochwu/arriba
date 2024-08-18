@@ -56,7 +56,7 @@ export const createCssVars = <
 
   const styled = proxify(styles);
 
-  const vars = {...composer?.(styled), ...styled};
+  const vars = {...(composer ? {...proxify(composer(styled))} : {}), ...styled};
 
   return {
     vars: vars as typeof composer extends undefined

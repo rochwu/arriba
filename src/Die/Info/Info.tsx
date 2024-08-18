@@ -5,6 +5,7 @@ import {styled} from 'solid-styled-components';
 
 import {vars} from '@arriba/css';
 
+import {Iconed} from '../../Iconed';
 import type {Die} from '../../store';
 import {DieLike} from '../DieLike';
 import {Roll} from '../Roll';
@@ -50,14 +51,7 @@ export const Info: Component<{
         <Name die={props.die} />
         <Flex>
           {props.die.age}
-          <Cake
-            style={{
-              width: vars.slot.special.size,
-              height: vars.slot.special.size,
-            }}
-            weight="duotone"
-            color={vars.slot.special.color}
-          />
+          <Iconed Icon={Cake} />
         </Flex>
       </Header>
       <List>

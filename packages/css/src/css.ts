@@ -29,6 +29,10 @@ export const {vars, root} = createCssVars({white: '#fafafa'}, (core) => ({
       fontWeight: 600,
     },
   },
+  icon: {
+    size: '18px',
+    color: 'blue',
+  },
   slot: {
     backgroundColor: '#fff8dc',
     special: {
@@ -41,7 +45,7 @@ export const {vars, root} = createCssVars({white: '#fafafa'}, (core) => ({
     },
   },
   opponent: {
-    color: '#b22222',
+    color: '#DC143C',
   },
   dot: {
     size: '8px',

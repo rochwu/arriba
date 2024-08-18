@@ -1,8 +1,6 @@
 export type DieId = string;
 export type EffectId = string;
 
-type List<T> = (T | null)[]; // undefined doesn't seem to work
-
 type Face = {
   id: number;
   value: number;
@@ -19,11 +17,17 @@ export type Die = {
   opponent?: boolean;
 };
 
+export type Slot = {
+  id: number;
+  die?: DieId;
+  min?: number;
+  key?: boolean;
+  lock?: boolean;
+};
+
 export type Effect = {
   id: EffectId;
-  dice: List<DieId>;
   name: string;
-  max: number;
   special?: {
     instant?: boolean;
     turned?: {
@@ -33,6 +37,7 @@ export type Effect = {
     opponents?: DieId[];
     death?: boolean;
   };
+  slots: Slot[];
 };
 
 export type State = {
