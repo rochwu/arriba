@@ -1,6 +1,14 @@
 import {createCssVars} from './createCssVars';
 
-export const {vars, root} = createCssVars({
+/**
+ * #deb887
+ * #cdaa7d
+ * #fff8dc
+ * #8b6914
+ * #fafafa
+ */
+
+export const {vars, root} = createCssVars({white: '#fafafa'}, (core) => ({
   backgroundColor: '#deb887',
   borderRadius: '8px',
   boxShadow: '2px 2px rgba(0, 0, 0, 0.10)',
@@ -11,13 +19,13 @@ export const {vars, root} = createCssVars({
     backgroundColor: '#cdaa7d',
   },
   die: {
-    backgroundColor: 'white',
+    backgroundColor: core.white,
     color: 'black',
     size: '50px',
     roll: {
       size: '12px',
-      color: 'white',
-      backgroundColor: 'red',
+      color: core.white,
+      backgroundColor: '#8b6914',
       fontWeight: 600,
     },
   },
@@ -32,7 +40,10 @@ export const {vars, root} = createCssVars({
       color: 'black',
     },
   },
+  opponent: {
+    color: '#b22222',
+  },
   dot: {
     size: '8px',
   },
-});
+}));

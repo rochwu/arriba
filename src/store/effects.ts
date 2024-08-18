@@ -1,19 +1,21 @@
 import {Effects} from '../constants';
 
-import {createDie} from './actions/createDie';
+import {makeDie} from './actions/makeDie';
+import {makeFaces} from './actions/makeFaces';
 import type {Die, Effect, EffectId} from './types';
 
 type Args = Partial<Omit<Effect, 'id'>> & {id: EffectId};
 
 export const opponents: Die[] = [
-  {...createDie(), opponent: true, age: 13},
-  {...createDie(), opponent: true, age: 17},
+  {...makeDie(), age: 13, opponent: true},
+  {...makeDie(), age: 17, opponent: true},
 ];
 
-export const geomentralist = createDie({
+export const geomentralist = makeDie({
   name: 'Geomentralist',
-  age: 66,
-  values: [6, 6, 6, 6, 6, 6],
+  age: 666,
+  faces: makeFaces([undefined, 6, 6, 6, 6, 6]),
+  opponent: true,
 });
 
 const create = (...effects: Args[]) => {
@@ -63,6 +65,7 @@ export const effects = {
           turns: 3,
           at: 0,
         },
+        death: true,
         opponents: [geomentralist.id],
       },
       max: 1,

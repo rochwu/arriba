@@ -5,7 +5,8 @@ import {DropType, Effects} from '../../constants';
 import {setStore} from '../store';
 import type {Die, DieId, EffectId} from '../types';
 
-import {createDie} from './createDie';
+import {makeDie} from './makeDie';
+import {makeFaces} from './makeFaces';
 import {age} from './mutators/age';
 import {summon} from './mutators/effects/summon';
 import {place} from './mutators/place';
@@ -17,7 +18,7 @@ const beginners = [1, 1, 1, 2, 2, 3];
 export const actions = {
   generate(repeat = 1) {
     const dice: Die[] = Array.from({length: repeat}).map(() => {
-      return createDie({age: 1, values: shuffle(beginners)});
+      return makeDie({age: 1, faces: makeFaces(shuffle(beginners))});
     });
 
     setStore(

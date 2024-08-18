@@ -1,28 +1,29 @@
-import type {Component, JSX} from 'solid-js';
+import type {Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
+import {vars} from '@arriba/css';
+
 import {Absolute} from '../Absolute';
+import {color} from '../Color';
 
 const Position = styled(Absolute)({
   bottom: 0,
   width: '100%',
 });
 
-const Text = styled.div({
+const Text = styled.div((props) => ({
   fontSize: '12px',
   lineHeight: '1',
   textTransform: 'lowercase',
   padding: '0 1px',
   borderRadius: '4px',
-  backgroundColor: 'white',
-});
+  ...color(props, {color: 'black', backgroundColor: vars.die.backgroundColor}),
+}));
 
-export const Name: Component<{children: string; style?: JSX.CSSProperties}> = (
-  props,
-) => {
+export const Name: Component<{children: string}> = (props) => {
   return (
     <Position>
-      <Text style={props.style}>{props.children}</Text>
+      <Text>{props.children}</Text>
     </Position>
   );
 };

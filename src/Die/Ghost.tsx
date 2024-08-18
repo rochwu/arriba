@@ -22,7 +22,7 @@ export const Ghost: Component = () => {
 
         return (
           <Die>
-            <Roll>{die().roll + 1}</Roll>
+            <Roll>{die().roll}</Roll>
             <Value>{value()}</Value>
             <Name>{die().name}</Name>
           </Die>

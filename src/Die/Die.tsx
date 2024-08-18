@@ -38,7 +38,7 @@ export const Die: Component<{id: DieId}> = (props) => {
   const {die, value} = useDie(props.id);
 
   const {enter, leave} = useTooltip({
-    element: <Info die={die} />,
+    element: <Info die={die()} />,
   });
 
   return (
@@ -51,7 +51,7 @@ export const Die: Component<{id: DieId}> = (props) => {
       onMouseLeave={leave}
     >
       <Content ref={droppable}>
-        <Roll>{die().roll + 1}</Roll>
+        <Roll>{die().roll}</Roll>
         <NoticeMe die={die} />
         <Value>{value()}</Value>
         <Name>{die().name}</Name>

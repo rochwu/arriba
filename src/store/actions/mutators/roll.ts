@@ -1,9 +1,8 @@
-import {random} from 'lodash-es';
-
 import type {State} from '../../types';
+import {roll as getRoll} from '../roll';
 
 export const roll = (state: State) => {
   Object.values(state.dieById).forEach((die) => {
-    die.roll = random(0, 5);
+    die.roll = getRoll(die.rolls);
   });
 };
