@@ -1,15 +1,16 @@
 import {createDroppable} from '@thisbeyond/solid-dnd';
+import {Show} from 'solid-js';
 import type {Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {vars} from '@arriba/css';
 
-import {DropType} from '../../constants';
+import {DropType, Effects} from '../../constants';
 import {Shape} from '../../Die';
-import {Specials} from '../../Die/Slot/Specials';
 import type {Effect, Slot as SlotState} from '../../store';
 
 import {Min} from './Min';
+import {Specials} from './Specials';
 
 const Container = styled(Shape)({
   backgroundColor: vars.slot.backgroundColor,
@@ -39,7 +40,9 @@ export const Slot: Component<{
           : undefined
       }
     >
-      <Min>{props.slot.min}</Min>
+      <Show when={props.effect.id !== Effects.Unplaced}>
+        <Min>{props.slot.min}</Min>
+      </Show>
       <Specials effect={props.effect} slot={props.slot} />
     </Container>
   );

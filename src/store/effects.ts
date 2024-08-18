@@ -6,12 +6,6 @@ import {makeDie} from './actions/makeDie';
 import {makeFaces} from './actions/makeFaces';
 import {makeEffect} from './makeEffect';
 import {repeat} from './repeat';
-import type {Die} from './types';
-
-export const opponents: Die[] = [
-  {...makeDie(), age: 13, opponent: true},
-  {...makeDie(), age: 17, opponent: true},
-];
 
 export const geomentralistDie = makeDie({
   name: 'Geomentralist',
@@ -22,9 +16,17 @@ export const geomentralistDie = makeDie({
 
 const beginners = [1, 1, 1, 2, 2, 3];
 
-export const beginnerDie = makeDie({
-  faces: makeFaces(shuffle(beginners)),
-});
+export const beginnerDice = [
+  makeDie({
+    faces: makeFaces(shuffle(beginners)),
+  }),
+  makeDie({
+    faces: makeFaces(shuffle(beginners)),
+  }),
+  makeDie({
+    faces: makeFaces(shuffle(beginners)),
+  }),
+];
 
 const geometric = makeEffect({
   id: Effects.Geometric,
@@ -51,14 +53,12 @@ const geomentralistEffect = makeEffect({
   slots: repeat(2, {}),
   special: {
     opponents: [geomentralistDie.id],
+    turned: {
+      turns: 3,
+      at: 0,
+    },
+    death: true,
   },
-  //     special: {
-  //       turned: {
-  //         turns: 3,
-  //         at: 0,
-  //       },
-  //       death: true,
-  //     },
 });
 
 const summon = makeEffect({
@@ -71,10 +71,8 @@ const unplaced = makeEffect({
   id: Effects.Unplaced,
   name: 'Put These to Work',
   slots: [
-    {
-      die: beginnerDie.id,
-    },
-    ...repeat(8, {}),
+    ...beginnerDice.map((die) => ({die: die.id})),
+    ...repeat(9 - beginnerDice.length, {}),
   ],
 });
 
@@ -88,40 +86,6 @@ const fire = makeEffect({
 });
 
 export const effects = {
-  // ...create(
-  //   {
-  //     id: Effects.Duel,
-  //     name: 'Duel to the Death',
-  //     special: {
-  //       death: true,
-  //       turned: {
-  //         turns: 3,
-  //         at: 0,
-  //       },
-  //       opponents: opponents.map(({id}) => id),
-  //     },
-  //   },
-  //   {
-  //     id: Effects.Geomentralist,
-  //     name: 'Deranged Geomentralist',
-  //     special: {
-  //       turned: {
-  //         turns: 3,
-  //         at: 0,
-  //       },
-  //       death: true,
-  //       opponents: [geomentralist.id],
-  //     },
-  //   },
-  //   {id: Effects.Unplaced, name: 'Put These to Work'},
-  //   {
-  //     id: Effects.Fire,
-  //     name: 'Fire',
-  //     special: {
-  //       instant: true,
-  //     },
-  //   },
-  // ),
   [geomentralistEffect.id]: geomentralistEffect,
   [geometric.id]: geometric,
   [fire.id]: fire,
