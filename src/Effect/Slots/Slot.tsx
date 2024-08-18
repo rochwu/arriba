@@ -7,7 +7,8 @@ import {vars} from '@arriba/css';
 
 import {DropType, Effects} from '../../constants';
 import {Shape} from '../../Die';
-import type {Effect, Slot as SlotState} from '../../store';
+import type {Slot as SlotState} from '../../store';
+import {useEffectContext} from '../Provider';
 
 import {Min} from './Min';
 import {Specials} from './Specials';
@@ -19,18 +20,19 @@ const Container = styled(Shape)({
 export const Slot: Component<{
   slot: SlotState;
   index: number;
-  effect: Effect;
 }> = (props) => {
-  const droppable = createDroppable(`${props.effect.id}-${props.index}`, {
+  const effect = useEffectContext();
+
+  const droppable = createDroppable(`${effect.id}-${props.index}`, {
     type: DropType.Effect,
-    id: props.effect.id,
+    id: effect.id,
     order: props.index,
   });
 
   return (
     <Container
       ref={droppable}
-      data-effect={props.effect.id}
+      data-effect={effect.id}
       data-order={props.index}
       style={
         droppable.isActiveDroppable
@@ -40,10 +42,10 @@ export const Slot: Component<{
           : undefined
       }
     >
-      <Show when={props.effect.id !== Effects.Unplaced}>
+      <Show when={effect.id !== Effects.Unplaced}>
         <Min>{props.slot.min}</Min>
       </Show>
-      <Specials effect={props.effect} slot={props.slot} />
+      <Specials effect={effect} slot={props.slot} />
     </Container>
   );
 };

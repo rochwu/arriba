@@ -1,14 +1,51 @@
-import {random} from 'lodash-es';
+import {mean, random, shuffle} from 'lodash-es';
 
 import {Effects} from '../../../../constants';
 import {getDice} from '../../../getDice';
-import type {State} from '../../../types';
+import type {Die, State} from '../../../types';
 import {makeDie} from '../../makeDie';
 import {makeFaces} from '../../makeFaces';
 import {place} from '../place';
 import {push} from '../push';
 
 const it = Array.from({length: 6});
+
+const getValues = (die: Die) => {
+  return die.rolls.map((roll) => die.faces[roll].value);
+};
+
+// Mutates, change to not if not using shuffle
+const spread = (values: number[]) => {
+  const next = [...values];
+
+  // Deal with die without all 6 faces.
+  if (next.length < 5) {
+    const average = Math.round(mean(next));
+
+    while (next.length < 5) {
+      next.push(average);
+    }
+  }
+
+  const removable = next.reduce((removable, value, index) => {
+    if (value > 1) {
+      return [...removable, index];
+    }
+
+    return removable;
+  }, [] as number[]);
+
+  removable.forEach((removable) => {
+    next[removable] -= 1;
+  });
+
+  removable.forEach(() => {
+    next[random(0, 5)] += 1;
+  });
+
+  // Shuffle at the end to not just always remove from the front
+  return shuffle(next);
+};
 
 export const summon = (state: State) => {
   const [summoner] = getDice(state, Effects.Summon);
@@ -23,18 +60,7 @@ export const summon = (state: State) => {
     return;
   }
 
-  const {roll} = summoner;
-
-  let values: number[];
-
-  // Least to most powerful
-  if (roll <= 1) {
-    values = it.map(() => random(1, 3));
-  } else if (roll <= 3) {
-    values = it.map(() => random(1, 5));
-  } else {
-    values = it.map(() => random(2, 6));
-  }
+  const values = spread(getValues(summoner));
 
   place(state, {from: summoner.id});
 

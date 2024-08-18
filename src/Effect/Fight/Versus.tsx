@@ -10,7 +10,8 @@ import {useTooltip} from '@arriba/tooltip';
 
 import {Absolute} from '../../Absolute';
 import {Iconed} from '../../Iconed';
-import type {Effect, Score as ScoreResult} from '../../store';
+import type {Score as ScoreResult} from '../../store';
+import {useEffectContext} from '../Provider';
 
 const Container = styled.div({
   display: 'flex',
@@ -30,8 +31,10 @@ const Vs = styled(Absolute)({
   fontSize: vars.text.small,
 });
 
-export const Versus: Component<{effect: Effect}> = (props) => {
-  const scores = () => props.effect.special!.score!;
+export const Versus: Component = () => {
+  const effect = useEffectContext();
+
+  const scores = () => effect.special!.score!;
   const wins = () => scores().filter((score) => score === 'win').length;
   const loses = () => scores().filter((score) => score === 'lose').length;
 

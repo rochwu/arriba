@@ -1,16 +1,7 @@
 import {Effects} from '../constants';
-import {store} from '../store';
 
-import {Card} from './Card';
-import {Slots} from './Slots';
+import {Effect} from './Effect';
 
 export const Unplaced = () => {
-  const unplaced = () => store.effectById[Effects.Unplaced];
-
-  return (
-    <Card>
-      {unplaced().name}
-      <Slots effect={unplaced()} />
-    </Card>
-  );
+  return <Effect id={Effects.Unplaced} />;
 };

@@ -1,10 +1,10 @@
-import {Index, Show, type Component} from 'solid-js';
+import {Index, Show} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {vars} from '@arriba/css';
 
 import {Die} from '../../Die';
-import type {Effect} from '../../store';
+import {useEffectContext} from '../Provider';
 
 import {Slot} from './Slot';
 
@@ -13,8 +13,10 @@ const Container = styled.div({
   gap: vars.gap,
 });
 
-export const Slots: Component<{effect: Effect}> = (props) => {
-  const slots = () => props.effect.slots;
+export const Slots = () => {
+  const effect = useEffectContext();
+
+  const slots = () => effect.slots;
 
   return (
     <Container>
@@ -23,9 +25,7 @@ export const Slots: Component<{effect: Effect}> = (props) => {
           <Show
             when={slot().die}
             keyed
-            fallback={
-              <Slot slot={slot()} effect={props.effect} index={index} />
-            }
+            fallback={<Slot slot={slot()} index={index} />}
           >
             {(id) => <Die id={id} />}
           </Show>

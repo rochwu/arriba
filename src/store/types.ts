@@ -1,3 +1,5 @@
+import type {JSX} from 'solid-js';
+
 export type DieId = string;
 export type EffectId = string;
 
@@ -30,6 +32,7 @@ export type Score = 'win' | 'lose' | 'tie' | 'none';
 export type Effect = {
   id: EffectId;
   name: string;
+  description?: JSX.Element;
   special?: {
     instant?: boolean;
     opponents?: DieId[];

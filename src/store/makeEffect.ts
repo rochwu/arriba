@@ -25,5 +25,7 @@ export const makeEffect = (args: RecursivePartial<Effect>) => {
     }
   }
 
+  partial.description ??= partial.name;
+
   return partial;
 };
