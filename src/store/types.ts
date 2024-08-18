@@ -18,6 +18,7 @@ export type Die = {
   age: number;
   opponent?: boolean;
 };
+
 export type Effect = {
   id: EffectId;
   dice: List<DieId>;

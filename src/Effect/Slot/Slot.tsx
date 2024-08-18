@@ -35,6 +35,13 @@ export const Slot: Component<{
       ref={droppable}
       data-effect={mergedProps.effect.id}
       data-order={mergedProps.index}
+      style={
+        droppable.isActiveDroppable
+          ? {
+              'background-color': vars.die.backgroundColor,
+            }
+          : undefined
+      }
     >
       <Show when={props.effect.id !== Effects.Unplaced}>
         <Min effect={mergedProps.effect} />
