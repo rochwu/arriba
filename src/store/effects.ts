@@ -53,8 +53,8 @@ const geomentralistEffect = makeEffect({
   slots: repeat(2, {}),
   special: {
     opponents: [geomentralistDie.id],
-    turned: {
-      turns: 3,
+    turns: {
+      max: 3,
       at: 0,
     },
     death: true,

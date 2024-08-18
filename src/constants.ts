@@ -14,4 +14,4 @@ export const Effects = {
 export const DropType = {
   Die: 'die',
   Effect: 'effect',
-};
+} as const;

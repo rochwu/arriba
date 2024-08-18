@@ -25,17 +25,20 @@ export type Slot = {
   lock?: boolean;
 };
 
+export type Score = 'win' | 'lose' | 'tie' | 'none';
+
 export type Effect = {
   id: EffectId;
   name: string;
   special?: {
     instant?: boolean;
-    turned?: {
-      turns: number;
-      at: number;
-    };
     opponents?: DieId[];
     death?: boolean;
+    score?: Score[]; // tie = undefined
+    turns?: {
+      max: number;
+      at: number;
+    };
   };
   slots: Slot[];
 };

@@ -58,17 +58,23 @@ export const useTooltip = (config: Config) => {
     });
   };
 
+  const enter = ({target}: MouseEvent) => {
+    reset();
+
+    containerEl = target as HTMLElement;
+
+    enterTimeout = setTimeout(() => {
+      setContent(config.element);
+      cleanup = autoUpdate(containerEl, tooltipEl, update);
+    }, 400); // default recommended
+  };
+
   return {
-    enter: ({target}: MouseEvent) => {
-      reset();
-
-      containerEl = target as HTMLElement;
-
-      enterTimeout = setTimeout(() => {
-        setContent(config.element);
-        cleanup = autoUpdate(containerEl, tooltipEl, update);
-      }, 400); // default recommended
-    },
+    enter,
     leave,
+    handlers: {
+      onMouseEnter: enter,
+      onMouseLeave: leave,
+    },
   };
 };

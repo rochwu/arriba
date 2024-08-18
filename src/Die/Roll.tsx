@@ -11,7 +11,7 @@ const Position = styled(RollLike)({
 });
 
 const Text = styled.div({
-  fontSize: vars.die.roll.size,
+  fontSize: vars.text.small,
   fontWeight: vars.die.roll.fontWeight,
   lineHeight: 1,
 });

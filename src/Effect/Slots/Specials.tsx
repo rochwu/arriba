@@ -23,7 +23,7 @@ export const Specials: Component<{effect: Effect; slot?: Slot}> = (props) => {
 
   return (
     <Show when={special()} keyed>
-      {({instant, death, turned, key, lock}) => (
+      {({instant, death, turns, key, lock}) => (
         <Position>
           <Show when={instant}>
             <Special Icon={Lightning} tooltip="happens instantly" />
@@ -31,7 +31,7 @@ export const Specials: Component<{effect: Effect; slot?: Slot}> = (props) => {
           <Show when={death}>
             <Special Icon={Skull} tooltip="die loses, die dies" />
           </Show>
-          <Show when={turned}>
+          <Show when={turns}>
             <Special Icon={Stairs} tooltip="busy 'til it's over" />
           </Show>
           <Show when={key}>

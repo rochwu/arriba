@@ -12,7 +12,7 @@ const Position = styled(Absolute)({
 });
 
 const Text = styled.div((props) => ({
-  fontSize: '12px',
+  fontSize: vars.text.small,
   lineHeight: '1',
   textTransform: 'lowercase',
   padding: '0 1px',
