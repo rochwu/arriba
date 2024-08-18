@@ -29,7 +29,7 @@ export const Specials: Component<{effect: Effect}> = (props) => {
           </Show>
 
           <Show when={death}>
-            <Special Icon={Skull} tooltip="die lose, die dies" />
+            <Special Icon={Skull} tooltip="die loses, die dies" />
           </Show>
           <Show when={turned}>
             <Special Icon={Stairs} tooltip="busy 'til it's over" />
