@@ -45,7 +45,7 @@ export const {vars, root} = createCssVars({white: '#fafafa'}, (core) => ({
     },
   },
   opponent: {
-    color: '#b22222',
+    color: '#DC143C',
   },
   dot: {
     size: '8px',

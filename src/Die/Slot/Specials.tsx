@@ -10,7 +10,6 @@ import {Special} from './Special';
 const Position = styled(Absolute)({
   bottom: '-4px',
   minWidth: '100%',
-  justifySelf: 'center',
 });
 
 export const Specials: Component<{effect: Effect}> = (props) => {
@@ -27,7 +26,6 @@ export const Specials: Component<{effect: Effect}> = (props) => {
           <Show when={instant}>
             <Special Icon={Lightning} tooltip="happens instantly" />
           </Show>
-
           <Show when={death}>
             <Special Icon={Skull} tooltip="die loses, die dies" />
           </Show>
