@@ -1,16 +1,18 @@
-import {createDroppable} from '@thisbeyond/solid-dnd';
-import {Show} from 'solid-js';
-import type {Component} from 'solid-js';
+import {createDroppable, useDragDropContext} from '@thisbeyond/solid-dnd';
+import {createMemo, Show} from 'solid-js';
+import type {Component, JSX} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {vars} from '@arriba/css';
 
 import {DropType, Effects} from '../../constants';
 import {Shape} from '../../Die';
-import type {Effect, Slot as SlotState} from '../../store';
+import {store, type Slot as SlotState} from '../../store';
+import {useEffectContext} from '../Provider';
 
+import {Icons} from './Icons';
+import {isUnlocked} from './isUnlocked';
 import {Min} from './Min';
-import {Specials} from './Specials';
 
 const Container = styled(Shape)({
   backgroundColor: vars.slot.backgroundColor,
@@ -19,31 +21,56 @@ const Container = styled(Shape)({
 export const Slot: Component<{
   slot: SlotState;
   index: number;
-  effect: Effect;
 }> = (props) => {
-  const droppable = createDroppable(`${props.effect.id}-${props.index}`, {
+  const effect = useEffectContext();
+  const [state] = useDragDropContext()!;
+
+  const droppable = createDroppable(`${effect.id}-${props.index}`, {
     type: DropType.Effect,
-    id: props.effect.id,
+    id: effect.id,
     order: props.index,
   });
+
+  const min = () => props.slot.min || 1;
+
+  const unlocked = createMemo(() => {
+    if (!props.slot.lock) {
+      return true;
+    }
+
+    return isUnlocked(effect.slots);
+  });
+
+  const style = (): JSX.CSSProperties | undefined => {
+    const active = droppable.isActiveDroppable;
+
+    if (!active) {
+      return;
+    }
+
+    const draggable = state.active.draggable!.data;
+
+    const dieId = draggable.id;
+    const die = store.dieById[dieId];
+    const {roll} = die;
+
+    return {
+      'background-color':
+        roll >= min() && unlocked() ? vars.slot.allowed : vars.slot.disallowed,
+    };
+  };
 
   return (
     <Container
       ref={droppable}
-      data-effect={props.effect.id}
+      data-effect={effect.id}
       data-order={props.index}
-      style={
-        droppable.isActiveDroppable
-          ? {
-              'background-color': vars.die.backgroundColor,
-            }
-          : undefined
-      }
+      style={style()}
     >
-      <Show when={props.effect.id !== Effects.Unplaced}>
-        <Min>{props.slot.min}</Min>
+      <Show when={effect.id !== Effects.Unplaced}>
+        <Min>{min()}</Min>
       </Show>
-      <Specials effect={props.effect} slot={props.slot} />
+      <Icons effect={effect} slot={props.slot} />
     </Container>
   );
 };

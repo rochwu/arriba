@@ -1,11 +1,11 @@
-import type {Lightning} from 'phosphor-solid-js';
+import type {IconProps, Lightning} from 'phosphor-solid-js';
 import {Show, splitProps, type Component, type JSX} from 'solid-js';
 
 import {vars} from '@arriba/css';
 
 import {Flex} from './Flex';
 
-const common = {
+const base = {
   style: {
     width: vars.slot.special.size,
     height: vars.slot.special.size,
@@ -15,11 +15,11 @@ const common = {
 };
 
 export const Iconed: Component<
-  {Icon: typeof Lightning} & JSX.HTMLAttributes<HTMLDivElement>
+  {Icon: typeof Lightning} & JSX.HTMLAttributes<HTMLDivElement> & IconProps
 > = (props) => {
   const [_, spread] = splitProps(props, ['Icon', 'children']);
 
-  const icon = () => <props.Icon {...common} {...spread} />;
+  const icon = () => <props.Icon {...base} {...spread} />;
 
   return (
     <Show when={props.children} fallback={icon()}>

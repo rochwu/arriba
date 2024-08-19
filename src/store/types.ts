@@ -1,3 +1,5 @@
+import type {JSX} from 'solid-js';
+
 export type DieId = string;
 export type EffectId = string;
 
@@ -25,17 +27,21 @@ export type Slot = {
   lock?: boolean;
 };
 
+export type Score = 'win' | 'lose' | 'none';
+
 export type Effect = {
   id: EffectId;
   name: string;
+  description?: JSX.Element;
   special?: {
     instant?: boolean;
-    turned?: {
-      turns: number;
-      at: number;
-    };
     opponents?: DieId[];
     death?: boolean;
+    score?: Score[]; // tie = undefined
+    turns?: {
+      max: number;
+      at: number;
+    };
   };
   slots: Slot[];
 };

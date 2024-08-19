@@ -9,6 +9,7 @@ import {summon} from './mutators/effects/summon';
 import {place} from './mutators/place';
 import {roll} from './mutators/roll';
 import {swap} from './mutators/swap';
+import {turn} from './mutators/turn';
 
 export const actions = {
   endTurn() {
@@ -20,6 +21,9 @@ export const actions = {
 
         // Has to be at the end or the rolls won't count right up top
         roll(state);
+
+        // Happens after the rolls to have an immediate result
+        turn(state);
       }),
     );
   },

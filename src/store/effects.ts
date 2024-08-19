@@ -11,6 +11,7 @@ export const geomentralistDie = makeDie({
   name: 'Geomentralist',
   age: 666,
   faces: makeFaces([undefined, 6, 6, 6, 6, 6]),
+  // faces: makeFaces([undefined, 2, 2, 2, 2, 2]),
   opponent: true,
 });
 
@@ -30,7 +31,8 @@ export const beginnerDice = [
 
 const geometric = makeEffect({
   id: Effects.Geometric,
-  name: 'Geometric Ritual',
+  name: 'Geomentral Ritual',
+  description: 'In the name of patron saint geometry, deface a peer',
   slots: [
     {
       min: 6,
@@ -50,11 +52,12 @@ const geometric = makeEffect({
 const geomentralistEffect = makeEffect({
   id: Effects.Geomentralist,
   name: 'Deranged Geomentralist',
+  description: 'Hold up, a die with 5 faces?!',
   slots: repeat(2, {}),
   special: {
     opponents: [geomentralistDie.id],
-    turned: {
-      turns: 3,
+    turns: {
+      max: 3,
       at: 0,
     },
     death: true,
@@ -64,12 +67,14 @@ const geomentralistEffect = makeEffect({
 const summon = makeEffect({
   id: Effects.Summon,
   name: 'Summon',
+  description: 'Get more! No one better than you is coming, though',
   slots: [{}],
 });
 
 const unplaced = makeEffect({
   id: Effects.Unplaced,
   name: 'Put These to Work',
+  description: '', // Turns of descriptions on render
   slots: [
     ...beginnerDice.map((die) => ({die: die.id})),
     ...repeat(9 - beginnerDice.length, {}),
@@ -79,6 +84,7 @@ const unplaced = makeEffect({
 const fire = makeEffect({
   id: Effects.Fire,
   name: 'Fire',
+  description: 'Die underperforming? Consider an early retirement',
   special: {
     instant: true,
   },

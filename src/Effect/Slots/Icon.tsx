@@ -12,7 +12,7 @@ const Tooltip = styled.div({
   alignItems: 'center',
 });
 
-export const Special: Component<{
+export const Icon: Component<{
   Icon: typeof Lightning;
   tooltip: JSX.Element;
 }> = (props) => {

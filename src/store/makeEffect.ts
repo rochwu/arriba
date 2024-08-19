@@ -15,5 +15,17 @@ export const makeEffect = (args: RecursivePartial<Effect>) => {
     slot.id ??= index;
   });
 
+  if (partial.special) {
+    const {special} = partial;
+
+    if (special.turns?.max) {
+      special.score ??= Array.from({length: special.turns.max}).map(
+        () => 'none',
+      );
+    }
+  }
+
+  partial.description ??= partial.name;
+
   return partial;
 };

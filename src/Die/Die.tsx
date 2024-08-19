@@ -1,5 +1,5 @@
 import {createDraggable, createDroppable} from '@thisbeyond/solid-dnd';
-import type {Component} from 'solid-js';
+import {type Component} from 'solid-js';
 import {styled} from 'solid-styled-components';
 
 import {vars} from '@arriba/css';
