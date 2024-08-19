@@ -4,11 +4,27 @@ import {getEffect} from '../../getEffect';
 import {getValue} from '../../getValue';
 import type {Score, State} from '../../types';
 
-const won = (score: Score[]) => {
-  const beat = score.length / 2;
-  const count = score.filter((value) => value === 'win').length;
+import {fire} from './instant/fire';
+import {place} from './place';
 
-  return count >= beat;
+const calculate = (score: Score[]): Score => {
+  const beat = score.length / 2;
+
+  const [won, lost] = score.reduce(
+    (count, score) => {
+      count[0] = score === 'win' ? count[0] + 1 : count[0];
+      count[1] = score === 'lose' ? count[1] + 1 : count[1] + 0;
+
+      return count;
+    },
+    [0, 0],
+  );
+
+  if (won >= beat) {
+    return 'win';
+  }
+
+  return lost >= beat ? 'lose' : 'none';
 };
 
 export const turn = (state: State) => {
@@ -24,12 +40,18 @@ export const turn = (state: State) => {
 
     if (dice.length === 0) {
       turns.at = 0;
-      score.forEach((_, index) => {
-        score[index] = 'none';
-      });
 
       return;
     }
+
+    // Only reset on next round, so that users can see the results of the previous turn
+    if (turns.at === 0) {
+      score.forEach((_, index) => {
+        score[index] = 'none';
+      });
+    }
+
+    turns.at += 1;
 
     const us = getValue(state, ...dice);
     const them = getValue(state, ...special.opponents!);
@@ -40,8 +62,18 @@ export const turn = (state: State) => {
 
     score[index] = tally;
 
-    // console.log(won(score));
+    const result = calculate(score);
 
-    turns.at += 1;
+    if (result === 'win' || result === 'lose') {
+      turns.at = 0;
+
+      if (special.death && result === 'lose') {
+        dice.forEach((die) => {
+          fire(state, {die: die.id});
+        });
+      } else {
+        dice.forEach((die) => place(state, {from: die.id}));
+      }
+    }
   }
 };
