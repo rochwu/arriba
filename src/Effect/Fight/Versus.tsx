@@ -1,5 +1,5 @@
 import type {Lightning} from 'phosphor-solid-js';
-import {CheckCircle, Circle, MinusCircle, XCircle} from 'phosphor-solid-js';
+import {CheckCircle, Circle, XCircle} from 'phosphor-solid-js';
 import {Index} from 'solid-js';
 import type {Component} from 'solid-js';
 import {Dynamic} from 'solid-js/web';
@@ -21,7 +21,6 @@ const Container = styled.div({
 const icons = {
   win: CheckCircle,
   lose: XCircle,
-  tie: MinusCircle,
   none: Circle,
 } as Record<ScoreResult, typeof Lightning>;
 

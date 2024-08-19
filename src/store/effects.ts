@@ -11,6 +11,7 @@ export const geomentralistDie = makeDie({
   name: 'Geomentralist',
   age: 666,
   faces: makeFaces([undefined, 6, 6, 6, 6, 6]),
+  // faces: makeFaces([undefined, 2, 2, 2, 2, 2]),
   opponent: true,
 });
 

@@ -27,7 +27,7 @@ export type Slot = {
   lock?: boolean;
 };
 
-export type Score = 'win' | 'lose' | 'tie' | 'none';
+export type Score = 'win' | 'lose' | 'none';
 
 export type Effect = {
   id: EffectId;
