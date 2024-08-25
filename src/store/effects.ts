@@ -84,7 +84,7 @@ const unplaced = makeEffect({
 const fire = makeEffect({
   id: Effects.Fire,
   name: 'Fire',
-  description: 'Die underperforming? Consider an early retirement',
+  description: 'Die underperforming? Consider early retirement',
   special: {
     instant: true,
   },
