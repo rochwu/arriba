@@ -7,3 +7,5 @@ Then many years later, I started doing board games and learned of the worker pla
 Then I came upon Dark Forest Village and everything was so well built and finally made me start my own incremental.
 
 So this has no goal, maybe learn Solid, maybe do something with it. But hey at least there's some worker placement stuff going on, not sure if it's even a game at this point.
+
+This isn't even an incremental....
