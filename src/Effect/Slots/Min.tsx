@@ -1,7 +1,5 @@
-import {Show, type Component} from 'solid-js';
-import {styled} from 'solid-styled-components';
-
 import {vars} from '@arriba/css';
+import styled from '@emotion/styled';
 
 import {Absolute} from '../../Absolute';
 import {RollLike} from '../../Die';
@@ -23,14 +21,12 @@ const Plus = styled(Absolute)({
   color: vars.slot.min.color,
 });
 
-export const Min: Component<{children?: number}> = (props) => {
+export const Min = ({children}: {children?: number}) => {
   return (
     <Position>
       <Text>
-        {props.children ?? 1}
-        <Show when={props.children !== 6}>
-          <Plus>+</Plus>
-        </Show>
+        {children ?? 1}
+        {children !== 6 && <Plus>+</Plus>}
       </Text>
     </Position>
   );

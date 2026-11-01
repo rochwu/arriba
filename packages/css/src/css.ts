@@ -38,13 +38,13 @@ export const {vars, root} = createCssVars(
     },
     icon: {
       size: '18px',
-      color: 'blue',
+      color: '#4a6c8c',
     },
     slot: {
       backgroundColor: '#fff8dc',
       special: {
         size: '18px',
-        color: 'blue',
+        color: '#4a6c8c',
       },
       min: {
         // Most come from die.roll

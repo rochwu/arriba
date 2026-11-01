@@ -1,13 +1,12 @@
-import {createDroppable, useDragDropContext} from '@thisbeyond/solid-dnd';
-import {createMemo, Show} from 'solid-js';
-import type {Component, JSX} from 'solid-js';
-import {styled} from 'solid-styled-components';
-
 import {vars} from '@arriba/css';
+import {useDndContext, useDroppable} from '@dnd-kit/core';
+import styled from '@emotion/styled';
+import type {CSSProperties} from 'react';
 
 import {DropType, Effects} from '../../constants';
 import {Shape} from '../../Die';
-import {store, type Slot as SlotState} from '../../store';
+import type {DieId} from '../../store';
+import {type Slot as SlotState, useStore} from '../../store';
 import {useEffectContext} from '../Provider';
 
 import {Icons} from './Icons';
@@ -18,59 +17,46 @@ const Container = styled(Shape)({
   backgroundColor: vars.slot.backgroundColor,
 });
 
-export const Slot: Component<{
-  slot: SlotState;
-  index: number;
-}> = (props) => {
+export const Slot = ({slot, index}: {slot: SlotState; index: number}) => {
   const effect = useEffectContext();
-  const [state] = useDragDropContext()!;
+  const {active} = useDndContext();
 
-  const droppable = createDroppable(`${effect.id}-${props.index}`, {
-    type: DropType.Effect,
-    id: effect.id,
-    order: props.index,
+  const droppable = useDroppable({
+    id: `${effect.id}-${index}`,
+    data: {
+      type: DropType.Effect,
+      id: effect.id,
+      order: index,
+    },
   });
 
-  const min = () => props.slot.min || 1;
+  const draggedId = active?.data.current?.id as DieId | undefined;
+  const dragged = useStore((state) =>
+    draggedId ? state.dieById[draggedId] : undefined,
+  );
 
-  const unlocked = createMemo(() => {
-    if (!props.slot.lock) {
-      return true;
-    }
+  const min = slot.min || 1;
+  const unlocked = !slot.lock || isUnlocked(effect.slots);
 
-    return isUnlocked(effect.slots);
-  });
-
-  const style = (): JSX.CSSProperties | undefined => {
-    const active = droppable.isActiveDroppable;
-
-    if (!active) {
-      return;
-    }
-
-    const draggable = state.active.draggable!.data;
-
-    const dieId = draggable.id;
-    const die = store.dieById[dieId];
-    const {roll} = die;
-
-    return {
-      'background-color':
-        roll >= min() && unlocked() ? vars.slot.allowed : vars.slot.disallowed,
+  let style: CSSProperties | undefined;
+  if (droppable.isOver && dragged) {
+    style = {
+      backgroundColor:
+        dragged.roll >= min && unlocked
+          ? vars.slot.allowed
+          : vars.slot.disallowed,
     };
-  };
+  }
 
   return (
     <Container
-      ref={droppable}
+      ref={droppable.setNodeRef}
       data-effect={effect.id}
-      data-order={props.index}
-      style={style()}
+      data-order={index}
+      style={style}
     >
-      <Show when={effect.id !== Effects.Unplaced}>
-        <Min>{min()}</Min>
-      </Show>
-      <Icons effect={effect} slot={props.slot} />
+      {effect.id !== Effects.Unplaced && <Min>{min}</Min>}
+      <Icons effect={effect} slot={slot} />
     </Container>
   );
 };

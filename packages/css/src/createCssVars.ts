@@ -1,3 +1,5 @@
+// biome-ignore-all lint/suspicious/noExplicitAny: generic over arbitrary token trees
+// biome-ignore-all lint/complexity/noBannedTypes: `{}` means no composed styles
 export const createCssVars = <
   Styles extends Record<string, any>,
   MoreStyles extends Record<string, any> | {},

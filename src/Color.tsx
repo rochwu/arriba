@@ -1,20 +1,16 @@
-import {splitProps, type Component, type JSX} from 'solid-js';
-import type {DefaultTheme} from 'solid-styled-components';
-import {ThemeProvider} from 'solid-styled-components';
+import type {Theme} from '@emotion/react';
+import {ThemeProvider} from '@emotion/react';
+import type {ReactNode} from 'react';
 
-// import original module declarations
-import 'solid-styled-components';
-
-// and extend them!
-declare module 'solid-styled-components' {
-  export interface DefaultTheme {
+declare module '@emotion/react' {
+  export interface Theme {
     color?: string;
     backgroundColor?: string;
   }
 }
 
 export const color = (
-  {theme = {}}: {theme?: DefaultTheme},
+  {theme = {}}: {theme?: Theme},
   {color, backgroundColor}: {color?: string; backgroundColor?: string},
 ) => {
   return {
@@ -23,12 +19,16 @@ export const color = (
   };
 };
 
-export const Color: Component<{
-  children: JSX.Element;
+export const Color = ({
+  children,
+  color,
+  backgroundColor,
+}: {
+  children: ReactNode;
   color?: string;
   backgroundColor?: string;
-}> = (props) => {
-  const [theme] = splitProps(props, ['color', 'backgroundColor']);
-
-  return <ThemeProvider theme={theme}>{props.children}</ThemeProvider>;
+}) => {
+  return (
+    <ThemeProvider theme={{color, backgroundColor}}>{children}</ThemeProvider>
+  );
 };

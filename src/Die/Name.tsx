@@ -1,7 +1,5 @@
-import type {Component} from 'solid-js';
-import {styled} from 'solid-styled-components';
-
 import {vars} from '@arriba/css';
+import styled from '@emotion/styled';
 
 import {Absolute} from '../Absolute';
 import {color} from '../Color';
@@ -20,10 +18,10 @@ const Text = styled.div((props) => ({
   ...color(props, {color: 'black', backgroundColor: vars.die.backgroundColor}),
 }));
 
-export const Name: Component<{children: string}> = (props) => {
+export const Name = ({children}: {children: string}) => {
   return (
     <Position>
-      <Text>{props.children}</Text>
+      <Text>{children}</Text>
     </Position>
   );
 };

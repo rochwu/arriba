@@ -1,19 +1,23 @@
-import type {JSX} from 'solid-js';
-import {createContext, useContext, type Component} from 'solid-js';
+import type {ReactNode} from 'react';
+import {createContext, useContext} from 'react';
 
-import type {EffectId} from '../store';
-import {store, type Effect} from '../store';
+import type {Effect, EffectId} from '../store';
+import {useStore} from '../store';
 
-const Context = createContext<Effect>(undefined as never as Effect);
+const Context = createContext<EffectId>(undefined as never as EffectId);
 
-export const useEffectContext = () => {
-  return useContext(Context);
+export const useEffectContext = (): Effect => {
+  const id = useContext(Context);
+
+  return useStore((state) => state.effectById[id]);
 };
 
-export const Provider: Component<{effect: EffectId; children: JSX.Element}> = (
-  props,
-) => {
-  const effect = () => store.effectById[props.effect];
-
-  return <Context.Provider value={effect()}>{props.children}</Context.Provider>;
+export const Provider = ({
+  effect,
+  children,
+}: {
+  effect: EffectId;
+  children: ReactNode;
+}) => {
+  return <Context.Provider value={effect}>{children}</Context.Provider>;
 };

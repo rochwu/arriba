@@ -1,9 +1,6 @@
-import {Cake} from 'phosphor-solid-js';
-import type {Component} from 'solid-js';
-import {Index} from 'solid-js';
-import {styled} from 'solid-styled-components';
-
 import {vars} from '@arriba/css';
+import styled from '@emotion/styled';
+import {CakeIcon} from '@phosphor-icons/react';
 
 import {Iconed} from '../../Iconed';
 import type {Die} from '../../store';
@@ -40,29 +37,24 @@ const Flex = styled.div({
   alignItems: 'center',
 });
 
-export const Info: Component<{
-  die: Die;
-}> = (props) => {
-  const faces = () => props.die.faces;
-
+export const Info = ({die}: {die: Die}) => {
   return (
     <Container>
       <Header>
-        <Name die={props.die} />
+        <Name die={die} />
         <Flex>
-          {props.die.age}
-          <Iconed Icon={Cake} />
+          {die.age}
+          <Iconed Icon={CakeIcon} />
         </Flex>
       </Header>
       <List>
-        <Index each={props.die.rolls}>
-          {(roll) => (
-            <Face>
-              <Roll>{roll()}</Roll>
-              <Value>{faces()[roll()].value}</Value>
-            </Face>
-          )}
-        </Index>
+        {die.rolls.map((roll, index) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: rolls are positional and can repeat
+          <Face key={index}>
+            <Roll>{roll}</Roll>
+            <Value>{die.faces[roll].value}</Value>
+          </Face>
+        ))}
       </List>
     </Container>
   );

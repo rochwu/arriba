@@ -1,7 +1,5 @@
-import {Index, Show} from 'solid-js';
-import {styled} from 'solid-styled-components';
-
 import {vars} from '@arriba/css';
+import styled from '@emotion/styled';
 
 import {Die} from '../../Die';
 import {useEffectContext} from '../Provider';
@@ -16,21 +14,15 @@ const Container = styled.div({
 export const Slots = () => {
   const effect = useEffectContext();
 
-  const slots = () => effect.slots;
-
   return (
     <Container>
-      <Index each={slots()}>
-        {(slot, index) => (
-          <Show
-            when={slot().die}
-            keyed
-            fallback={<Slot slot={slot()} index={index} />}
-          >
-            {(id) => <Die id={id} />}
-          </Show>
-        )}
-      </Index>
+      {effect.slots.map((slot, index) =>
+        slot.die ? (
+          <Die key={slot.id} id={slot.die} />
+        ) : (
+          <Slot key={slot.id} slot={slot} index={index} />
+        ),
+      )}
     </Container>
   );
 };

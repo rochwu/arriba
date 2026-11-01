@@ -1,11 +1,7 @@
-import type {Component} from 'solid-js';
-import {styled} from 'solid-styled-components';
-
 import {vars} from '@arriba/css';
+import styled from '@emotion/styled';
 
 import {actions} from './store';
-
-const shadow = 2;
 
 const Button = styled.div({
   display: 'grid',
@@ -24,9 +20,9 @@ const Button = styled.div({
   boxShadow: vars.boxShadow,
 });
 
-export const EndTurn: Component = () => {
+export const EndTurn = () => {
   return (
-    <Button role="button" onClick={actions.endTurn}>
+    <Button role="button" onClick={() => actions.endTurn()}>
       End Turn
     </Button>
   );

@@ -41,7 +41,7 @@ export const place = (
     previousSlot.die = undefined;
   }
 
-  let at = undefined;
+  let at: number | undefined;
   if (order) {
     at = order;
   } else if (openToSlot) {

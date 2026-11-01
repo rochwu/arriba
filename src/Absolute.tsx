@@ -1,4 +1,4 @@
-import {styled} from 'solid-styled-components';
+import styled from '@emotion/styled';
 
 export const Absolute = styled.div({
   display: 'flex',

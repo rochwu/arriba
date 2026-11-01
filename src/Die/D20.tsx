@@ -1,8 +1,6 @@
-import type {JSX} from 'solid-js';
-import {mergeProps, type Component} from 'solid-js';
-import {styled} from 'solid-styled-components';
-
 import {vars} from '@arriba/css';
+import styled from '@emotion/styled';
+import type {ReactNode} from 'react';
 
 const Darkest = styled.polygon({
   filter: 'brightness(0.8)',
@@ -47,12 +45,12 @@ const Svg = styled.svg({
   position: 'absolute',
 });
 
-export const View: Component<{backgroundColor: string}> = (props) => {
+export const View = ({backgroundColor}: {backgroundColor: string}) => {
   return (
     <Svg
       width="100%"
       height="100%"
-      fill={props.backgroundColor}
+      fill={backgroundColor}
       viewBox="0 0 100 100"
     >
       {/* Top left, right */}
@@ -84,15 +82,17 @@ const Container = styled.div({
   height: vars.die.size,
 });
 
-export const D20: Component<{
+export const D20 = ({
+  backgroundColor,
+  children,
+}: {
   backgroundColor: string;
-  children: JSX.Element;
-}> = (rawProps) => {
-  const props = mergeProps({size: 50}, rawProps);
+  children: ReactNode;
+}) => {
   return (
     <Container>
-      <View backgroundColor={props.backgroundColor} />
-      {props.children}
+      <View backgroundColor={backgroundColor} />
+      {children}
     </Container>
   );
 };

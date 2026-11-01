@@ -1,13 +1,9 @@
 import type {DieId} from './store';
-import {store} from './store';
+import {useStore} from './store';
 
 export const useDie = (id: DieId) => {
-  const die = () => store.dieById[id];
-  const value = () => {
-    const {faces, roll} = die();
-
-    return faces[roll].value;
-  };
+  const die = useStore((state) => state.dieById[id]);
+  const value = die.faces[die.roll].value;
 
   return {die, value};
 };

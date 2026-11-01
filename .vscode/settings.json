@@ -1,15 +1,14 @@
 {
-  "cSpell.words": [
-    "arriba",
-    "Geomentral",
-    "Geomentralist",
-    "Iconed",
-    "proxify",
-    "thisbeyond",
-    "underperforming"
-  ],
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "biomejs.biome",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  }
+    "source.fixAll.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "cSpell.words": ["arriba"]
 }

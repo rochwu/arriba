@@ -1,9 +1,7 @@
-import {createDraggable, createDroppable} from '@thisbeyond/solid-dnd';
-import {type Component} from 'solid-js';
-import {styled} from 'solid-styled-components';
-
 import {vars} from '@arriba/css';
 import {useTooltip} from '@arriba/tooltip';
+import {useDraggable, useDroppable} from '@dnd-kit/core';
+import styled from '@emotion/styled';
 
 import {DropType} from '../constants';
 import type {DieId} from '../store';
@@ -28,33 +26,30 @@ const Content = styled.div({
   height: vars.die.size,
 });
 
-export const Die: Component<{id: DieId}> = (props) => {
-  const draggable = createDraggable(props.id, {id: props.id});
-  const droppable = createDroppable(props.id, {
-    type: DropType.Die,
-    id: props.id,
-  });
+export const Die = ({id}: {id: DieId}) => {
+  const draggable = useDraggable({id, data: {id}});
+  const droppable = useDroppable({id, data: {type: DropType.Die, id}});
 
-  const {die, value} = useDie(props.id);
+  const {die, value} = useDie(id);
 
   const {enter, leave} = useTooltip({
-    element: <Info die={die()} />,
+    element: <Info die={die} />,
   });
 
   return (
     <Container
-      ref={(el) => {
-        draggable(el);
-      }}
-      data-die={props.id}
+      ref={draggable.setNodeRef}
+      {...draggable.attributes}
+      {...draggable.listeners}
+      data-die={id}
       onMouseEnter={enter}
       onMouseLeave={leave}
     >
-      <Content ref={droppable}>
-        <Roll>{die().roll}</Roll>
+      <Content ref={droppable.setNodeRef}>
+        <Roll>{die.roll}</Roll>
         <NoticeMe die={die} />
-        <Value>{value()}</Value>
-        <Name>{die().name}</Name>
+        <Value>{value}</Value>
+        <Name>{die.name}</Name>
       </Content>
     </Container>
   );

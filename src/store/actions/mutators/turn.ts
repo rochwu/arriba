@@ -72,7 +72,9 @@ export const turn = (state: State) => {
           fire(state, {die: die.id});
         });
       } else {
-        dice.forEach((die) => place(state, {from: die.id}));
+        dice.forEach((die) => {
+          place(state, {from: die.id});
+        });
       }
     }
   }

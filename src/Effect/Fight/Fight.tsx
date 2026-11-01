@@ -1,7 +1,5 @@
-import {type Component} from 'solid-js';
-import {styled} from 'solid-styled-components';
-
 import {vars} from '@arriba/css';
+import styled from '@emotion/styled';
 
 import {Opponent} from '../../Die';
 import {useEffectContext} from '../Provider';
@@ -15,16 +13,15 @@ const Container = styled.div({
   alignItems: 'center',
 });
 
-export const Fight: Component = () => {
+export const Fight = () => {
   const effect = useEffectContext();
-  const opponent = () => {
-    return effect.special!.opponents![0]!;
-  };
+  const opponent = effect.special!.opponents![0]!;
+
   return (
     <Container>
       <Slots />
       <Versus />
-      <Opponent id={opponent()} />
+      <Opponent id={opponent} />
     </Container>
   );
 };

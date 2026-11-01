@@ -1,6 +1,5 @@
-import {styled} from 'solid-styled-components';
-
 import {vars} from '@arriba/css';
+import styled from '@emotion/styled';
 
 export const Card = styled.div({
   display: 'flex',

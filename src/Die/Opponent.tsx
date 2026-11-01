@@ -1,8 +1,6 @@
-import type {Component} from 'solid-js';
-import {styled} from 'solid-styled-components';
-
 import {vars} from '@arriba/css';
 import {useTooltip} from '@arriba/tooltip';
+import styled from '@emotion/styled';
 
 import {Color} from '../Color';
 import type {DieId} from '../store';
@@ -18,19 +16,19 @@ const Container = styled(DieLike)({
   boxShadow: vars.boxShadow,
 });
 
-export const Opponent: Component<{id: DieId}> = (props) => {
-  const {die, value} = useDie(props.id);
+export const Opponent = ({id}: {id: DieId}) => {
+  const {die, value} = useDie(id);
 
   const {enter, leave} = useTooltip({
-    element: <Info die={die()} />,
+    element: <Info die={die} />,
   });
 
   return (
-    <Container data-die={props.id} onMouseEnter={enter} onMouseLeave={leave}>
-      <Roll>{die().roll}</Roll>
-      <Value>{value()}</Value>
+    <Container data-die={id} onMouseEnter={enter} onMouseLeave={leave}>
+      <Roll>{die.roll}</Roll>
+      <Value>{value}</Value>
       <Color color={vars.opponent.color}>
-        <Name>{die().name}</Name>
+        <Name>{die.name}</Name>
       </Color>
     </Container>
   );

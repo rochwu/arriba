@@ -6,14 +6,9 @@ import type {State} from './types';
 const {[Effects.Unplaced]: unplaced, ...effects} = rawEffects;
 
 export const initialValue: State = {
-  dieById: {
-    ...[...beginnerDice, geomentralistDie].reduce((dice, die) => {
-      return {
-        ...dice,
-        [die.id]: die,
-      };
-    }, {}),
-  },
+  dieById: Object.fromEntries(
+    [...beginnerDice, geomentralistDie].map((die) => [die.id, die]),
+  ),
   dice: [...beginnerDice.map((die) => die.id)],
   effectById: {
     ...effects,
