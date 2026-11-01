@@ -2,9 +2,9 @@ import {vars} from '@arriba/css';
 import {useTooltip} from '@arriba/tooltip';
 import styled from '@emotion/styled';
 
-import {Color} from '../Color';
-import type {DieId} from '../store';
-import {useDie} from '../useDie';
+import {Color} from '@/Color';
+import type {DieId} from '@/store';
+import {useDie} from '@/useDie';
 
 import {DieLike} from './DieLike';
 import {Info} from './Info';

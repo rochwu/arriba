@@ -1,8 +1,8 @@
 import {produce} from 'immer';
 
-import {DropType, Effects} from '../../constants';
-import {store} from '../store';
-import type {DieId, EffectId} from '../types';
+import {DropType, Effects} from '@/constants';
+import {store} from '@/store/store';
+import type {DieId, EffectId} from '@/store/types';
 
 import {age} from './mutators/age';
 import {summon} from './mutators/effects/summon';

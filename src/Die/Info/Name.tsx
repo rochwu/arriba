@@ -1,7 +1,7 @@
 import {vars} from '@arriba/css';
 import styled from '@emotion/styled';
 
-import type {Die} from '../../store';
+import type {Die} from '@/store';
 
 const View = styled.div({
   textTransform: 'lowercase',

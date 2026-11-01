@@ -1,8 +1,8 @@
-import {Effects} from '../../../constants';
-import {getDice} from '../../getDice';
-import {getEffect} from '../../getEffect';
-import {getValue} from '../../getValue';
-import type {Score, State} from '../../types';
+import {Effects} from '@/constants';
+import {getDice} from '@/store/getDice';
+import {getEffect} from '@/store/getEffect';
+import {getValue} from '@/store/getValue';
+import type {Score, State} from '@/store/types';
 
 import {fire} from './instant/fire';
 import {place} from './place';

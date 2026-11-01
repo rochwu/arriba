@@ -3,9 +3,9 @@ import {useTooltip} from '@arriba/tooltip';
 import {useDraggable, useDroppable} from '@dnd-kit/core';
 import styled from '@emotion/styled';
 
-import {DropType} from '../constants';
-import type {DieId} from '../store';
-import {useDie} from '../useDie';
+import {DropType} from '@/constants';
+import type {DieId} from '@/store';
+import {useDie} from '@/useDie';
 
 import {DieLike} from './DieLike';
 import {Info} from './Info';

@@ -1,8 +1,8 @@
 import {vars} from '@arriba/css';
 import styled from '@emotion/styled';
 
-import {Die} from '../../Die';
-import {useEffectContext} from '../Provider';
+import {Die} from '@/Die';
+import {useEffectContext} from '@/Effect/Provider';
 
 import {Slot} from './Slot';
 

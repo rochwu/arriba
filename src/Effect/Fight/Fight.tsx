@@ -1,9 +1,9 @@
 import {vars} from '@arriba/css';
 import styled from '@emotion/styled';
 
-import {Opponent} from '../../Die';
-import {useEffectContext} from '../Provider';
-import {Slots} from '../Slots';
+import {Opponent} from '@/Die';
+import {useEffectContext} from '@/Effect/Provider';
+import {Slots} from '@/Effect/Slots';
 
 import {Versus} from './Versus';
 

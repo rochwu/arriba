@@ -6,6 +6,9 @@
     "jsx": "react-jsx",
     "noEmit": true,
     "isolatedModules": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }

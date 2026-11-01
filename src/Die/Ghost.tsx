@@ -1,8 +1,8 @@
 import {DragOverlay, useDndContext} from '@dnd-kit/core';
 import styled from '@emotion/styled';
 
-import type {DieId} from '../store';
-import {useDie} from '../useDie';
+import type {DieId} from '@/store';
+import {useDie} from '@/useDie';
 
 import {DieLike} from './DieLike';
 import {Name} from './Name';

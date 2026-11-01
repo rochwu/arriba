@@ -6,8 +6,8 @@ import {
   StairsIcon,
 } from '@phosphor-icons/react';
 
-import {Absolute} from '../../Absolute';
-import type {Effect, Slot} from '../../store';
+import {Absolute} from '@/Absolute';
+import type {Effect, Slot} from '@/store';
 
 import {Icon} from './Icon';
 import {Lock} from './Lock';

@@ -3,14 +3,13 @@ import {useDndContext, useDroppable} from '@dnd-kit/core';
 import styled from '@emotion/styled';
 import type {CSSProperties} from 'react';
 
-import {DropType, Effects} from '../../constants';
-import {Shape} from '../../Die';
-import type {DieId} from '../../store';
-import {type Slot as SlotState, useStore} from '../../store';
-import {useEffectContext} from '../Provider';
+import {DropType, Effects} from '@/constants';
+import {Shape} from '@/Die';
+import {useEffectContext} from '@/Effect/Provider';
+import type {DieId} from '@/store';
+import {canPlace, type Slot as SlotState, useStore} from '@/store';
 
 import {Icons} from './Icons';
-import {isUnlocked} from './isUnlocked';
 import {Min} from './Min';
 
 const Container = styled(Shape)({
@@ -35,16 +34,16 @@ export const Slot = ({slot, index}: {slot: SlotState; index: number}) => {
     draggedId ? state.dieById[draggedId] : undefined,
   );
 
-  const min = slot.min || 1;
-  const unlocked = !slot.lock || isUnlocked(effect.slots);
-
   let style: CSSProperties | undefined;
   if (droppable.isOver && dragged) {
     style = {
-      backgroundColor:
-        dragged.roll >= min && unlocked
-          ? vars.slot.allowed
-          : vars.slot.disallowed,
+      backgroundColor: canPlace({
+        die: dragged,
+        slot,
+        slots: effect.slots,
+      })
+        ? vars.slot.allowed
+        : vars.slot.disallowed,
     };
   }
 
@@ -55,7 +54,7 @@ export const Slot = ({slot, index}: {slot: SlotState; index: number}) => {
       data-order={index}
       style={style}
     >
-      {effect.id !== Effects.Unplaced && <Min>{min}</Min>}
+      {effect.id !== Effects.Unplaced && <Min>{slot.min?.roll}</Min>}
       <Icons effect={effect} slot={slot} />
     </Container>
   );

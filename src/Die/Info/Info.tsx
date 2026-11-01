@@ -1,12 +1,11 @@
 import {vars} from '@arriba/css';
 import styled from '@emotion/styled';
 import {CakeIcon} from '@phosphor-icons/react';
-
-import {Iconed} from '../../Iconed';
-import type {Die} from '../../store';
-import {DieLike} from '../DieLike';
-import {Roll} from '../Roll';
-import {Value} from '../Value';
+import {DieLike} from '@/Die/DieLike';
+import {Roll} from '@/Die/Roll';
+import {Value} from '@/Die/Value';
+import {Iconed} from '@/Iconed';
+import type {Die} from '@/store';
 
 import {Name} from './Name';
 

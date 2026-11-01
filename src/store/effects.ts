@@ -1,6 +1,6 @@
 import {shuffle} from 'lodash-es';
 
-import {Effects} from '../constants';
+import {Effects} from '@/constants';
 
 import {makeDie} from './actions/makeDie';
 import {makeFaces} from './actions/makeFaces';
@@ -35,15 +35,15 @@ const geometric = makeEffect({
   description: 'In the name of patron saint geometry, deface a peer',
   slots: [
     {
-      min: 6,
+      min: {roll: 6},
       key: true,
     },
     {
-      min: 6,
+      min: {roll: 6},
       key: true,
     },
     {
-      min: 1,
+      min: {roll: 1},
       lock: true,
     },
   ],

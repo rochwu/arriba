@@ -1,8 +1,8 @@
 import {vars} from '@arriba/css';
 import styled from '@emotion/styled';
 
-import {Absolute} from '../../Absolute';
-import {RollLike} from '../../Die';
+import {Absolute} from '@/Absolute';
+import {RollLike} from '@/Die';
 
 const Position = styled(RollLike)({
   color: vars.slot.min.color,

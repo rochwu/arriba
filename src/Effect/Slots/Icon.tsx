@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import type {Icon as PhosphorIcon} from '@phosphor-icons/react';
 import type {ReactNode} from 'react';
 
-import {Iconed} from '../../Iconed';
+import {Iconed} from '@/Iconed';
 
 const Tooltip = styled.div({
   display: 'flex',

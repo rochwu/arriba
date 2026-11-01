@@ -1,5 +1,5 @@
-import {Effects} from '../../../../constants';
-import type {DieId, EffectId, State} from '../../../types';
+import {Effects} from '@/constants';
+import type {DieId, EffectId, State} from '@/store/types';
 
 import {fire} from './fire';
 

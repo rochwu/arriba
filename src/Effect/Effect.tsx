@@ -1,4 +1,4 @@
-import type {EffectId} from '../store';
+import type {EffectId} from '@/store';
 
 import {Base} from './Base';
 import {Fight} from './Fight';

@@ -1,7 +1,7 @@
 import {vars} from '@arriba/css';
 import styled from '@emotion/styled';
 
-import {Absolute} from '../Absolute';
+import {Absolute} from '@/Absolute';
 
 export const RollLike = styled(Absolute)({
   left: '-1px',

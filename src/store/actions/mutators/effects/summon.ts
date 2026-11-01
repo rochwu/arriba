@@ -1,12 +1,12 @@
 import {mean, random, shuffle} from 'lodash-es';
 
-import {Effects} from '../../../../constants';
-import {getDice} from '../../../getDice';
-import type {Die, State} from '../../../types';
-import {makeDie} from '../../makeDie';
-import {makeFaces} from '../../makeFaces';
-import {place} from '../place';
-import {push} from '../push';
+import {Effects} from '@/constants';
+import {makeDie} from '@/store/actions/makeDie';
+import {makeFaces} from '@/store/actions/makeFaces';
+import {place} from '@/store/actions/mutators/place';
+import {push} from '@/store/actions/mutators/push';
+import {getDice} from '@/store/getDice';
+import type {Die, State} from '@/store/types';
 
 const getValues = (die: Die) => {
   return die.rolls.map((roll) => die.faces[roll].value);

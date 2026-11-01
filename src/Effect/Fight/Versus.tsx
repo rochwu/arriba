@@ -4,10 +4,10 @@ import styled from '@emotion/styled';
 import type {Icon} from '@phosphor-icons/react';
 import {CheckCircleIcon, CircleIcon, XCircleIcon} from '@phosphor-icons/react';
 
-import {Absolute} from '../../Absolute';
-import {Iconed} from '../../Iconed';
-import type {Score as ScoreResult} from '../../store';
-import {useEffectContext} from '../Provider';
+import {Absolute} from '@/Absolute';
+import {useEffectContext} from '@/Effect/Provider';
+import {Iconed} from '@/Iconed';
+import type {Score as ScoreResult} from '@/store';
 
 const Container = styled.div({
   display: 'flex',
