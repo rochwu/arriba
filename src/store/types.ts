@@ -5,7 +5,7 @@ export type EffectId = string;
 
 type Face = {
   id: number;
-  value: number;
+  value: number; // what that face is worth
 };
 
 export type Die = {
@@ -14,7 +14,7 @@ export type Die = {
   name: string;
   faces: Record<number, Face>;
   rolls: number[]; // eg: [1, 2, 3, 4, 5, 6], it's aware of how many faces there are
-  roll: number; // value in `rolls` eg: 1 - 6
+  roll: number; // which face landed, eg: 1 - 6
   age: number;
   opponent?: boolean;
 };
