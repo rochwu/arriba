@@ -1,5 +1,3 @@
-import {Match, Switch, type Component} from 'solid-js';
-
 import type {EffectId} from '../store';
 
 import {Base} from './Base';
@@ -10,20 +8,12 @@ import {Provider, useEffectContext} from './Provider';
 const Common = () => {
   const effect = useEffectContext();
 
-  return (
-    <Base>
-      <Switch fallback={<Generic />}>
-        <Match when={effect.special?.opponents}>
-          <Fight />
-        </Match>
-      </Switch>
-    </Base>
-  );
+  return <Base>{effect.special?.opponents ? <Fight /> : <Generic />}</Base>;
 };
 
-export const Effect: Component<{id: EffectId}> = (props) => {
+export const Effect = ({id}: {id: EffectId}) => {
   return (
-    <Provider effect={props.id}>
+    <Provider effect={id}>
       <Common />
     </Provider>
   );

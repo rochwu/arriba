@@ -1,2 +1,2 @@
 export {Tooltip} from './Tooltip';
-export {useTooltip, reset} from './useTooltip';
+export {reset, useTooltip} from './useTooltip';

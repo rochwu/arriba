@@ -1,7 +1,6 @@
-import type {Component, JSX} from 'solid-js';
-import {styled} from 'solid-styled-components';
-
 import {vars} from '@arriba/css';
+import styled from '@emotion/styled';
+import type {ReactNode} from 'react';
 
 import {Card} from './Card';
 import {useEffectContext} from './Provider';
@@ -12,13 +11,13 @@ const Description = styled.div({
   fontSize: vars.text.small,
 });
 
-export const Base: Component<{children: JSX.Element}> = (props) => {
+export const Base = ({children}: {children: ReactNode}) => {
   const effect = useEffectContext();
 
   return (
     <Card>
       <Title>{effect.name}</Title>
-      {props.children}
+      {children}
       <Description>{effect.description}</Description>
     </Card>
   );

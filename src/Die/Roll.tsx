@@ -1,7 +1,5 @@
-import type {Component} from 'solid-js';
-import {styled} from 'solid-styled-components';
-
 import {vars} from '@arriba/css';
+import styled from '@emotion/styled';
 
 import {RollLike} from './RollLike';
 
@@ -16,10 +14,10 @@ const Text = styled.div({
   lineHeight: 1,
 });
 
-export const Roll: Component<{children: string | number}> = (props) => {
+export const Roll = ({children}: {children: string | number}) => {
   return (
     <Position>
-      <Text>{props.children}</Text>
+      <Text>{children}</Text>
     </Position>
   );
 };

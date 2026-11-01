@@ -1,6 +1,10 @@
-import {Key, Lightning, Skull, Stairs} from 'phosphor-solid-js';
-import {Show, type Component} from 'solid-js';
-import {styled} from 'solid-styled-components';
+import styled from '@emotion/styled';
+import {
+  KeyIcon,
+  LightningIcon,
+  SkullIcon,
+  StairsIcon,
+} from '@phosphor-icons/react';
 
 import {Absolute} from '../../Absolute';
 import type {Effect, Slot} from '../../store';
@@ -13,35 +17,16 @@ const Position = styled(Absolute)({
   minWidth: '100%',
 });
 
-export const Icons: Component<{effect: Effect; slot?: Slot}> = (props) => {
-  const special = () => {
-    const special = props.effect.special;
-    const slot = props.slot;
-
-    return {...special, ...slot};
-  };
+export const Icons = ({effect, slot}: {effect: Effect; slot?: Slot}) => {
+  const {instant, death, turns, key, lock} = {...effect.special, ...slot};
 
   return (
-    <Show when={special()} keyed>
-      {({instant, death, turns, key, lock}) => (
-        <Position>
-          <Show when={instant}>
-            <Icon Icon={Lightning} tooltip="happens instantly" />
-          </Show>
-          <Show when={death}>
-            <Icon Icon={Skull} tooltip="die loses, die dies" />
-          </Show>
-          <Show when={turns}>
-            <Icon Icon={Stairs} tooltip="busy 'til it's over" />
-          </Show>
-          <Show when={key}>
-            <Icon Icon={Key} tooltip="unlocks" />
-          </Show>
-          <Show when={lock}>
-            <Lock />
-          </Show>
-        </Position>
-      )}
-    </Show>
+    <Position>
+      {instant && <Icon Icon={LightningIcon} tooltip="happens instantly" />}
+      {death && <Icon Icon={SkullIcon} tooltip="die loses, die dies" />}
+      {turns && <Icon Icon={StairsIcon} tooltip="busy 'til it's over" />}
+      {key && <Icon Icon={KeyIcon} tooltip="unlocks" />}
+      {lock && <Lock />}
+    </Position>
   );
 };

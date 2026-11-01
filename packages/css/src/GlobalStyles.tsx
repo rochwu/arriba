@@ -1,14 +1,18 @@
-import {createGlobalStyles} from 'solid-styled-components';
+import {Global} from '@emotion/react';
 
 import 'normalize.css';
-import {vars, root} from './css';
+import {root, vars} from './css';
 
-export const GlobalStyles = createGlobalStyles({
-  ':root': root,
-  body: {
-    backgroundColor: vars.backgroundColor,
-    color: vars.color,
-    fontFamily: vars.fontFamily,
-    userSelect: 'none',
-  },
-});
+export const GlobalStyles = () => (
+  <Global
+    styles={{
+      ':root': root,
+      body: {
+        backgroundColor: vars.backgroundColor,
+        color: vars.color,
+        fontFamily: vars.fontFamily,
+        userSelect: 'none',
+      },
+    }}
+  />
+);

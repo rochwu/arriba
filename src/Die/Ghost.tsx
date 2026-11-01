@@ -1,7 +1,7 @@
-import {DragOverlay} from '@thisbeyond/solid-dnd';
-import type {Component} from 'solid-js';
-import {styled} from 'solid-styled-components';
+import {DragOverlay, useDndContext} from '@dnd-kit/core';
+import styled from '@emotion/styled';
 
+import type {DieId} from '../store';
 import {useDie} from '../useDie';
 
 import {DieLike} from './DieLike';
@@ -14,20 +14,24 @@ const Die = styled(DieLike)({
   cursor: 'grabbing',
 });
 
-export const Ghost: Component = () => {
-  return (
-    <DragOverlay>
-      {(draggable) => {
-        const {die, value} = useDie(String(draggable!.id));
+const Dragged = ({id}: {id: DieId}) => {
+  const {die, value} = useDie(id);
 
-        return (
-          <Die>
-            <Roll>{die().roll}</Roll>
-            <Value>{value()}</Value>
-            <Name>{die().name}</Name>
-          </Die>
-        );
-      }}
+  return (
+    <Die>
+      <Roll>{die.roll}</Roll>
+      <Value>{value}</Value>
+      <Name>{die.name}</Name>
+    </Die>
+  );
+};
+
+export const Ghost = () => {
+  const {active} = useDndContext();
+
+  return (
+    <DragOverlay dropAnimation={null}>
+      {active ? <Dragged id={String(active.id)} /> : null}
     </DragOverlay>
   );
 };

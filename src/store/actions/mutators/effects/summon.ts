@@ -8,8 +8,6 @@ import {makeFaces} from '../../makeFaces';
 import {place} from '../place';
 import {push} from '../push';
 
-const it = Array.from({length: 6});
-
 const getValues = (die: Die) => {
   return die.rolls.map((roll) => die.faces[roll].value);
 };
@@ -27,13 +25,7 @@ const spread = (values: number[]) => {
     }
   }
 
-  const removable = next.reduce((removable, value, index) => {
-    if (value > 1) {
-      return [...removable, index];
-    }
-
-    return removable;
-  }, [] as number[]);
+  const removable = next.flatMap((value, index) => (value > 1 ? [index] : []));
 
   removable.forEach((removable) => {
     next[removable] -= 1;

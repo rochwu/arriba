@@ -1,6 +1,4 @@
-import type {Accessor, Component} from 'solid-js';
-import {Show} from 'solid-js';
-import {styled} from 'solid-styled-components';
+import styled from '@emotion/styled';
 
 import {Dot} from '../Dot';
 import type {Die} from '../store';
@@ -13,12 +11,10 @@ const View = styled(Dot)({
   backgroundColor: '#3cb371',
 });
 
-export const NoticeMe: Component<{die: Accessor<Die>}> = (props) => {
-  const notice = () => props.die().age === 1;
+export const NoticeMe = ({die}: {die: Die}) => {
+  if (die.age !== 1) {
+    return null;
+  }
 
-  return (
-    <Show when={notice()}>
-      <View aria-label="new die" />
-    </Show>
-  );
+  return <View aria-label="new die" />;
 };

@@ -1,7 +1,6 @@
-import type {IconProps, Lightning} from 'phosphor-solid-js';
-import {Show, splitProps, type Component, type JSX} from 'solid-js';
-
 import {vars} from '@arriba/css';
+import type {Icon, IconProps} from '@phosphor-icons/react';
+import type {ReactNode} from 'react';
 
 import {Flex} from './Flex';
 
@@ -12,22 +11,24 @@ const base = {
   },
   weight: 'duotone',
   color: vars.slot.special.color,
-};
+} as const;
 
-export const Iconed: Component<
-  {Icon: typeof Lightning} & JSX.HTMLAttributes<HTMLDivElement> & IconProps
-> = (props) => {
-  const [_, spread] = splitProps(props, ['Icon', 'children']);
+export const Iconed = ({
+  Icon,
+  children,
+  ...rest
+}: {Icon: Icon; children?: ReactNode} & IconProps) => {
+  const icon = <Icon {...base} {...rest} />;
 
-  const icon = () => <props.Icon {...base} {...spread} />;
+  if (!children) {
+    return icon;
+  }
 
   return (
-    <Show when={props.children} fallback={icon()}>
-      <Flex>
-        {icon()}
-        &nbsp;
-        {props.children}
-      </Flex>
-    </Show>
+    <Flex>
+      {icon}
+      &nbsp;
+      {children}
+    </Flex>
   );
 };

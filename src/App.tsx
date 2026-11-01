@@ -1,11 +1,9 @@
-import {type Component} from 'solid-js';
-import {styled} from 'solid-styled-components';
-
 import {GlobalStyles, vars} from '@arriba/css';
 import {Tooltip} from '@arriba/tooltip';
+import styled from '@emotion/styled';
 
 import {Game} from './Game';
-import {store} from './store';
+import {useStore} from './store';
 
 const Container = styled.div({
   display: 'flex',
@@ -15,12 +13,14 @@ const Container = styled.div({
   margin: '1em',
 });
 
-export const App: Component = () => {
+export const App = () => {
+  const turns = useStore((state) => state.turns);
+
   return (
     <>
       <GlobalStyles />
       <Container>
-        <div>Turn {store.turns}</div>
+        <div>Turn {turns}</div>
         <Game />
         <Tooltip />
       </Container>

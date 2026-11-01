@@ -1,7 +1,5 @@
-import type {Component} from 'solid-js';
-
 import {Slots} from './Slots';
 
-export const Generic: Component = () => {
+export const Generic = () => {
   return <Slots />;
 };

@@ -1,7 +1,5 @@
-import type {Component} from 'solid-js';
-import {styled} from 'solid-styled-components';
-
 import {vars} from '@arriba/css';
+import styled from '@emotion/styled';
 
 import type {Die} from '../../store';
 
@@ -10,14 +8,10 @@ const View = styled.div({
   fontWeight: 'bold',
 });
 
-export const Name: Component<{die: Die}> = (props) => {
+export const Name = ({die}: {die: Die}) => {
   return (
-    <View
-      style={{
-        color: props.die.opponent ? vars.opponent.color : vars.color,
-      }}
-    >
-      {props.die.name}
+    <View style={{color: die.opponent ? vars.opponent.color : vars.color}}>
+      {die.name}
     </View>
   );
 };

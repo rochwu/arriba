@@ -1,39 +1,32 @@
 import type {Placement} from '@floating-ui/dom';
-import {
-  autoUpdate,
-  computePosition,
-  flip,
-  shift,
-  offset,
-} from '@floating-ui/dom';
-import type {JSX} from 'solid-js';
-import {createSignal} from 'solid-js';
+import type {MouseEvent, ReactNode} from 'react';
+import {useEffect, useId, useRef} from 'react';
+import {create} from 'zustand';
 
-let tooltipEl: HTMLElement = undefined as never;
-let containerEl: HTMLElement = undefined as never;
+type TooltipState = {
+  // useTooltip instance that owns the tooltip, set on hover before it shows
+  owner?: string;
+  anchor?: HTMLElement;
+  placement: Placement;
+  content: ReactNode;
+};
 
-let cleanup: () => void | undefined;
-let enterTimeout: number;
-let leaveTimeout: number;
+export const useTooltipStore = create<TooltipState>()(() => ({
+  placement: 'top',
+  content: null,
+}));
 
-const [content, setContent] = createSignal<JSX.Element>(null);
-
-export {content};
+let enterTimeout: number | undefined;
+let leaveTimeout: number | undefined;
 
 export const reset = () => {
-  setContent(null);
   clearTimeout(enterTimeout);
   clearTimeout(leaveTimeout);
-  cleanup?.();
-};
-
-export const tooltipRef = (el: HTMLDivElement) => {
-  tooltipEl = el;
-};
-
-type Config = {
-  placement?: Placement;
-  element: JSX.Element;
+  useTooltipStore.setState({
+    owner: undefined,
+    anchor: undefined,
+    content: null,
+  });
 };
 
 // Cancel timeout on tooltip enter
@@ -42,30 +35,48 @@ export const enter = () => {
 };
 
 export const leave = () => {
-  leaveTimeout = setTimeout(() => {
-    reset();
-  }, 200);
+  leaveTimeout = window.setTimeout(reset, 200);
 };
 
-export const useTooltip = (config: Config) => {
-  const update = () => {
-    computePosition(containerEl, tooltipEl, {
-      placement: config?.placement ?? 'top',
-      middleware: [offset(4), flip(), shift({padding: 8})],
-    }).then(({x, y}) => {
-      tooltipEl.style.top = `${y}px`;
-      tooltipEl.style.left = `${x}px`;
-    });
-  };
+type Config = {
+  placement?: Placement;
+  element: ReactNode;
+};
 
-  const enter = ({target}: MouseEvent) => {
+export const useTooltip = ({placement = 'top', element}: Config) => {
+  const owner = useId();
+  const elementRef = useRef(element);
+
+  // Keep an open tooltip in sync with the latest render of its owner
+  useEffect(() => {
+    elementRef.current = element;
+
+    const state = useTooltipStore.getState();
+    if (state.owner === owner && state.content) {
+      useTooltipStore.setState({content: element});
+    }
+  });
+
+  // Don't leave a tooltip pointing at an element that's gone
+  useEffect(() => {
+    return () => {
+      if (useTooltipStore.getState().owner === owner) {
+        reset();
+      }
+    };
+  }, [owner]);
+
+  const enter = (event: MouseEvent<Element>) => {
     reset();
 
-    containerEl = target as HTMLElement;
+    useTooltipStore.setState({
+      owner,
+      anchor: event.currentTarget as HTMLElement,
+      placement,
+    });
 
-    enterTimeout = setTimeout(() => {
-      setContent(config.element);
-      cleanup = autoUpdate(containerEl, tooltipEl, update);
+    enterTimeout = window.setTimeout(() => {
+      useTooltipStore.setState({content: elementRef.current});
     }, 400); // default recommended
   };
 

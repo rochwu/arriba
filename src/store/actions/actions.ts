@@ -1,7 +1,7 @@
-import {produce} from 'solid-js/store';
+import {produce} from 'immer';
 
 import {DropType, Effects} from '../../constants';
-import {setStore} from '../store';
+import {store} from '../store';
 import type {DieId, EffectId} from '../types';
 
 import {age} from './mutators/age';
@@ -13,7 +13,7 @@ import {turn} from './mutators/turn';
 
 export const actions = {
   endTurn() {
-    setStore(
+    store.setState(
       produce((state) => {
         age(state);
 
@@ -37,7 +37,7 @@ export const actions = {
       };
     }[]
   ) {
-    setStore(
+    store.setState(
       produce((state) => {
         placements.forEach(({dieId, to}) => {
           if (to.type === DropType.Die) {

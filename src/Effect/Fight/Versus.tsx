@@ -1,12 +1,8 @@
-import type {Lightning} from 'phosphor-solid-js';
-import {CheckCircle, Circle, XCircle} from 'phosphor-solid-js';
-import {Index} from 'solid-js';
-import type {Component} from 'solid-js';
-import {Dynamic} from 'solid-js/web';
-import {styled} from 'solid-styled-components';
-
 import {vars} from '@arriba/css';
 import {useTooltip} from '@arriba/tooltip';
+import styled from '@emotion/styled';
+import type {Icon} from '@phosphor-icons/react';
+import {CheckCircleIcon, CircleIcon, XCircleIcon} from '@phosphor-icons/react';
 
 import {Absolute} from '../../Absolute';
 import {Iconed} from '../../Iconed';
@@ -18,11 +14,11 @@ const Container = styled.div({
   position: 'relative',
 });
 
-const icons = {
-  win: CheckCircle,
-  lose: XCircle,
-  none: Circle,
-} as Record<ScoreResult, typeof Lightning>;
+const icons: Record<ScoreResult, Icon> = {
+  win: CheckCircleIcon,
+  lose: XCircleIcon,
+  none: CircleIcon,
+};
 
 const Vs = styled(Absolute)({
   width: '100%',
@@ -30,38 +26,33 @@ const Vs = styled(Absolute)({
   fontSize: vars.text.small,
 });
 
-export const Versus: Component = () => {
+const describe = (scores: ScoreResult[]) => {
+  const wins = scores.filter((score) => score === 'win').length;
+  const loses = scores.filter((score) => score === 'lose').length;
+
+  if (wins === 0 && loses === 0) {
+    return "hasn't started yet";
+  }
+
+  return `score: ${wins}-${loses}`;
+};
+
+export const Versus = () => {
   const effect = useEffectContext();
 
-  const scores = () => effect.special!.score!;
-  const wins = () => scores().filter((score) => score === 'win').length;
-  const loses = () => scores().filter((score) => score === 'lose').length;
-
-  const tooltip = () => {
-    const w = wins();
-    const l = loses();
-
-    if (w === 0 && l === 0) {
-      return "hasn't started yet";
-    }
-
-    return `score: ${w}-${l}`;
-  };
+  const scores = effect.special!.score!;
 
   const {handlers} = useTooltip({
-    element: tooltip(),
+    element: describe(scores),
   });
 
   return (
     <Container {...handlers}>
       <Vs>vs</Vs>
-      <Index each={scores()}>
-        {(score) => (
-          <Dynamic
-            component={() => <Iconed Icon={icons[score()]} weight="regular" />}
-          />
-        )}
-      </Index>
+      {scores.map((score, index) => (
+        // biome-ignore lint/suspicious/noArrayIndexKey: scores are positional, one per turn
+        <Iconed key={index} Icon={icons[score]} weight="regular" />
+      ))}
     </Container>
   );
 };
