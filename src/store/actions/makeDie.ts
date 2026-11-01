@@ -1,8 +1,8 @@
 import {merge, shuffle, uniqueId} from 'lodash-es';
 
-import {Effects} from '../../constants';
-import {names} from '../../names';
-import type {Die} from '../types';
+import {Effects} from '@/constants';
+import {names} from '@/names';
+import type {Die} from '@/store/types';
 
 import {makeFaces} from './makeFaces';
 import {roll} from './roll';

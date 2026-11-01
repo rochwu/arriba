@@ -1,5 +1,5 @@
-import {Effects} from '../../../constants';
-import type {State} from '../../types';
+import {Effects} from '@/constants';
+import type {State} from '@/store/types';
 
 import {push} from './push';
 

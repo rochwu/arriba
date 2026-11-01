@@ -1,4 +1,4 @@
-import type {DieId, EffectId, State} from '../../types';
+import type {DieId, EffectId, State} from '@/store/types';
 
 export const push = (
   state: State,

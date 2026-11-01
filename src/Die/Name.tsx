@@ -1,8 +1,8 @@
 import {vars} from '@arriba/css';
 import styled from '@emotion/styled';
 
-import {Absolute} from '../Absolute';
-import {color} from '../Color';
+import {Absolute} from '@/Absolute';
+import {color} from '@/Color';
 
 const Position = styled(Absolute)({
   bottom: 0,

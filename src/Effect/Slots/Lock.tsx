@@ -1,9 +1,8 @@
 import {LockLaminatedIcon} from '@phosphor-icons/react';
-
-import {useEffectContext} from '../Provider';
+import {useEffectContext} from '@/Effect/Provider';
+import {isUnlocked} from '@/store';
 
 import {Icon} from './Icon';
-import {isUnlocked} from './isUnlocked';
 
 export const Lock = () => {
   const effect = useEffectContext();

@@ -1,4 +1,4 @@
-import {Effects} from '../constants';
+import {Effects} from '@/constants';
 
 import {beginnerDice, geomentralistDie, effects as rawEffects} from './effects';
 import type {State} from './types';

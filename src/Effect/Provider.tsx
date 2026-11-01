@@ -1,8 +1,8 @@
 import type {ReactNode} from 'react';
 import {createContext, useContext} from 'react';
 
-import type {Effect, EffectId} from '../store';
-import {useStore} from '../store';
+import type {Effect, EffectId} from '@/store';
+import {useStore} from '@/store';
 
 const Context = createContext<EffectId>(undefined as never as EffectId);
 

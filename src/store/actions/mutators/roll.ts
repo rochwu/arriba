@@ -1,5 +1,5 @@
-import type {State} from '../../types';
-import {roll as getRoll} from '../roll';
+import {roll as getRoll} from '@/store/actions/roll';
+import type {State} from '@/store/types';
 
 export const roll = (state: State) => {
   Object.values(state.dieById).forEach((die) => {

@@ -1,6 +1,7 @@
-import {Effects} from '../../../constants';
-import {getSlot} from '../../getSlot';
-import type {DieId, EffectId, State} from '../../types';
+import {Effects} from '@/constants';
+import {canPlace} from '@/store/canPlace';
+import {getSlot} from '@/store/getSlot';
+import type {DieId, EffectId, State} from '@/store/types';
 
 import {instant} from './instant';
 import {push} from './push';
@@ -13,6 +14,16 @@ export const place = (
     order,
   }: {from: DieId; to?: EffectId; order?: number},
 ) => {
+  // Mirrors where `push` will land the die
+  const slots = state.effectById[to].slots;
+  const target = order
+    ? slots[order]
+    : getSlot(state, {effect: to, die: undefined});
+
+  if (target && !canPlace({die: state.dieById[from], slot: target, slots})) {
+    return;
+  }
+
   if (instant(state, {die: from, effect: to})) {
     return;
   }

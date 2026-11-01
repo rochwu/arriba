@@ -1,5 +1,5 @@
-import {getSlot} from '../../../getSlot';
-import type {DieId, State} from '../../../types';
+import {getSlot} from '@/store/getSlot';
+import type {DieId, State} from '@/store/types';
 
 export const fire = (state: State, {die}: {die: DieId}) => {
   const existing = state.dieById[die].effect;

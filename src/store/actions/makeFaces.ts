@@ -1,4 +1,4 @@
-import type {Die} from '../types';
+import type {Die} from '@/store/types';
 
 type Faces = Die['faces'];
 

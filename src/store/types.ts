@@ -22,7 +22,10 @@ export type Die = {
 export type Slot = {
   id: number;
   die?: DieId;
-  min?: number;
+  min?: {
+    roll?: number; // which face landed, eg: 1 - 6
+    value?: number; // what that face is worth
+  };
   key?: boolean;
   lock?: boolean;
 };

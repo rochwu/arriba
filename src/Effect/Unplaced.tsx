@@ -1,4 +1,4 @@
-import {Effects} from '../constants';
+import {Effects} from '@/constants';
 
 import {Effect} from './Effect';
 

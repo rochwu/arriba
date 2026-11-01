@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
-import {Dot} from '../Dot';
-import type {Die} from '../store';
+import {Dot} from '@/Dot';
+import type {Die} from '@/store';
 
 const View = styled(Dot)({
   position: 'absolute',
