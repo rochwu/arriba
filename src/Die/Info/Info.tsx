@@ -20,7 +20,10 @@ const List = styled.div({
   gap: vars.gap,
 });
 
-const Face = styled(DieLike)({});
+const Face = styled(DieLike)({
+  opacity: vars.die.ghost.opacity,
+  '&[data-active=true]': {opacity: 1},
+});
 
 const Header = styled.div({
   display: 'flex',
@@ -49,7 +52,7 @@ export const Info = ({die}: {die: Die}) => {
       <List>
         {die.rolls.map((roll, index) => (
           // biome-ignore lint/suspicious/noArrayIndexKey: rolls are positional and can repeat
-          <Face key={index}>
+          <Face key={index} data-active={roll === die.roll}>
             <Roll>{roll}</Roll>
             <Value>{die.faces[roll].value}</Value>
           </Face>

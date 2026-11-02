@@ -1,17 +1,14 @@
 import {Effects} from '@/constants';
-import type {DieId, EffectId, State} from '@/store/types';
+import type {DieId, State} from '@/store/types';
 
 import {fire} from './fire';
 
-export const instant = (
-  state: State,
-  {die, effect}: {die: DieId; effect: EffectId},
-) => {
-  switch (effect) {
+// Runs right after a die lands, against the effect it landed in
+export const instant = (state: State, {die}: {die: DieId}) => {
+  switch (state.dieById[die].effect) {
     case Effects.Fire: {
-      return fire(state, {die});
+      fire(state, {die});
+      break;
     }
   }
-
-  return false;
 };

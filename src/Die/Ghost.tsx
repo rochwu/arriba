@@ -1,3 +1,4 @@
+import {vars} from '@arriba/css';
 import {DragOverlay, useDndContext} from '@dnd-kit/core';
 import styled from '@emotion/styled';
 
@@ -10,7 +11,7 @@ import {Roll} from './Roll';
 import {Value} from './Value';
 
 const Die = styled(DieLike)({
-  opacity: '0.5',
+  opacity: vars.die.ghost.opacity,
   cursor: 'grabbing',
 });
 

@@ -32,6 +32,14 @@ export type Slot = {
 
 export type Score = 'win' | 'lose' | 'none';
 
+export type DestinationType = 'die' | 'effect';
+
+export type Destination = {
+  id?: DieId | EffectId;
+  type?: DestinationType;
+  order?: number;
+};
+
 export type Effect = {
   id: EffectId;
   name: string;
@@ -56,4 +64,5 @@ export type State = {
   effects: EffectId[];
   turns: number;
   returning: DieId[];
+  picked?: DieId; // picked up, waiting to be put down
 };

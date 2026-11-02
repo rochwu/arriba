@@ -15,6 +15,4 @@ export const fire = (state: State, {die}: {die: DieId}) => {
   state.dice.splice(index, 1);
 
   delete state.dieById[die];
-
-  return true;
 };

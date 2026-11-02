@@ -1,12 +1,15 @@
 import type {DieId, EffectId, State} from '@/store/types';
 
+/**
+ * The purest form of placing down a die in the store
+ */
 export const push = (
   state: State,
   {die, effect, order}: {die: DieId; effect: EffectId; order?: number},
 ) => {
   const slots = state.effectById[effect].slots;
 
-  if (order) {
+  if (order !== undefined) {
     slots[order].die = die;
   } else {
     const open = slots.findIndex(({die}) => die === undefined);
