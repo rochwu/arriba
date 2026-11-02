@@ -10,3 +10,5 @@ export const Effects = {
   // For Opponents
   None: 'none',
 } as const;
+
+export const Sides = [1, 2, 3, 4, 5, 6];
