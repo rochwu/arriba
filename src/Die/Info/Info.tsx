@@ -1,12 +1,12 @@
 import {vars} from '@arriba/css';
 import styled from '@emotion/styled';
 import {CakeIcon} from '@phosphor-icons/react';
+import {Sides} from '@/constants';
 import {DieLike} from '@/Die/DieLike';
 import {Roll} from '@/Die/Roll';
 import {Value} from '@/Die/Value';
 import {Iconed} from '@/Iconed';
 import type {Die} from '@/store';
-
 import {Name} from './Name';
 
 const Container = styled.div({
@@ -21,8 +21,16 @@ const List = styled.div({
 });
 
 const Face = styled(DieLike)({
-  opacity: vars.die.ghost.opacity,
-  '&[data-active=true]': {opacity: 1},
+  '&[data-active=false]': {
+    opacity: vars.die.ghost.opacity,
+  },
+  '&[data-missing=true]': {
+    boxSizing: 'border-box',
+    backgroundColor: 'transparent',
+    border: `1px dashed ${vars.die.backgroundColor}`,
+    // Makes it look like the color of ghost
+    opacity: vars.die.ghost.opacity,
+  },
 });
 
 const Header = styled.div({
@@ -50,13 +58,24 @@ export const Info = ({die}: {die: Die}) => {
         </Flex>
       </Header>
       <List>
-        {die.rolls.map((roll, index) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: rolls are positional and can repeat
-          <Face key={index} data-active={roll === die.roll}>
-            <Roll>{roll}</Roll>
-            <Value>{die.faces[roll].value}</Value>
-          </Face>
-        ))}
+        {Sides.map((side) => {
+          const face = die.faces[side];
+
+          return (
+            <Face
+              key={side}
+              data-active={side === die.roll}
+              data-missing={!face}
+            >
+              {face && (
+                <>
+                  <Roll>{side}</Roll>
+                  <Value>{face.value}</Value>
+                </>
+              )}
+            </Face>
+          );
+        })}
       </List>
     </Container>
   );
