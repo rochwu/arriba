@@ -27,7 +27,7 @@ const Face = styled(DieLike)({
   '&[data-missing=true]': {
     boxSizing: 'border-box',
     backgroundColor: 'transparent',
-    border: `2px dashed ${vars.die.backgroundColor}`,
+    border: `1px dashed ${vars.die.backgroundColor}`,
     // Makes it look like the color of ghost
     opacity: vars.die.ghost.opacity,
   },

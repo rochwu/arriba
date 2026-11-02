@@ -1,8 +1,22 @@
 // biome-ignore-all lint/suspicious/noExplicitAny: generic over arbitrary token trees
 // biome-ignore-all lint/complexity/noBannedTypes: `{}` means no composed styles
+
+// `& {}` stops `'8px' | string` from collapsing into `string`, the namespace is just so hovers read `'8px' | Css.String`
+namespace Var {
+  export type String = string & {};
+  export type Number = number & {};
+}
+
+// Hover shows the original literal, while still letting any value be assigned
+type Assignable<Node> = Node extends string
+  ? Node | Var.String
+  : Node extends number
+    ? Node | Var.Number
+    : {-readonly [Prop in keyof Node]: Assignable<Node[Prop]>};
+
 export const createCssVars = <
-  Styles extends Record<string, any>,
-  MoreStyles extends Record<string, any> | {},
+  const Styles extends Record<string, any>,
+  const MoreStyles extends Record<string, any> | {},
 >(
   styles: Styles,
   /**
@@ -49,7 +63,10 @@ export const createCssVars = <
           return false;
         }
 
-        document.documentElement.style.setProperty(getName(prop), newValue);
+        document.documentElement.style.setProperty(
+          `--${getName(prop)}`,
+          newValue,
+        );
         Reflect.set(node, prop, newValue);
         return true;
       },
@@ -61,9 +78,9 @@ export const createCssVars = <
   const vars = {...(composer ? {...proxify(composer(styled))} : {}), ...styled};
 
   return {
-    vars: vars as typeof composer extends undefined
-      ? Styles
-      : Styles & MoreStyles,
+    vars: vars as Assignable<
+      typeof composer extends undefined ? Styles : Styles & MoreStyles
+    >,
     root,
   };
 };
