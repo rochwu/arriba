@@ -10,5 +10,5 @@
   "[jsonc]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "cSpell.words": ["arriba"]
+  "cSpell.words": ["arriba", "geomentralist"]
 }

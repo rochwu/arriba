@@ -11,6 +11,7 @@ import {createCssVars} from './createCssVars';
 export const {vars, root} = createCssVars(
   {
     white: '#fafafa',
+    shadow: 'rgba(0, 0, 0, 0.2)',
     text: {
       small: '12px',
     },
@@ -18,7 +19,7 @@ export const {vars, root} = createCssVars(
   (core) => ({
     backgroundColor: '#deb887',
     borderRadius: '8px',
-    boxShadow: '2px 2px rgba(0, 0, 0, 0.10)',
+    boxShadow: `2px 2px ${core.shadow}`,
     color: 'black',
     fontFamily: 'Arial, Helvetica, sans-serif',
     gap: '8px',
@@ -29,6 +30,18 @@ export const {vars, root} = createCssVars(
       backgroundColor: core.white,
       color: 'black',
       size: '50px',
+      ghost: {
+        opacity: 0.6,
+      },
+      picked: {
+        lift: '2px',
+        // OG 2D sprite-like shadow
+        shadow: {
+          width: '115%',
+          height: '12px',
+          color: core.shadow,
+        },
+      },
       roll: {
         size: core.text.small,
         color: core.white,

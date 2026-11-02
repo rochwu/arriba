@@ -10,8 +10,3 @@ export const Effects = {
   // For Opponents
   None: 'none',
 } as const;
-
-export const DropType = {
-  Die: 'die',
-  Effect: 'effect',
-} as const;
